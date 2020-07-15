@@ -1,0 +1,1056 @@
+﻿*{
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 0px;
+    font-style: normal;
+    width: 100%;
+}
+
+body{
+    position: relative;
+}
+
+.container{
+    position: relative;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgb(229, 255, 0);
+
+}
+
+#header {
+    text-align: center;
+}
+
+.commercial{
+    position: relative;
+    width: 80%;
+    height: 25vh;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background-image: linear-gradient(to right, rgb(206, 205, 205), rgb(99, 99, 99), rgb(206, 205, 205));
+    color: white;
+
+}
+/* *************************************************************************************************** */
+
+.dateFrom{
+    background-color: rgb(243, 23, 195);
+    position: relative;
+}
+
+.day, .month, .year{
+    position: absolute;
+    width: 23%;
+    max-width: 100px;
+    box-shadow: -15px 15px 10px rgba(0,0,0,0.5);
+    transform: translate(-50%, -50%) rotate(-5deg) skewX(5deg);
+    transform-style: preserve-3d;
+    transition: .5s;
+}
+
+.day{
+    margin-top: 110px;
+    left: calc(50% - 120px);
+
+}
+
+.month{
+    margin-top: 100px;
+    left: calc(50% - 10px);
+}
+
+.year{
+    margin-top: 90px;
+    left: calc(50% + 100px);
+}
+
+
+.day:after, .month:after, .year:after{
+    content: '';
+    position: absolute;
+    top: 66.1px;
+    left: -2.5px;
+    /* height: 14.8px; */
+    height: 13.8px;
+    width: 100%;
+    /* background:rgb(199, 199, 199); */
+    background-image: linear-gradient(to top right,  rgb(172, 172, 172), rgb(236, 236, 236));
+
+    transform: 0.5s;
+    transform: rotate(0deg) skewX(-20deg);
+}
+
+.day:hover, .month:hover, .year:hover{
+    cursor: pointer;
+    transform: translate(-50%, -50%) rotate(-5deg) skewX(5deg) scaleX(1.2) scaleY(1.2);
+    box-shadow: -5px 5px 10px rgba(0,0,0,0.5);
+
+}
+
+
+/* *************************************************************************************************** */
+
+
+.name {
+    /* position: absolute; */
+    background-image: linear-gradient(to right,  rgb(33, 138, 9), rgb(46, 204, 12));
+    /* width: 100px; */
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    /* box-shadow: -25px 30.1px rgba(0,0,0,0.5); */
+
+}
+
+
+
+.name:before{
+    content: '';
+    position: absolute;
+    height: 14.8px;
+    width: 5.2px;
+    top: 10.5px;
+    left: -5.1px;
+    border-top-left-radius: 5px;
+    /* border-top-right-radius: 5px; */
+
+    background-color: rgb(33, 138, 9);
+    transform: 0.5s;
+    transform: rotate(0deg) skewY(-70deg);
+}
+/* *************************************************************************************************** */
+.number {
+    background-image: linear-gradient(to right,  rgb(199, 199, 199), rgb(245, 245, 245));
+    text-align: center;
+    padding: 8px 0;
+    height: 48px;
+    font-size: 30px;
+}
+
+.number:before{
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: -5.1px;
+    height: 48px;
+    width: 5.2px;
+    /* background:rgb(199, 199, 199); */
+    background-image: linear-gradient(to right,  rgb(161, 161, 161), rgb(199, 199, 199));
+    transform: 0.5s;
+    transform: rotate(0deg) skewY(-70deg);
+}
+
+
+/* Start________________________________________________________________________Modal_day________________________________________________________________ */
+
+.modalWindowChooseDay{
+    display: none;
+    position: fixed; /* Stay in place*/
+    z-index: 1;
+    /* padding-top: 100px; Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /*Full width */
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.cubeContainer{
+    position: absolute;
+
+    top: calc(50vh - 100px);
+    left: calc(50vw - 100px + 20px); /* 50px to center for mobile device*/
+    width: 200px;
+    height: 200px;
+    perspective: 400px;
+    /* margin: auto; */
+}
+
+.cube{
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+    transition: 1s;
+    transform: rotateX(0);
+    transform: rotateY(-20deg);
+    /* transform: rotate3d(1,1,1,90deg); */
+}
+
+
+.side{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border: 1px solid #fff;
+    font: normal 120px Arial;
+    text-align: center;
+    /* line-height: 300px; */
+    color: #B0DB43;
+    text-shadow: 2px 2px 10px orangered;
+    background-color: rgb(0, 128, 128, 0.8);
+    padding-top: 30px;
+}
+
+.front{
+    transform: translateZ(100px);
+}
+
+.back{
+    transform: rotateY(180deg) rotateZ(180deg) translateZ(100px);
+}
+
+.right{
+    transform: rotateY(90deg) translateZ(100px);
+}
+.left{
+    transform: rotateY(-90deg) translateZ(100px)
+}
+
+.top{
+    transform: rotateX(90deg) translateZ(100px);
+}
+
+.bottom{
+    transform: rotateX(-90deg) translateZ(100px);
+}
+
+.cubeSideFrontText, .cubeSideBackText, .cubeSideRightText, .cubeSideLeftText, .cubeSideTopText, .cubeSideBottomText{
+    transition: transform 1s ease-out;
+}
+
+/*Start***********************************************************Arrow up************************************************* */
+.arrowUp{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: calc(50vh - 100px - 150px);
+    left: calc(50vw - 100px);
+    animation: animationArrowUp 2s infinite;
+}
+
+@keyframes animationArrowUp{
+    0%   {top: calc(50vh - 100px - 130px);}
+    50%  {top: calc(50vh - 100px - 150px);}
+    100% {top: calc(50vh - 100px - 130px);}
+}
+
+.arrowUp:hover{
+    cursor: pointer;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.triangleUp{
+    position: relative;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid rgb(46, 204, 12);
+}
+
+.triangleUp::before{
+    content: '';
+    position: absolute;
+    top:20px;
+    left: -20px;
+    width: 40px;
+    height: 5px;
+    /* background-color: rgb(29, 119, 9); */
+    background-image: linear-gradient(to right, rgb(21, 85, 6), rgb(40, 168, 11)); 
+
+}
+
+.rectangleUp{
+    position: relative;
+    margin: 0 auto;
+    width: 15px;
+    height: 25px;
+    background-color: rgb(46, 204, 12);
+}
+
+.rectangleUp::after{
+    content: '';
+    position: absolute;
+    margin: 0 auto;
+    top: 25px;
+    width: 15px;
+    height: 5px;
+    /* background-color: rgb(29, 119, 9); */
+    background-image: linear-gradient(to right, rgb(21, 85, 6), rgb(40, 168, 11)); 
+
+}
+
+/*End***********************************************************Arrow up************************************************* */
+
+/*Start***********************************************************Arrow down************************************************* */
+
+.arrowDown{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: calc(50vh - 100px + 250px);
+    left: calc(50vw - 100px);
+    animation: animationArrowDown 2s infinite;
+}
+
+@keyframes animationArrowDown{
+    0%   {top: calc(50vh - 100px + 270px)}
+    50%  {top: calc(50vh - 100px + 250px)}
+    100% {top: calc(50vh - 100px + 270px)}
+}
+
+.arrowDown:hover{
+    cursor: pointer;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.triangleDown{
+    position: relative;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(46, 204, 12);
+}
+
+.triangleDown::before{
+    content: '';
+    position: absolute;
+    top:-9px;
+    left: -24px;
+    width: 28px;
+    height: 5px;
+    background-color: rgb(29, 119, 9);
+    transform: rotate(45deg) skewX(45deg);
+
+}
+.triangleDown::after{
+    content: '';
+    position: absolute;
+    top:-9px;
+    left: -4.2px;
+    width: 28.3px;
+    height: 5px;
+    /* background-color: rgb(251, 255, 0); */
+    background-image: linear-gradient(to right, rgb(21, 85, 6), rgb(40, 168, 11)); 
+    transform: rotate(-45deg) skewX(-45deg);
+}
+
+.rectangleDown{
+    position: relative;
+    margin: 0 auto;
+    margin-top: 40%;
+    width: 15px;
+    height: 25px;
+    background-color: rgb(46, 204, 12);
+}
+
+
+/*End***********************************************************Arrow down************************************************* */
+/*Start***********************************************************Arrow left************************************************* */
+
+.arrowLeft{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: calc(50vh - 100px + 50px);
+    left: calc(50vw - 280px);
+    animation: animationArrowLeft 2s infinite;
+}
+
+@keyframes animationArrowLeft{
+    0%   {left: calc(50vw - 260px);}
+    50%  {left: calc(50vw - 280px);}
+    100% {left: calc(50vw - 260px);}
+}
+
+.arrowLeft:hover{
+    cursor: pointer;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.triangleLeft{
+    float: left;
+    position: relative;
+    width: 0;
+    height: 0;
+    margin-top: 30%;
+    border-top: 20px solid transparent;
+    border-right: 20px solid rgb(46, 204, 12);
+    border-bottom: 20px solid transparent;
+}
+
+.rectangleLeft{
+    float: left;
+    position: relative;
+    left: 5px;
+    top: 7px;
+    width: 15px;
+    height: 25px;
+    margin-top: 30%;
+    background-color: rgb(46, 204, 12);
+    transform: rotate(90deg);
+}
+
+
+.triangleLeft::before{
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: -4px;
+    width: 28.2px;
+    height: 5px;
+    background-color: rgb(29, 119, 9);
+    transform: rotate(45deg) skewX(45deg);
+}
+
+.rectangleLeft::after{
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 3.2px;
+    width: 25px;
+    height: 5px;
+    background-image: linear-gradient(to right, rgb(40, 168, 11), rgb(21, 85, 6)); 
+    transform: rotate(90deg);
+}
+
+
+/*End***********************************************************Arrow left************************************************* */
+/*Start***********************************************************Arrow right************************************************* */
+
+.arrowRight{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: calc(50vh - 100px + 50px);
+    right: calc(50vw - 280px);
+    animation: animationArrowRight 2s infinite;
+}
+
+@keyframes animationArrowRight{
+    0%   {right: calc(50vw - 260px);}
+    50%  {right: calc(50vw - 280px);}
+    100% {right: calc(50vw - 260px);}
+}
+
+.arrowRight:hover{
+    cursor: pointer;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.rectangleRight{
+    float: left;
+    position: relative;
+    /* left: -5px; */
+    /* top: 7px; */
+    margin-top: 40%;
+    margin-left: 63%;
+    width: 15px;
+    height: 25px;
+    background-color: rgb(46, 204, 12);
+    transform: rotate(90deg);
+}
+
+.triangleRight{
+    float: left;
+    position: relative;
+    width: 0;
+    height: 0;
+
+    margin-top: 32%;
+    border-top: 20px solid transparent;
+    border-left: 20px solid rgb(46, 204, 12);
+    border-bottom: 20px solid transparent;
+}
+
+.rectangleRight::after{
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 3.2px;
+    width: 25px;
+    height: 5px;
+    background-image: linear-gradient(to right, rgb(21, 85, 6), rgb(40, 168, 11)); 
+    transform: rotate(90deg);
+} 
+
+.triangleRight::after{
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: -24px;
+    width: 28.2px;
+    height: 5px;
+    background-image: linear-gradient(to right, rgb(21, 85, 6), rgb(40, 168, 11)); 
+    transform: rotate(-45deg) skewX(-45deg);
+
+}
+
+
+/*End***********************************************************Arrow right************************************************* */
+
+
+/* .modalBackgroundOut{
+    display:block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    animation-duration: 0.5s;
+    animation-name: animationModalDaysColorOut;
+    overflow: hidden;
+}
+
+@keyframes animationModalDaysColorOut{
+    0%   {background-color: rgba(52, 64, 58, 0.4);width: 100%;left: 0;}
+    90%  {background-color: none;width: 100%;left: 0;}
+    100% {background-color: none;width: 0;left: 50%;}
+} */
+
+
+/* .modalAnimatingOut{
+    background-color: none;
+    margin-top:100vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 400px;
+    border: 0;
+    border-radius: 25px;
+    animation-duration: 0.7s;
+    animation-name: animationModalDaysOut;
+}
+
+@keyframes animationModalDaysOut{
+    from {
+        margin-top:25vh;
+        background-color: #fefefe;
+    }  
+    to {
+        margin-top:100vh;
+        background-color: none;
+    }
+} */
+
+.modalDays{
+    padding: 0;
+    margin-left: 25px;
+}
+
+.modalDays li{
+    list-style-type: none;
+    display: inline-block;
+    width: 12%;
+    text-align: center;
+    padding: 10px;
+    font-size:20px;
+    color: rgb(119, 119, 119);
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.dayItem{
+    border-radius: 20px;
+    background-color: #fff;
+    transition: background-color 0.3s ease-out;
+}
+.dayItem:hover{
+    background-color: rgb(46, 204, 12);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* End________________________________________________________________________Modal_day________________________________________________________________ */
+
+/* Start________________________________________________________________________Modal_month________________________________________________________________ */
+
+
+.modalWindowChooseMonth{
+    display: none;
+    position: fixed; /* Stay in place*/
+    z-index: 1; /* Sit on top */
+    /* padding-top: 100px; Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /*Full width */
+    height: 100%;
+    background-color: rgb(124, 124, 124); /* Fallback color */
+    /*background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    background-color: rgba(52, 64, 58, 0.4); /* Black w/ opacity */
+    animation-duration: 0.5s;
+    animation-name: animationModalDaysColor;
+    overflow: hidden;
+}
+
+.modalWindowMonthContainer{
+    background-color: #fefefe;
+    margin-top:25vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 350px;
+    border: 1px solid rgb(49, 49, 49);
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    
+    animation-duration: 0.5s;
+    animation-name: animationModalDays;
+
+}
+
+.modalMonthAnimatingOut{
+    background-color: none;
+    margin-top:100vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 250px;
+    border: 0;
+    border-radius: 25px;
+    animation-duration: 0.7s;
+    animation-name: animationModalDaysOut;
+}
+
+.modalMonth{
+    /* margin-top: 40px; */
+    padding: 0;
+    /* margin: auto; */
+    margin-left: 9%;
+}
+
+.modalMonth li{
+    list-style-type: none;
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    padding: 10px;
+    font-size:18px;
+    color: rgb(119, 119, 119);
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+.monthItem{
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease-out;
+}
+.monthItem:hover{
+    background-color: rgb(46, 204, 12);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* End________________________________________________________________________Modal_month________________________________________________________________ */
+
+/* Start________________________________________________________________________Modal_year________________________________________________________________ */
+
+.modalWindowChooseYear{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(18, 18, 18);
+    animation-duration: 0.5s;
+    animation-name: animationModalDaysColor;
+    overflow: hidden;
+
+}
+/* 
+.modalYearVerticalChoice{
+    background-color: #fefefe;
+    font-size: 25px;
+    margin-top:25vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 200px;
+    height: 350px;
+    border: 1px solid rgb(49, 49, 49);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    animation-duration: 0.5s;
+    animation-name: animationModalDays;
+    overflow-y: auto;
+} */
+
+.modalYearAnimatingOut{
+    background-color: none;
+    font-size: 25px;
+    margin-top:100vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 200px;
+    border: 0;
+    border-radius: 25px;
+    animation-duration: 0.7s;
+    animation-name: animationModalYearsOut;
+
+}
+@keyframes animationModalYearsOut{
+    from {
+        margin-top:25vh;
+        background-color: #fefefe;
+    }  
+    to {
+        margin-top:100vh;
+        background-color: none;
+    }
+}
+
+.yearItem{
+    width: 100%;
+    /* padding-left: 20%; */
+    text-align: center;
+    border: 0.1px solid rgb(243, 243, 243);
+    padding: 10px 0;
+}
+
+.yearItem:hover{
+    background-color: rgb(46, 204, 12);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* End________________________________________________________________________Modal_year________________________________________________________________ */
+
+.result{
+    position: absolute;
+    background-color: #34403A;
+    background-image: linear-gradient(to right, #6d6d6d, #34403A, #6d6d6d); 
+    top: 500px;
+    color: #fff;
+    margin: 0 auto;
+    width: 95%;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 450px;
+}
+
+#buttonCount{
+    position: absolute;
+
+    /* background-color: rgb(46, 204, 12); */
+    background-image: linear-gradient(to right, rgb(46, 204, 12), rgb(33, 138, 9), rgb(46, 204, 12)); 
+    top: 550px;
+
+    color: #fff;
+    margin: 0 auto;
+    width: 60%;
+    padding: 20px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+}
+
+#buttonCount:hover{
+    cursor: pointer;
+}
+
+.exitButtonContainer{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 0;
+    perspective: 400px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0;
+    transition: box-shadow .5s ease-in, background-color .5s ease-in;
+}
+
+.exitButtonContainer:hover{
+    box-shadow:20px 20px 50px 1px white inset; 
+    cursor: pointer;
+}
+
+
+.exitButtonContainerShadow{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    /* background-color: transparent; */
+    border-style: solid;
+    border-width: 0;
+    border-radius: 50%;
+    border-color: rgba(251, 255, 0, 0.568);
+    transition: border-width 2s ease-in;
+}
+/* .exitButtonContainerShadow:hover{
+    border-width: 50px;
+} */
+/* .exitButtonContainer:hover{ */
+    /* background: radial-gradient(rgb(110, 110, 110), rgb(255, 196, 0)); */
+
+/* } */
+
+/* @keyframes exitButtonContainer{
+0% {background: rgb(75, 194, 49);}
+50% {background: rgb(30, 116, 11);}
+100% {background: rgb(75, 194, 49);}
+} */
+
+
+/* start________________________________________________________________________exitButtonRectangle1________________________________________________________________ */
+
+.exitButtonRectangle1{
+    position: absolute;
+    right: 40px;
+    /* width: 10px;
+    height: 30px; */
+    width: 10px;
+    height: 30px;
+
+    margin-top: 30%;
+    transform-style: preserve-3d;
+    /* transform: rotate(145deg) skewX(45deg); */
+    /* transform: skewX(-40deg) rotateZ(25deg) rotateY(310deg); */
+    transform: skewX(-40deg) rotateX(10deg) rotateY(20deg);
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: moveRectangle1;
+}
+
+@keyframes moveRectangle1{
+    0%   {transform: skewX(-40deg) rotateX(0deg) rotateY(20deg);}
+    100%  {transform: skewX(-40deg) rotateX(360deg) rotateY(20deg);}
+}
+
+.exitButtonRectangle1:hover {
+    cursor: pointer;
+}
+
+.rectangle1Side{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+}
+
+.rectangle1Front{
+    background-image: linear-gradient(to right, rgb(35, 151, 8), rgb(53, 184, 24));
+    transform: translateZ(5px);
+}
+
+.rectangle1Back{
+    background-image: linear-gradient(to right, rgb(53, 184, 24), rgb(35, 151, 8));
+    transform: rotateY(180deg) translateZ(5px);
+}
+
+.rectangle1Right{
+    background-color: rgb(66, 247, 26);
+    transform: rotateY(90deg) translateZ(5px);
+    }
+
+.rectangle1Left{
+    background-color: rgb(22, 90, 8);
+    transform: rotateY(-90deg) translateZ(5px)
+}
+
+.rectangle1Top{
+    position: absolute;
+    width: inherit;
+    height: 10px;
+    background-color: rgb(36, 151, 10);
+    transform: rotateX(90deg) translateZ(5px);
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: topBottom;
+}
+
+.rectangle1Bottom{
+    position: absolute;
+    width: inherit;
+    height: 10px;
+    background: rgb(38, 151, 13);
+    transform: rotateX(-90deg) translateZ(25px);
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: topBottom;
+}
+@keyframes topBottom{
+    0% {background: rgb(75, 194, 49);}
+    50% {background: rgb(30, 116, 11);}
+    100% {background: rgb(75, 194, 49);}
+}
+
+/* end________________________________________________________________________exitButtonRectangle1________________________________________________________________ */
+
+
+/* start________________________________________________________________________exitButtonRectangle2________________________________________________________________ */
+
+.exitButtonRectangle2{
+    position: absolute;
+    right: 40px;
+    width: 10px;
+    height: 30px;
+
+    margin-top: 30%;
+    transform-style: preserve-3d;
+    transform: skewX(40deg) rotateY(-5deg) rotateX(10deg) rotateY(20deg);
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: moveRectangle2;
+}
+
+@keyframes moveRectangle2{
+    0%   {transform: skewX(40deg) rotateX(0deg) rotateY(20deg);}
+    100%  {transform: skewX(40deg) rotateX(360deg) rotateY(20deg);}
+}
+
+.exitButtonRectangle2:hover{
+    cursor: pointer;
+}
+
+.rectangle2Side{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    /* border: 5px solid #fff; */
+    /* font: normal 5px Arial; */
+    /* text-align: center; */
+    /* line-height: 300px; */
+
+}
+
+.rectangle2Front{
+    background-image: linear-gradient(to right, rgb(35, 151, 8), rgb(66, 247, 26));
+    transform: translateZ(5px);
+}
+
+.rectangle2Side:hover .exitButtonRectangle2{
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.rectangle2Back{
+    background-image: linear-gradient(to right, rgb(66, 247, 26), rgb(35, 151, 8));
+
+    transform: rotateY(180deg) translateZ(5px);
+}
+
+.rectangle2Right{
+    background-color: rgb(66, 247, 26);
+    transform: rotateY(90deg) translateZ(5px);
+}
+
+.rectangle2Left{
+    background-color: rgb(42, 145, 18);
+    transform: rotateY(-90deg) translateZ(5px)
+}
+
+.rectangle2Top{
+    position: absolute;
+    width: inherit;
+    height: 10px;
+    background: rgb(38, 151, 13);
+    transform: rotateX(90deg) translateZ(5px);
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: topBottom;
+}
+
+.rectangle2Bottom{
+    position: absolute;
+    width: inherit;
+    height: 10px;
+    background: rgb(38, 151, 13);
+    transform: rotateX(-90deg) translateZ(25px);
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: topBottom;
+
+}
+@keyframes topBottom{
+    0% {background: rgb(75, 194, 49);}
+    50% {background: rgb(30, 116, 11);}
+    100% {background: rgb(75, 194, 49);}
+}
+
+
+/* end________________________________________________________________________exitButtonRectangle2________________________________________________________________ */
+
+
+
+canvas{
+    background-color: rgb(41, 41, 41);
+}
+
+.canvasAnimatingOut{
+    display: none;
+    /* opacity: 0; */
+    /* animation-duration: 5s; */
+    /* animation-name: canvasAnimatingOut; */
+}
+/* @keyframes canvasAnimatingOut{
+    0%   {opacity: 1}
+    100% {opacity: 0}
+} */
+
+
+
+
+
+
+
+@media(min-width: 961px){
+    .day{
+        margin-top: 115px;
+        left: calc(50% - 130px);
+    }
+    
+    .month{
+        /* position: fixed; */
+        /* top: 200px; */
+        margin-top: 100px;
+        left: 50%;
+    }
+    
+    .year{
+        margin-top: 85px;
+        left: calc(50% + 130px);
+    }
+    
+}
