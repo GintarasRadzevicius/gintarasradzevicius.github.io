@@ -786,8 +786,6 @@ function moveDown(){
 
   getBottomLine();
 
-  resetRotateXYZ("down");
-
   moveDownRotation();
 
   changeCubePointsDown();
@@ -983,50 +981,6 @@ function getPointB(){
 function getBottomLine(){
   arrBottomLine[0] = getPointA();
   arrBottomLine[1] = getPointB();
-}
-
-function resetRotateXYZ(direction){   // reseting variables in order to be same number after many rotations
-  switch (direction) {
-    case "down":
-        switch (arrBottomLine.toString()) {
-          case "0,1":
-            rotateX = 0;
-            rotateY = -25;
-            rotateZ = 0;
-        
-            break;
-
-          case "4,5":
-            rotateX = 90;
-            rotateY = -25;
-            rotateZ = 0;
-            break;
-
-          case "7,6":
-              rotateX = 180;
-              rotateY = -25;
-              rotateZ = 0;
-              break;
- 
-          case "3,2":
-            console.log("Trutututututu");
-            console.log("rotateX: " + rotateX);
-            console.log("rotateY: " + rotateY);
-            console.log("rotateZ: " + rotateZ);
-            console.log("");
-            rotateX = 270;
-            rotateY = -25;
-            rotateZ = 0;
-
-            break;
-    
-          }
-        
-        break;
-  case "up":
-    break;
-
-  }
 }
 
 function bBottomLineIsAtPoints(index1, index2){           //function getBottomLine() should be called before
