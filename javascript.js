@@ -5,7 +5,6 @@ Notes:
 1. Calculation does not include last day.
 */
 
-
 var yearNumber = new Date().getFullYear();
 var monthNumber = (new Date().getMonth()) + 1;
 var dayNumber = new Date().getDate();
@@ -43,6 +42,12 @@ window.ontouchstart = function(event){                              /*For Iphone
 
 
 }
+
+daySelector(document.getElementsByClassName("number")[0]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test
+
+
+
+
 
 /* Start________________________________________________________________________Modal_day________________________________________________________________ */
 
@@ -738,9 +743,11 @@ function moveUp(){
   console.log("B: " + getPointB());
   console.log("");
 
-  moveUpRotation();
+  rotate('X', '-90');
 
-  changeCubePointsUp();
+  // moveUpRotation();
+
+  // changeCubePointsUp();
   console.log("");
 
 }
@@ -783,16 +790,28 @@ function moveDown(){
 
   // let firstDayNumber = Number(document.getElementsByClassName(sourceClassName)[0].children[0].children[1].innerText);
   // document.getElementsByClassName("cubeSideBottomText")[0].innerText = firstDayNumber - 1;
+  rotate('X', '90');
+  // getBottomLine();
 
-  getBottomLine();
+  // moveDownRotation();
 
-  moveDownRotation();
-
-  changeCubePointsDown();
+  // changeCubePointsDown();
   
 }
 
+function rotate(axis, degrees) {
+  let outermostRotator = document.getElementsByClassName("cube").item(0);
+  outermostRotator.style.transform = 'rotateY(0deg)';
+  outermostRotator.outerHTML = `<div class='cube' id='container' style="transition: 1s; transform-style: preserve-3d; transform: rotate${axis}(0deg); position: relative; transition-timing-function: ease-in-out; width: inherit; height: inherit; ">${outermostRotator.outerHTML}</div>`;
+  window.setTimeout(function () {
+      container.style.transform = `rotateY(-20deg) rotate${axis}(${degrees}deg)`;
+      container.removeAttribute('id');
+  }, 1000);
+
+}
+
 function moveDownRotation(){
+
   if (bBottomLineIsAtPoints(0, 1) || bBottomLineIsAtPoints(4, 5) || bBottomLineIsAtPoints(7, 6) || bBottomLineIsAtPoints(3, 2)) {
 
     rotateX += 90;            //rotate whole cube
@@ -893,9 +912,10 @@ function moveLeft(){
   console.log("B: " + getPointB());
   console.log("");
 
-  moveLeftRotation();
+  rotate('Y', '90');
+  // moveLeftRotation();
 
-  changeCubePointsLeft();
+  // changeCubePointsLeft();
   console.log("");
 }
 
@@ -943,10 +963,11 @@ function moveRight(){
   // rotateX = 0;
 
   rotateY -= 90;
+  rotate('Y', '-90');
 
-  document.querySelector('.cube').style.transform =
-  'rotateY(' + rotateY + 'deg)' +
-  'rotateX(' + rotateX + 'deg)';
+  // document.querySelector('.cube').style.transform =
+  // 'rotateY(' + rotateY + 'deg)' +
+  // 'rotateX(' + rotateX + 'deg)';
 
   // rotateTopSideDeg -= 90;
   // rotateBottomSideDeg += 90;
@@ -956,7 +977,7 @@ function moveRight(){
   // document.querySelector('.cubeSideBottomText').style.transform = 'rotate('+ rotateBottomSideDeg +  'deg)';
   // document.querySelector('.cubeSideBackText').style.transform = 'rotate('+ rotateBackSideDeg +  'deg)';
 
-  changeCubePointsRight();
+  // changeCubePointsRight();
   console.log("");
 
 }
