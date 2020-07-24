@@ -801,7 +801,7 @@ function moveDown(){
 
 function rotate(axis, degrees) {
   let outermostRotator = document.getElementsByClassName("cube").item(0);
-  outermostRotator.style.transform = 'rotateY(0deg)';
+  //outermostRotator.style.transform = 'rotateY(0deg)';
   outermostRotator.outerHTML = `<div class='cube' id='container' style="transition: 1s; transform-style: preserve-3d; transform: rotate${axis}(0deg); position: relative; transition-timing-function: ease-in-out; width: inherit; height: inherit; ">${outermostRotator.outerHTML}</div>`;
   window.setTimeout(function () {
       container.style.transform = `rotateY(-20deg) rotate${axis}(${degrees}deg)`;
