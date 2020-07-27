@@ -801,12 +801,15 @@ function moveDown(){
 
 function rotate(axis, degrees) {
   let outermostRotator = document.getElementsByClassName("cube").item(0);
-  //outermostRotator.style.transform = 'rotateY(0deg)';
-  outermostRotator.outerHTML = `<div class='cube' id='container' style="transition: 1s; transform-style: preserve-3d; transform: rotate${axis}(0deg); position: relative; transition-timing-function: ease-in-out; width: inherit; height: inherit; ">${outermostRotator.outerHTML}</div>`;
+  // outermostRotator.style.transform = 'rotateY(-20deg)';
+  let strOutermostRotatorOuterHTML = outermostRotator.outerHTML;
+  strOutermostRotatorOuterHTML = strOutermostRotatorOuterHTML.replace("rotateY(-20deg)", "rotateY(0deg)")
+  outermostRotator.outerHTML = `<div class='cube' id='container' style="transition: 1s; transform-style: preserve-3d; transform: rotateY(-20deg) rotate${axis}(0deg) ; position: relative; transition-timing-function: ease-in-out; width: inherit; height: inherit; ">${strOutermostRotatorOuterHTML}</div>`;
+
   window.setTimeout(function () {
       container.style.transform = `rotateY(-20deg) rotate${axis}(${degrees}deg)`;
       container.removeAttribute('id');
-  }, 1000);
+  }, 10);
 
 }
 
