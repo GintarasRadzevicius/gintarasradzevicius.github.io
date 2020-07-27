@@ -799,8 +799,13 @@ function moveDown(){
   
 }
 var bfirstTimeRun = true;
+
 function rotate(axis, degrees) {
   let outermostRotator = document.getElementsByClassName("cube").item(0);
+  let aaa = document.getElementsByClassName("side front").item(0).getBoundingClientRect();
+  let bbbb = document.getElementsByClassName("side back").item(0).getBoundingClientRect();
+  // alert(aaa["top"]);
+  // alert(bbbb["top"]);
   if (bfirstTimeRun) {
     outermostRotator.style.transform = 'rotateY(0deg)';
     bfirstTimeRun = false;
