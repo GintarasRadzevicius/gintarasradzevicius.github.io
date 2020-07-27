@@ -181,7 +181,7 @@ body{
     height: inherit;
     transform-style: preserve-3d;
     transition: 1s;
-    transform: rotateX(0) rotateY(0deg);
+    transform: rotateX(0) rotateY(-20deg);
     /* transform: rotate3d(1,1,1,90deg); */
 }
 
