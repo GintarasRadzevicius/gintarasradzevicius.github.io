@@ -43,7 +43,7 @@ window.ontouchstart = function(event){                              /*For Iphone
 
 }
 
-daySelector(document.getElementsByClassName("number")[0]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test
+// daySelector(document.getElementsByClassName("number")[0]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test
 
 
 
