@@ -790,29 +790,29 @@ function moveDown(){
   // let firstDayNumber = Number(document.getElementsByClassName(sourceClassName)[0].children[0].children[1].innerText);
   // document.getElementsByClassName("cubeSideBottomText")[0].innerText = firstDayNumber - 1;
   rotate('X', '90');
-  let cubeSideFrontText = document.getElementsByClassName("cubeSideFrontText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideFrontText").item(0).innerText);
-  console.log("front top: " + cubeSideFrontText["width"]);
+  // let cubeSideFrontText = document.getElementsByClassName("cubeSideFrontText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideFrontText").item(0).innerText);
+  // console.log("front top: " + cubeSideFrontText["width"]);
 
-  let cubeSideTopText = document.getElementsByClassName("cubeSideTopText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideTopText").item(0).innerText);
-  console.log("top top: " + cubeSideTopText["width"]);
+  // let cubeSideTopText = document.getElementsByClassName("cubeSideTopText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideTopText").item(0).innerText);
+  // console.log("top top: " + cubeSideTopText["width"]);
 
-  let cubeSideBackText = document.getElementsByClassName("cubeSideBackText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideBackText").item(0).innerText);
-  console.log("back top: " + cubeSideBackText["width"]);
+  // let cubeSideBackText = document.getElementsByClassName("cubeSideBackText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideBackText").item(0).innerText);
+  // console.log("back top: " + cubeSideBackText["width"]);
  
-  let cubeSideBottomText = document.getElementsByClassName("cubeSideBottomText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideBottomText").item(0).innerText);
-  console.log("bottom top: " + cubeSideBottomText["width"]);
+  // let cubeSideBottomText = document.getElementsByClassName("cubeSideBottomText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideBottomText").item(0).innerText);
+  // console.log("bottom top: " + cubeSideBottomText["width"]);
 
-  let cubeSideRightText = document.getElementsByClassName("cubeSideRightText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideRightText").item(0).innerText);
-  console.log("right top: " + cubeSideRightText["twidthop"]);
+  // let cubeSideRightText = document.getElementsByClassName("cubeSideRightText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideRightText").item(0).innerText);
+  // console.log("right top: " + cubeSideRightText["twidthop"]);
 
-  let cubeSideLeftText = document.getElementsByClassName("cubeSideLeftText").item(0).getBoundingClientRect();
-  console.log(document.getElementsByClassName("cubeSideLeftText").item(0).innerText);
-  console.log("left top: " + cubeSideLeftText["width"]);
+  // let cubeSideLeftText = document.getElementsByClassName("cubeSideLeftText").item(0).getBoundingClientRect();
+  // console.log(document.getElementsByClassName("cubeSideLeftText").item(0).innerText);
+  // console.log("left top: " + cubeSideLeftText["width"]);
 
   console.log("");
 }
