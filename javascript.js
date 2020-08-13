@@ -43,7 +43,7 @@ window.ontouchstart = function(event){                              /*For Iphone
 
 }
 
-// daySelector(document.getElementsByClassName("number")[0]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test
+daySelector(document.getElementsByClassName("number")[0]); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!for test
 
 
 
@@ -783,29 +783,61 @@ function moveUpRotation(){
   }
 }
 
-function moveDown(){
-  console.log("A: " + getPointA());
-  console.log("B: " + getPointB());
-  console.log("");
+// !!!!!!!!!!!!!!!!!!!!!aaaaaaaaaaaaaaaaaaaaaaaaa
 
+
+function moveDown(){
   // let firstDayNumber = Number(document.getElementsByClassName(sourceClassName)[0].children[0].children[1].innerText);
   // document.getElementsByClassName("cubeSideBottomText")[0].innerText = firstDayNumber - 1;
   rotate('X', '90');
-  // getBottomLine();
+  let cubeSideFrontText = document.getElementsByClassName("cubeSideFrontText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideFrontText").item(0).innerText);
+  console.log("front top: " + cubeSideFrontText["width"]);
 
-  // moveDownRotation();
+  let cubeSideTopText = document.getElementsByClassName("cubeSideTopText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideTopText").item(0).innerText);
+  console.log("top top: " + cubeSideTopText["width"]);
 
-  // changeCubePointsDown();
-  
+  let cubeSideBackText = document.getElementsByClassName("cubeSideBackText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideBackText").item(0).innerText);
+  console.log("back top: " + cubeSideBackText["width"]);
+ 
+  let cubeSideBottomText = document.getElementsByClassName("cubeSideBottomText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideBottomText").item(0).innerText);
+  console.log("bottom top: " + cubeSideBottomText["width"]);
+
+  let cubeSideRightText = document.getElementsByClassName("cubeSideRightText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideRightText").item(0).innerText);
+  console.log("right top: " + cubeSideRightText["twidthop"]);
+
+  let cubeSideLeftText = document.getElementsByClassName("cubeSideLeftText").item(0).getBoundingClientRect();
+  console.log(document.getElementsByClassName("cubeSideLeftText").item(0).innerText);
+  console.log("left top: " + cubeSideLeftText["width"]);
+
+  console.log("");
 }
+
+
+
+
 var bfirstTimeRun = true;
 
 function rotate(axis, degrees) {
+  
   let outermostRotator = document.getElementsByClassName("cube").item(0);
-  let aaa = document.getElementsByClassName("side front").item(0).getBoundingClientRect();
-  let bbbb = document.getElementsByClassName("side back").item(0).getBoundingClientRect();
-  // alert(aaa["top"]);
-  // alert(bbbb["top"]);
+  let front = document.getElementsByClassName("side front").item(0).getBoundingClientRect();
+  let back = document.getElementsByClassName("side back").item(0).getBoundingClientRect();
+  let top = document.getElementsByClassName("side top").item(0).getBoundingClientRect();
+  let bottom = document.getElementsByClassName("side bottom").item(0).getBoundingClientRect();
+  let right = document.getElementsByClassName("side right").item(0).getBoundingClientRect();
+  let left = document.getElementsByClassName("side left").item(0).getBoundingClientRect();
+
+  // console.log("back: " + back["top"]);
+  // console.log("top: " + top["top"]);
+  // console.log("bottom: " + bottom["top"]);
+  // console.log("right: " + right["top"]);
+  // console.log("left: " + left["top"]);
+
   if (bfirstTimeRun) {
     outermostRotator.style.transform = 'rotateY(0deg)';
     bfirstTimeRun = false;
@@ -823,103 +855,6 @@ function rotate(axis, degrees) {
 
 }
 
-function moveDownRotation(){
-
-  if (bBottomLineIsAtPoints(0, 1) || bBottomLineIsAtPoints(4, 5) || bBottomLineIsAtPoints(7, 6) || bBottomLineIsAtPoints(3, 2)) {
-
-    rotateX += 90;            //rotate whole cube
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' +
-    'rotateX(' + rotateX + 'deg)';
-
-    // rotateRightSideDeg -= 90; //rotate only side faces
-    // rotateLeftSideDeg += 90;
-    // document.querySelector('.cubeSideRightText').style.transform = 'rotate('+ rotateRightSideDeg +  'deg)';
-    // document.querySelector('.cubeSideLeftText').style.transform = 'rotate('+ rotateLeftSideDeg +  'deg)';
-  } else if (bBottomLineIsAtPoints(1, 0) || bBottomLineIsAtPoints(5, 4) || bBottomLineIsAtPoints(6, 7) || bBottomLineIsAtPoints(2, 3)) {
-    rotateX -= 90;
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' + 
-    'rotateX(' + rotateX + 'deg)';
-    
-  } else if(bBottomLineIsAtPoints(1, 5) || bBottomLineIsAtPoints(0, 4) || bBottomLineIsAtPoints(3, 7) || bBottomLineIsAtPoints(2, 6)){
-
-    rotateY += 0;
-    rotateZ -= 90;
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' + 
-    'rotateZ(' + rotateZ + 'deg)';
-
-  } else if(bBottomLineIsAtPoints(5, 1) || bBottomLineIsAtPoints(4, 0) || bBottomLineIsAtPoints(7, 3) || bBottomLineIsAtPoints(6, 2)){
-    rotateY -= 0;
-    rotateZ += 90;
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' + 
-    'rotateZ(' + rotateZ + 'deg)';
-
-  } else if(bBottomLineIsAtPoints(1, 2) || bBottomLineIsAtPoints(5, 6) || bBottomLineIsAtPoints(4, 7) || bBottomLineIsAtPoints(0, 3)){
-    console.log(111111111111);
-    
-    console.log("rotateY: " + rotateY);
-    console.log("rotateX: " + rotateX);
-    console.log("rotateZ: " + rotateZ);
-    console.log("");
-    
-    if (rotateX % 90 == 0){
-      rotateY += 115;
-      rotateX += 115;
-      rotateZ -= 90;
-
-    } else{
-      rotateY -= 90;
-      rotateX += 0;
-    }
-
-    
-    console.log("rotateY: " + rotateY);
-    console.log("rotateX: " + rotateX);
-    console.log("rotateZ: " + rotateZ);
-    console.log("");
-
-
-
-    document.querySelector('.cube').style.transform =
-    'rotateZ(' + rotateZ + 'deg)' +
-    'rotateX(' + rotateX + 'deg)' +
-    'rotateY(' + rotateY + 'deg)';
-  
-  } else if(bBottomLineIsAtPoints(2, 1) || bBottomLineIsAtPoints(6, 5) || bBottomLineIsAtPoints(7, 4) || bBottomLineIsAtPoints(3, 0)){
-    console.log(22222222222);
-    console.log("rotateY: " + rotateY);
-    console.log("rotateX: " + rotateX);
-    console.log("rotateZ: " + rotateZ);
-    console.log("");
-    
-    if (rotateX % 90 == 0){
-      rotateY += 115;
-      rotateX += 115;
-      rotateZ -= 90;
-
-    } else{
-      rotateY += 90;
-    }
-
-    
-    console.log("rotateY: " + rotateY);
-    console.log("rotateX: " + rotateX);
-    console.log("rotateZ: " + rotateZ);
-    console.log("");
-
-
-
-    document.querySelector('.cube').style.transform =
-    'rotateZ(' + rotateZ + 'deg)' +
-    'rotateX(' + rotateX + 'deg)' +
-    'rotateY(' + rotateY + 'deg)';
-
-  }
-}
-
 function moveLeft(){
   console.log("A: " + getPointA());
   console.log("B: " + getPointB());
@@ -930,45 +865,6 @@ function moveLeft(){
 
   // changeCubePointsLeft();
   console.log("");
-}
-
-function moveLeftRotation(){
-  if (bBottomLineIsAtPoints(0, 1) || bBottomLineIsAtPoints(4, 0) || bBottomLineIsAtPoints(5, 4) || bBottomLineIsAtPoints(1, 5)) {
-    rotateY += 90;
-console.log("0. moveLeftRotation. rotateX: " + rotateX);
-    document.querySelector('.cube').style.transform =
-    'rotateY(' + rotateY + 'deg)' +
-    'rotateX(' + rotateX + 'deg)';
- 
-    
-  } else if (bBottomLineIsAtPoints(1, 0) || bBottomLineIsAtPoints(2, 1) || bBottomLineIsAtPoints(3, 2) || bBottomLineIsAtPoints(0, 3)) {
-    rotateY += 90;
-
-    console.log("1. moveLeftRotation. rotateX: " + rotateX);
-    document.querySelector('.cube').style.transform =
-    'rotateY(' + rotateY + 'deg)' +
-    'rotateX(' + rotateX + 'deg)';
-    
-  } else if(bBottomLineIsAtPoints(4, 5) || bBottomLineIsAtPoints(7, 4) || bBottomLineIsAtPoints(6, 7) || bBottomLineIsAtPoints(5, 6)){
-    rotateY += 90;
-    rotateX += 0;
-    console.log("2. moveLeftRotation. rotateX: " + rotateX);
-    console.log("2. moveLeftRotation. rotateY: " + rotateY);
-    console.log("2. moveLeftRotation. rotateZ: " + rotateZ);
-    console.log("");
-
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' + 
-    'rotateX(' + rotateX + 'deg)';
-
-  } else if(bBottomLineIsAtPoints(1, 2) || bBottomLineIsAtPoints(5, 1) || bBottomLineIsAtPoints(6, 5) || bBottomLineIsAtPoints(2, 6)){
-    rotateY += 0;
-    rotateZ -= 90;
-    console.log("3. moveLeftRotation. rotateY: " + rotateY);
-    document.querySelector('.cube').style.transform = 
-    'rotateY(' + rotateY + 'deg)' + 
-    'rotateZ(' + rotateZ + 'deg)';
-  }
 }
 
 function moveRight(){
