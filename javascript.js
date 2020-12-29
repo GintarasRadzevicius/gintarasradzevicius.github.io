@@ -69,13 +69,11 @@ fromContainer1.addEventListener('touchmove', processTouchMove, false);
 fromContainer1.addEventListener('touchstart', processTouchStart, false);
 fromContainer1.addEventListener('touchend', processTouchEnd, false);
 
-var startX = 0;
 var startY = 0;
 var time;
 
 function processTouchStart(ev){
   ev.preventDefault();
-  startX = ev.changedTouches[0].pageX;
   startY = ev.changedTouches[0].pageY;
 
   date = new Date();
@@ -83,8 +81,6 @@ function processTouchStart(ev){
 
 }
 
-var firstXMove = 0;
-var firstYMove = 0;
 var date;
 var endY = 0;
 
@@ -103,6 +99,8 @@ function processTouchMove(ev){
     rotateCubeUp();
   }
   
+  startY = ev.changedTouches[0].pageY;
+
   date = new Date();
   time = date.getTime();
 }
@@ -132,8 +130,6 @@ function rotateCubeDown(){
 
 function processTouchEnd(ev){
   ev.preventDefault();
-  firstXMove = 0;
-  firstYMove = 0;
   if(startY < endY){
     rotateCubeDown();
 
