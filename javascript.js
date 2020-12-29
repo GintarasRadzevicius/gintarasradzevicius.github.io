@@ -72,18 +72,18 @@ fromContainer1.addEventListener('touchend', processTouchEnd, false);
 var startY = 0;
 var fingerPressTime;
 var time;
+var endY;
 
 function processTouchStart(ev){
   ev.preventDefault();
   startY = ev.changedTouches[0].pageY;
-
+  endY = startY;
   date = new Date();
   time = date.getTime();
   fingerPressTime = time;
 }
 
 var date;
-var endY = 0;
 var timeNew;
 var distance = 0;
 
@@ -92,9 +92,11 @@ function processTouchMove(ev){
 
   date = new Date();
   timeNew = date.getTime();
-  if(timeNew - time < 500){return;}
 
   endY = ev.changedTouches[0].pageY;
+
+  if(timeNew - time < 500){return;}
+
   console.log('startY: '  + startY);
   console.log('endY: '  + endY);
   console.log(' ');
@@ -147,13 +149,20 @@ function rotateCubeDown(){
 
 
 function processTouchEnd(ev){
+  console.log('startY: '  + startY);
+  console.log('endY: '  + endY);
+
   if(timeNew - fingerPressTime >= 500){return;}
   ev.preventDefault();
+
   if(startY < endY){
     rotateCubeDown();
 
-  } else{
+  } else if(startY > endY){
     rotateCubeUp();
+
+  } else{                       //when startY = endY
+    return;
   }
 }
 
