@@ -70,6 +70,7 @@ fromContainer1.addEventListener('touchstart', processTouchStart, false);
 fromContainer1.addEventListener('touchend', processTouchEnd, false);
 
 var startY = 0;
+var fingerPressTime;
 var time;
 
 function processTouchStart(ev){
@@ -78,24 +79,29 @@ function processTouchStart(ev){
 
   date = new Date();
   time = date.getTime();
-
+  fingerPressTime = time;
 }
 
 var date;
 var endY = 0;
+var timeNew;
+var yForDistance = 0;
 
 function processTouchMove(ev){
   console.log('ppppppppppppppppppppppp');
   ev.preventDefault();
 
   date = new Date();
-  let timeNew = date.getTime();
+  timeNew = date.getTime();
   if(timeNew - time < 500){return;}
+
   endY = ev.changedTouches[0].pageY;
 
   if(startY < endY){
+    if(endY - startY < 50){return;}
     rotateCubeDown();
   } else{
+    if(startY - endY < 50){return;}
     rotateCubeUp();
   }
   
@@ -129,6 +135,7 @@ function rotateCubeDown(){
 
 
 function processTouchEnd(ev){
+  if(timeNew - fingerPressTime >= 500){return;}
   ev.preventDefault();
   if(startY < endY){
     rotateCubeDown();
