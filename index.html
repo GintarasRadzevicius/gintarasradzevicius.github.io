@@ -14,29 +14,99 @@
     <h2>Skaičiuoti dienų skaičių</h2>
   </header>
 
-  <div class="commercial">Vieta reklamai</div>
-
-  <div class="container">
-    <div class="dateFrom">
-      <div class="day">
-        <div class="name">Diena</div>
-        <div class="number" onclick="daySelector(this)"></div>
+  <div class="dateText">
+    <div class="column">
+      <p>Diena</p>
+    
+      <div class="container">
+        <div class="cubeContainer">
+          <div id="cube1" class="cube">
+            <div class="side front">
+              <div class="cubeSideFrontText"></div>
+            </div>
+            <div class="side top">
+              <div class="cubeSideTopText"></div>
+            </div>
+            <div class="side back">
+              <div class="cubeSideBackText"></div>
+            </div>
+            <div class="side bottom">
+              <div class="cubeSideBottomText"></div>
+            </div>
+            <div class="side right">
+              <div class="cubeSideRightText"></div>
+            </div>
+            <div class="side left">
+              <div class="cubeSideLeftText"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="month">
-        <div class="name">Mėnuo</div>
-        <div class="number" onclick="monthSelector(this)"></div>
-      </div>
-      <div class="year">
-        <div class="name">Metai</div>
-        <div class="number" onclick="yearSelector(this)"></div>
-      </div>
-
     </div>
 
+    <div class="column">
+      <p>Mėnuo</p>
+      <div class="container">
+        <div class="cubeContainer">
+          <div id="cube2" class="cube">
+            <div class="side front">
+              <div class="cubeSideFrontText"></div>
+            </div>
+            <div class="side top">
+              <div class="cubeSideTopText"></div>
+            </div>
+            <div class="side back">
+              <div class="cubeSideBackText"></div>
+            </div>
+            <div class="side bottom">
+              <div class="cubeSideBottomText"></div>
+            </div>
+            <div class="side right">
+              <div class="cubeSideRightText"></div>
+            </div>
+            <div class="side left">
+              <div class="cubeSideLeftText"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="column">
+      <p>Metai</p>
+      <div class="container">
+        <div class="cubeContainer">
+          <div id="cube3" class="cube">
+            <div class="side front">
+              <div class="cubeSideFrontText"></div>
+            </div>
+            <div class="side top">
+              <div class="cubeSideTopText"></div>
+            </div>
+            <div class="side back">
+              <div class="cubeSideBackText"></div>
+            </div>
+            <div class="side bottom">
+              <div class="cubeSideBottomText"></div>
+            </div>
+            <div class="side right">
+              <div class="cubeSideRightText"></div>
+            </div>
+            <div class="side left">
+              <div class="cubeSideLeftText"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
     <br>
     <br>
 
-    <div id="modalWindowChooseDay" class="modalWindowChooseDay">
+    <!-- <div id="modalWindowChooseDay" class="modalWindowChooseDay">
 
       <canvas id = "canvasDay" class = "canvasDay" style="position: fixed;top:0;left:0;"></canvas>
 
@@ -97,8 +167,8 @@
           </div>
         </div>
       </div>
-    </div>
-
+    </div> -->
+<!-- 
     <div id="modalWindowChooseMonth" class="modalWindowChooseMonth">
       <div class="modalWindowMonthContainer">
         <ul id = "modalMonth" class="modalMonth">
@@ -116,13 +186,13 @@
           <li class="monthItem" onclick="monthChange(this)">12</li>
         </ul>
       </div>
-    </div>
+    </div> -->
   
 
-    <div id="modalWindowChooseYear" class="modalWindowChooseYear">
-    </div>
+    <!-- <div id="modalWindowChooseYear" class="modalWindowChooseYear">
+    </div> -->
 
-    <div id="modalWindowChooseMonth" class="modalWindowChooseMonth">
+    <!-- <div id="modalWindowChooseMonth" class="modalWindowChooseMonth">
       <div class="modalWindowMonthContainer">
         <ul id = "modalMonth" class="modalMonth">
           <li class="monthItem" onclick="monthChange(this)">1</li>
@@ -138,7 +208,7 @@
           <li class="monthItem" onclick="monthChange(this)">11</li>
           <li class="monthItem" onclick="monthChange(this)">12</li>
         </ul>
-      </div>
+      </div> -->
       <!-- <div id="modalYearVerticalChoice" class="modalYearVerticalChoice" onscroll="scrollAddMoreYears()" ontouchend = "bTouchEnded()">
         <div class="yearItem" onclick="yearChange(this)">2010</div>
         <div class="yearItem" onclick="yearChange(this)">2011</div>
@@ -162,26 +232,26 @@
         <div class="yearItem" onclick="yearChange(this)">2029</div>
         <div class="yearItem" onclick="yearChange(this)">2030</div>
       </div> -->
-      </div>
+      <!-- </div>
 
       <br>
-      <br>
+      <br> -->
 
-    <div class="result" style="text-align:center"></div>
-    
+    <!-- <div class="result" style="text-align:center"></div> -->
+<!--     
     <br>
-    <br>
+    <br> -->
 
-    <button id="buttonCount" onclick="calculateResult()" style="text-align:center">Skaičiuoti</button>
-  </div>
+    <!-- <button id="buttonCount" onclick="calculateResult()" style="text-align:center">Skaičiuoti</button> -->
+  <!-- </div> -->
 
 
-
+<!-- 
   <script src="jsCanvas/canvas_top.js"></script>
   <script src="jsCanvas/canvas_bottom.js"></script>
   <script src="jsCanvas/canvas_left.js"></script>
   <script src="jsCanvas/canvas_right.js"></script>
-  <script src="jsCanvas/canvas_main.js"></script>
+  <script src="jsCanvas/canvas_main.js"></script> -->
 
 
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
