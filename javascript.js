@@ -85,10 +85,9 @@ function processTouchStart(ev){
 var date;
 var endY = 0;
 var timeNew;
-var yForDistance = 0;
+var distance = 0;
 
 function processTouchMove(ev){
-  console.log('ppppppppppppppppppppppp');
   ev.preventDefault();
 
   date = new Date();
@@ -96,15 +95,28 @@ function processTouchMove(ev){
   if(timeNew - time < 500){return;}
 
   endY = ev.changedTouches[0].pageY;
+  console.log('startY: '  + startY);
+  console.log('endY: '  + endY);
+  console.log(' ');
 
   if(startY < endY){
-    if(endY - startY < 50){return;}
+    distance = distance + endY - startY;
+    console.log('distance: '  + distance);
+    console.log(' ');
+
+    if(distance < 50){return;}     //to limit rotations
     rotateCubeDown();
+
   } else{
-    if(startY - endY < 50){return;}
+    distance = distance + startY - endY;
+    console.log('distance else: '  + distance);
+    console.log(' ');
+
+    if(distance < 50){return;}     //to limit rotations
     rotateCubeUp();
   }
   
+  distance = 0;
   startY = ev.changedTouches[0].pageY;
 
   date = new Date();
