@@ -69,18 +69,68 @@ fromContainer1.addEventListener('touchmove', processTouchMove, false);
 fromContainer1.addEventListener('touchstart', processTouchStart, false);
 fromContainer1.addEventListener('touchend', processTouchEnd, false);
 
+fromContainer2.addEventListener('touchmove', processTouchMove, false);
+fromContainer2.addEventListener('touchstart', processTouchStart, false);
+fromContainer2.addEventListener('touchend', processTouchEnd, false);
+
+fromContainer3.addEventListener('touchmove', processTouchMove, false);
+fromContainer3.addEventListener('touchstart', processTouchStart, false);
+fromContainer3.addEventListener('touchend', processTouchEnd, false);
+
+
+
 var startY = 0;
 var fingerPressTime;
 var time;
 var endY;
+var targetElement;
 
 function processTouchStart(ev){
+  // console.dir(ev.target);
+
   ev.preventDefault();
+  identifyWhichCube(ev);
+
   startY = ev.changedTouches[0].pageY;
   endY = startY;
+
   date = new Date();
   time = date.getTime();
   fingerPressTime = time;
+}
+
+function identifyWhichCube(ev){ //sita vieta taisyti
+  targetElement = ev.targetTouches[0].target;
+  console.log('targetElement.className: ' + targetElement.className);
+
+  switch (targetElement.className) {
+    case 'container':
+    case 'cubeContainer':
+    case 'cube':
+      let i = 0;
+
+      while (targetElement.className != 'cube') {
+        targetElement = targetElement.children[0];
+        i++;
+        if (i == 5) {alert('ERROR in identifyWhichCube -> while (targetElement.className != cube)');}
+      }
+    
+      break;
+
+    default:
+      let j = 0;
+      while (targetElement.className != 'cube') {
+        targetElement = targetElement.parentElement;
+        j++;
+        if (j == 5) {alert('ERROR in identifyWhichCube -> DEFAULT while (targetElement.className != cube)');}
+      }
+      break;
+    }
+
+
+  if (targetElement.className != 'cube') {alert('error in identifyWhichCube -> container');}
+  targetElement = targetElement.id;
+  // targetElement = document.getElementById(targetElement);
 }
 
 var date;
@@ -106,7 +156,7 @@ function processTouchMove(ev){
     console.log('distance: '  + distance);
     console.log(' ');
 
-    if(distance < 50){return;}     //to limit rotations
+    if(distance < 30){return;}     //to limit rotations
     rotateCubeDown();
 
   } else{
@@ -114,7 +164,7 @@ function processTouchMove(ev){
     console.log('distance else: '  + distance);
     console.log(' ');
 
-    if(distance < 50){return;}     //to limit rotations
+    if(distance < 30){return;}     //to limit rotations
     rotateCubeUp();
   }
   
@@ -129,12 +179,15 @@ var rotateXDegree = 0;
 
 function rotateCubeUp(){
   rotateXDegree += 90;
-  document.querySelector('.cube').style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  // document.querySelector('.' + targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  
 }
 
 function rotateCubeDown(){
   rotateXDegree -= 90;
-  document.querySelector('.cube').style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  // document.querySelector('.' + targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
 }
 
 // function processTouchStart(ev){
