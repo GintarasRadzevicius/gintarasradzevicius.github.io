@@ -101,7 +101,6 @@ function processTouchStart(ev){
 
 function identifyWhichCube(ev){ //sita vieta taisyti
   targetElement = ev.targetTouches[0].target;
-  console.log('targetElement.className: ' + targetElement.className);
 
   switch (targetElement.className) {
     case 'container':
@@ -130,7 +129,6 @@ function identifyWhichCube(ev){ //sita vieta taisyti
 
   if (targetElement.className != 'cube') {alert('error in identifyWhichCube -> container');}
   targetElement = targetElement.id;
-  // targetElement = document.getElementById(targetElement);
 }
 
 var date;
@@ -175,19 +173,50 @@ function processTouchMove(ev){
   time = date.getTime();
 }
 
-var rotateXDegree = 0;
+var rotateXDegree = [0,0,0,0,0];
 
 function rotateCubeUp(){
-  rotateXDegree += 90;
-  // document.querySelector('.' + targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
-  document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
-  
+  switch (targetElement) {
+    case 'cube1':
+      rotateXDegree[0] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      break;
+      
+    case 'cube2':
+      rotateXDegree[1] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      break;
+
+    case 'cube3':
+      rotateXDegree[2] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      break;
+
+    default:
+      break;
+  }
 }
 
 function rotateCubeDown(){
-  rotateXDegree -= 90;
-  // document.querySelector('.' + targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
-  document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree + 'deg)';
+  switch (targetElement) {
+    case 'cube1':
+      rotateXDegree[0] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      break;
+      
+    case 'cube2':
+      rotateXDegree[1] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      break;
+
+    case 'cube3':
+      rotateXDegree[2] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      break;
+
+    default:
+      break;
+  }
 }
 
 // function processTouchStart(ev){
