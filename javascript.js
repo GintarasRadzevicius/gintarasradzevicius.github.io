@@ -179,17 +179,17 @@ function rotateCubeUp(){
   switch (targetElement) {
     case 'cube1':
       rotateXDegree[0] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[0] + 'deg)';
       break;
       
     case 'cube2':
       rotateXDegree[1] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[1] + 'deg)';
       break;
 
     case 'cube3':
       rotateXDegree[2] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[2] + 'deg)';
       break;
 
     default:
@@ -201,17 +201,17 @@ function rotateCubeDown(){
   switch (targetElement) {
     case 'cube1':
       rotateXDegree[0] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[0] + 'deg)';
       break;
       
     case 'cube2':
       rotateXDegree[1] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[1] + 'deg)';
       break;
 
     case 'cube3':
       rotateXDegree[2] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-20deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[2] + 'deg)';
       break;
 
     default:
