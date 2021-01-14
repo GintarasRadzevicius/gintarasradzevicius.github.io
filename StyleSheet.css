@@ -54,7 +54,7 @@ h2{
     clear: both;
   }
   .dateText{
-      margin: 0 5%;
+      margin: 0 2%;
   }
   .column p{
     font-size: 20px;
@@ -75,18 +75,41 @@ h2{
     perspective: 140px;
 }
 
-#cubeContainer1, #cubeContainer4{
+#cubeContainer1{
     width: 50px;
     height: 50px;
     perspective: 100px;
 }
 
-#cubeContainer2, #cubeContainer5{
+#cubeContainer2{
     top: 40px;
     left: -30px;
 }
 
-#cubeContainer3, #cubeContainer6{
+#cubeContainer3{
+    top: 28px;
+    width: 94px;
+    height: 94px;
+    perspective: 188px;
+}
+
+#cubeContainer4{
+    left: -15px;
+}
+
+#cubeContainer5{
+    top: 40px;
+    left: 18px;
+}
+
+#cubeContainer6{
+    width: 50px;
+    height: 50px;
+    perspective: 100px;
+    left: -15px;
+}
+
+#cubeContainer4{
     top: 28px;
     width: 94px;
     height: 94px;
@@ -102,9 +125,8 @@ h2{
     transform: rotate3d(0.1,1,0,-18deg);
 }
 
-#cube1, #cube2, #cube3{
+#cube4, #cube5, #cube6{
     transform: rotate3d(0.1,1,0,18deg);
-
 }
 
 .side{
@@ -112,72 +134,80 @@ h2{
     width: inherit;
     height: inherit;
     border: 1px solid rgb(0, 132, 255);
-    font: normal 30px Arial;
     text-align: center;
-    /* line-height: 300px; */
     color: whitesmoke;
-    /* text-shadow: 1px 1px 10px rgb(0, 132, 255); */
     background-color: rgba(6, 20, 102, 0.8);
     padding-top: 18px;
+}
+
+#cubeContainer1 .side, #cubeContainer6 .side{
+    font-size: 20px;
+    padding-top: 14px;
+}
+#cubeContainer2 .side, #cubeContainer5 .side{
+    font-size: 30px;
+}
+#cubeContainer3 .side, #cubeContainer4 .side{
+    font-size: 45px;
 }
 
 #cubeContainer2 .front, #cubeContainer5 .front{
     transform: translateZ(35px);
 }
-#cubeContainer1 .front, #cubeContainer4 .front{
+#cubeContainer1 .front, #cubeContainer6 .front{
     transform: translateZ(25px);
 }
-#cubeContainer3 .front, #cubeContainer6 .front{
+#cubeContainer3 .front, #cubeContainer4 .front{
     transform: translateZ(47px);
 }
 
 #cubeContainer2 .back, #cubeContainer5 .back{
     transform: rotateY(180deg) rotateZ(180deg) translateZ(35px);
 }
-#cubeContainer1 .back, #cubeContainer4 .back{
+#cubeContainer1 .back, #cubeContainer6 .back{
     transform: rotateY(180deg) rotateZ(180deg) translateZ(25px);
 }
-#cubeContainer3 .back, #cubeContainer6 .back{
+#cubeContainer3 .back, #cubeContainer4 .back{
     transform: rotateY(180deg) rotateZ(180deg) translateZ(47px);
 }
 
 #cubeContainer2 .right, #cubeContainer5 .right{
     transform: rotateY(90deg) translateZ(35px);
 }
-#cubeContainer1 .right, #cubeContainer4 .right{
+#cubeContainer1 .right, #cubeContainer6 .right{
     transform: rotateY(90deg) translateZ(25px);
 }
-#cubeContainer3 .right, #cubeContainer6 .right{
+#cubeContainer3 .right, #cubeContainer4 .right{
     transform: rotateY(90deg) translateZ(47px);
 }
 
 #cubeContainer2 .left, #cubeContainer5 .left{
     transform: rotateY(-90deg) translateZ(35px);
 }
-#cubeContainer1 .left, #cubeContainer4 .left{
+#cubeContainer1 .left, #cubeContainer6 .left{
     transform: rotateY(-90deg) translateZ(25px);
 }
-#cubeContainer3 .left, #cubeContainer6 .left{
+#cubeContainer3 .left, #cubeContainer4 .left{
     transform: rotateY(-90deg) translateZ(47px);
 }
 
 #cubeContainer2 .top, #cubeContainer5 .top{
     transform: rotateX(90deg) translateZ(35px);
 }
-#cubeContainer1 .top, #cubeContainer4 .top{
+#cubeContainer1 .top, #cubeContainer6 .top{
     transform: rotateX(90deg) translateZ(25px);
 }
-#cubeContainer3 .top, #cubeContainer6 .top{
+#cubeContainer3 .top, #cubeContainer4 .top{
     transform: rotateX(90deg) translateZ(47px);
 }
 
 #cubeContainer2 .bottom, #cubeContainer5 .bottom{
     transform: rotateX(-90deg) translateZ(35px);
 }
-#cubeContainer1 .bottom, #cubeContainer4 .bottom{
+#cubeContainer1 .bottom, #cubeContainer6 .bottom{
     transform: rotateX(-90deg) translateZ(25px);
 }
-#cubeContainer3 .bottom, #cubeContainer6 .bottom{
+#cubeContainer3 .bottom, #cubeContainer4 .bottom{
     transform: rotateX(-90deg) translateZ(47px);
 }
 
