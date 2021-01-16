@@ -23,15 +23,7 @@ var yearNumber = new Date().getFullYear();
 var monthNumber = (new Date().getMonth()) + 1;
 var dayNumber = new Date().getDate();
 
-let dayFromTag = document.getElementById("cube1");
-dayFromTag.firstElementChild.innerText = dayNumber;
-
-let monthFromTag = document.getElementById("cube2");
-monthFromTag.firstElementChild.innerText = monthNumber;
-
-let yearFromTag = document.getElementById("cube3");
-yearFromTag.firstElementChild.innerText = yearNumber;
-
+firstFillCubeNumbers();
 
 
 // window.ontouchstart = function(event){                              /*For Iphone !!!!!!!!!!!!!!! not updated*/ 
@@ -251,3 +243,136 @@ function processTouchEnd(ev){
 // http://www.javascriptkit.com/javatutors/touchevents.shtml
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events
+
+/***********************************************************cube numbers start*******************************************************/
+var maxDaysInMonth;
+
+function fillCubeNumbers(){
+
+  maxDaysInMonth = getDaysfromMonthAndYear(monthNumber, yearNumber);
+
+
+
+  // if(dayNumber == maxDaysInMonth){dayNumber = 0};
+  // document.getElementsByClassName("cubeSideTopText")[0].innerText = 1 + dayNumber;
+
+  // if(dayNumber == maxDaysInMonth){dayNumber = -1};
+  // document.getElementsByClassName("cubeSideBackText")[0].innerText = 2 + dayNumber;
+
+  // if(dayNumber == maxDaysInMonth){dayNumber = -4};
+  // document.getElementsByClassName("cubeSideRightText")[0].innerText = maxDaysInMonth;
+
+  // let monthNumberForCube = Number(document.getElementsByClassName(sourceClassName)[0].children[1].children[1].innerText);
+
+  // if(dayNumber == 1){
+
+  //   if(monthNumberForCube == 1){
+  //     dayNumber == 31 + 1;
+  //   } else{
+  //     let yearNumberForCube = Number(document.getElementsByClassName(sourceClassName)[0].children[2].children[1].innerText) - 1;
+  //     maxDaysInMonth = getDaysfromMonthAndYear(monthNumberForCube - 1, yearNumberForCube);
+  //     dayNumber = maxDaysInMonth + 1;
+  //   }
+    
+  // };
+  // document.getElementsByClassName("cubeSideBottomText")[0].innerText = dayNumber - 1;
+
+}
+
+function firstFillCubeNumbers(){
+
+  let dayFromTag = document.getElementById("cube1");
+  dayFromTag.firstElementChild.innerText = dayNumber;
+  
+  let monthFromTag = document.getElementById("cube2");
+  monthFromTag.firstElementChild.innerText = monthNumber;
+  
+  let yearFromTag = document.getElementById("cube3");
+  yearFromTag.firstElementChild.innerText = yearNumber;
+  
+  let dayToTag = document.getElementById("cube4");
+  dayToTag.firstElementChild.innerText = dayNumber;
+  
+  let monthToTag = document.getElementById("cube5");
+  monthToTag.firstElementChild.innerText = monthNumber;
+  
+  let yearToTag = document.getElementById("cube6");
+  yearToTag.firstElementChild.innerText = yearNumber;
+}
+
+function getDaysfromMonthAndYear(month, year){
+
+  var isLeapYear = isLeapYearCheck(year);
+
+  switch(month){
+
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+      return 31;
+
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      return 30;
+  
+    case 2:
+      
+    if (isLeapYear){
+      return 29;
+
+    }else{
+      return 28;
+    }
+  }
+}
+
+function isLeapYearCheck(year){
+  if (year % 4 == 0){
+
+    if(year % 100 == 0 && year % 400 != 0){
+      return false;
+    }
+
+    return true;
+
+  } else {
+    return false;
+  }
+
+  // if (year == 2020){
+  //   return true;
+  // }
+  // let dummyYear = year;
+  // if (year > 2020){
+
+  //   while(dummyYear >= 2020){
+  //     dummyYear = dummyYear - 4;
+  //     if (dummyYear == 2020){
+  //       return true;
+  //     }
+  //   }
+
+  // }else{
+  //   while(dummyYear <= 2020){
+  //     dummyYear = Number(dummyYear) + 4;
+  //     if (dummyYear == 2020){
+  //       return true;
+  //     }
+  //   }
+  // }
+
+  // return false;
+
+}
+
+
+
+
+
+/***********************************************************cube numbers end*******************************************************/
