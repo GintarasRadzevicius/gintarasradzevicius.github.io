@@ -165,23 +165,28 @@ function processTouchMove(ev){
   time = date.getTime();
 }
 
-var rotateXDegree = [0,0,0,0,0];
+var arrRotateXDegree = [0,0,0,0,0];
+var arrSideCounter = [1,1,1,1,1,1];
+var activeCube = 0;
 
 function rotateCubeUp(){
   switch (targetElement) {
     case 'cube1':
-      rotateXDegree[0] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      arrRotateXDegree[0] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
+      countFrontSideAndCubeIdentification(0, "up");
       break;
       
     case 'cube2':
-      rotateXDegree[1] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      arrRotateXDegree[1] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
+      countFrontSideAndCubeIdentification(1, "up");
       break;
 
     case 'cube3':
-      rotateXDegree[2] += 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      arrRotateXDegree[2] += 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
+      countFrontSideAndCubeIdentification(2, "up");
       break;
 
     default:
@@ -190,25 +195,56 @@ function rotateCubeUp(){
 }
 
 function rotateCubeDown(){
+
   switch (targetElement) {
+
     case 'cube1':
-      rotateXDegree[0] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[0] + 'deg)';
+      arrRotateXDegree[0] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
+      
+      countFrontSideAndCubeIdentification(0, "down");
+      daysCubeFillNumbers("cube1");
       break;
       
     case 'cube2':
-      rotateXDegree[1] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[1] + 'deg)';
+      arrRotateXDegree[1] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
+      
+      countFrontSideAndCubeIdentification(1, "down");
+      daysCubeFillNumbers("cube2");
       break;
 
     case 'cube3':
-      rotateXDegree[2] -= 90;
-      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + rotateXDegree[2] + 'deg)';
+      arrRotateXDegree[2] -= 90;
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
+      
+      countFrontSideAndCubeIdentification(2, "down");
+      daysCubeFillNumbers("cube3");
       break;
 
     default:
       break;
   }
+
+}
+
+function countFrontSideAndCubeIdentification(cube, rotation){
+
+  switch(rotation){
+
+    case "up":
+      if (arrSideCounter[cube] == 1) {arrSideCounter[cube] = 5;}
+      arrSideCounter[cube] -= 1;
+      break;
+
+    case "down":
+      if (arrSideCounter[cube] == 4) {arrSideCounter[cube] = 0;}
+      arrSideCounter[cube] += 1;
+      break;
+  }
+
+  activeCube = cube + 1;
+
 }
 
 // function processTouchStart(ev){
@@ -247,10 +283,11 @@ function processTouchEnd(ev){
 /***********************************************************cube numbers start*******************************************************/
 var maxDaysInMonth;
 
-function fillCubeNumbers(){
+function daysCubeFillNumbers(cubeId){
 
-  maxDaysInMonth = getDaysfromMonthAndYear(monthNumber, yearNumber);
-
+  
+  // let month = getMonth();
+  // maxDaysInMonth = getDaysfromMonthAndYear(monthNumber, yearNumber);
 
 
   // if(dayNumber == maxDaysInMonth){dayNumber = 0};
@@ -276,6 +313,33 @@ function fillCubeNumbers(){
     
   // };
   // document.getElementsByClassName("cubeSideBottomText")[0].innerText = dayNumber - 1;
+
+}
+
+function getMonth(){
+  let side;
+  switch(ac){
+    case 1:
+      side = "front"
+      break;
+
+    case 2:
+      side = "top"
+      break;
+
+    case 3:
+      side = "back"
+      break;
+
+    case 4:
+      side = "bottom"
+      break;
+   
+  }
+
+
+
+
 
 }
 
