@@ -166,27 +166,27 @@ function processTouchMove(ev){
 }
 
 var arrRotateXDegree = [0,0,0,0,0];
-var arrSideCounter = [1,1,1,1,1,1];
-var activeCube = 0;
+var arrSideCounter = [0,0,0,0,0,0];
+var arrCubeSidesClasses = ['cubeSideFrontText', 'cubeSideTopText', 'cubeSideBackText', 'cubeSideBottomText'];
 
 function rotateCubeUp(){
   switch (targetElement) {
     case 'cube1':
       arrRotateXDegree[0] += 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
-      countFrontSideAndCubeIdentification(0, "up");
+      countFrontSideAfterChange(0, "up");
       break;
       
     case 'cube2':
       arrRotateXDegree[1] += 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
-      countFrontSideAndCubeIdentification(1, "up");
+      countFrontSideAfterChange(1, "up");
       break;
 
     case 'cube3':
       arrRotateXDegree[2] += 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
-      countFrontSideAndCubeIdentification(2, "up");
+      countFrontSideAfterChange(2, "up");
       break;
 
     default:
@@ -202,24 +202,29 @@ function rotateCubeDown(){
       arrRotateXDegree[0] -= 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
       
-      countFrontSideAndCubeIdentification(0, "down");
-      daysCubeFillNumbers("cube1");
+      countFrontSideAfterChange(0, "down");
+       let item = document.getElementsByClassName('cube');
+alert(item.length);
+// let item = document.getElementsByClassName('cubeSideFrontText')[0].tagName;
+// alert(item.length);
+
+      // cubeFillNumbers(0);
       break;
       
     case 'cube2':
       arrRotateXDegree[1] -= 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
       
-      countFrontSideAndCubeIdentification(1, "down");
-      daysCubeFillNumbers("cube2");
+      countFrontSideAfterChange(1, "down");
+      cubeFillNumbers(1);
       break;
 
     case 'cube3':
       arrRotateXDegree[2] -= 90;
       document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
       
-      countFrontSideAndCubeIdentification(2, "down");
-      daysCubeFillNumbers("cube3");
+      countFrontSideAfterChange(2, "down");
+      cubeFillNumbers(2);
       break;
 
     default:
@@ -228,22 +233,20 @@ function rotateCubeDown(){
 
 }
 
-function countFrontSideAndCubeIdentification(cube, rotation){
+function countFrontSideAfterChange(cube, rotation){
 
   switch(rotation){
 
     case "up":
-      if (arrSideCounter[cube] == 1) {arrSideCounter[cube] = 5;}
+      if (arrSideCounter[cube] == 0) {arrSideCounter[cube] = 4;}
       arrSideCounter[cube] -= 1;
       break;
 
     case "down":
-      if (arrSideCounter[cube] == 4) {arrSideCounter[cube] = 0;}
+      if (arrSideCounter[cube] == 3) {arrSideCounter[cube] = -1;}
       arrSideCounter[cube] += 1;
       break;
   }
-
-  activeCube = cube + 1;
 
 }
 
@@ -281,23 +284,61 @@ function processTouchEnd(ev){
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events
 
 /***********************************************************cube numbers start*******************************************************/
-var maxDaysInMonth;
+var maxDays;
 
-function daysCubeFillNumbers(cubeId){
+function cubeFillNumbers(cubeNumber){
 
   
-  // let month = getMonth();
-  // maxDaysInMonth = getDaysfromMonthAndYear(monthNumber, yearNumber);
+  
+  switch(cubeNumber){//dabar dirbu tik su dienom!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    case 0:
+    case 3:
+      let activeFrontClassDay = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
+      console.log('activeFrontClassDay: ' + activeFrontClassDay);
+      let activeFrontClassMonth = arrCubeSidesClasses[arrSideCounter[cubeNumber + 1]];
+      console.log('activeFrontClassMonth: ' + activeFrontClassMonth);
+      let activeFrontClassYear = arrCubeSidesClasses[arrSideCounter[cubeNumber + 2]];
+      console.log('activeFrontClassYear: ' + activeFrontClassYear);
+    
+      let cubeDayId = 'cube' + (cubeNumber + 1);
+      let cubeMonthId = 'cube' + (cubeNumber + 2);
+      let cubeYearId = 'cube' + (cubeNumber + 3);
+      
+
+      let activeDay = document.getElementById(cubeDayId).getElementsByClassName(activeFrontClassDay)[0].innerText;
+      // let activeMonth = document.getElementById(cubeMonthId).getElementsByClassName(activeFrontClassMonth)[0].innerText;
+      let activeYear = document.getElementById(cubeYearId).innerText;
+      alert('aaaaaaaaaaaaa activeDay: ' + activeDay);
+
+      break;
+
+    // case 1:
+    // case 4:
+
+    //   break;
+
+    // case 2:
+    // case 5:
+
+    //   break;
 
 
-  // if(dayNumber == maxDaysInMonth){dayNumber = 0};
+
+    }
+
+    
+    // let month = getMonth();
+    maxDays = getDaysfromMonthAndYear(monthNumber, yearNumber);
+
+
+  // if(dayNumber == maxDays){dayNumber = 0};
   // document.getElementsByClassName("cubeSideTopText")[0].innerText = 1 + dayNumber;
 
-  // if(dayNumber == maxDaysInMonth){dayNumber = -1};
+  // if(dayNumber == maxDays){dayNumber = -1};
   // document.getElementsByClassName("cubeSideBackText")[0].innerText = 2 + dayNumber;
 
-  // if(dayNumber == maxDaysInMonth){dayNumber = -4};
-  // document.getElementsByClassName("cubeSideRightText")[0].innerText = maxDaysInMonth;
+  // if(dayNumber == maxDays){dayNumber = -4};
+  // document.getElementsByClassName("cubeSideRightText")[0].innerText = maxDays;
 
   // let monthNumberForCube = Number(document.getElementsByClassName(sourceClassName)[0].children[1].children[1].innerText);
 
@@ -307,8 +348,8 @@ function daysCubeFillNumbers(cubeId){
   //     dayNumber == 31 + 1;
   //   } else{
   //     let yearNumberForCube = Number(document.getElementsByClassName(sourceClassName)[0].children[2].children[1].innerText) - 1;
-  //     maxDaysInMonth = getDaysfromMonthAndYear(monthNumberForCube - 1, yearNumberForCube);
-  //     dayNumber = maxDaysInMonth + 1;
+  //     maxDays = getDaysfromMonthAndYear(monthNumberForCube - 1, yearNumberForCube);
+  //     dayNumber = maxDays + 1;
   //   }
     
   // };
