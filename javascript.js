@@ -337,7 +337,8 @@ function processTouchEnd(ev){
   console.log('endY: '  + endY);
 
   if(timeNew - fingerPressTime >= 500){return;}
-  ev.preventDefault();
+alert(endY-startY);
+  ev.preventDefault('startY: '  + startY);
 
   if(startY < endY){
     rotateCubeDown();
