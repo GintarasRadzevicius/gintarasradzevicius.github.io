@@ -337,14 +337,28 @@ function processTouchEnd(ev){
   console.log('endY: '  + endY);
 
   if(timeNew - fingerPressTime >= 500){return;}
-alert('Time:' + (timeNew - fingerPressTime));
+
   ev.preventDefault('startY: '  + startY);
 
   if(startY < endY){
     rotateCubeDown();
+    if(timeNew - fingerPressTime < 100){
+      rotateCubeDown();
+      rotateCubeDown();
+      rotateCubeDown();
+      rotateCubeDown();
+      rotateCubeDown();
+    }
 
   } else if(startY > endY){
     rotateCubeUp();
+    if(timeNew - fingerPressTime < 100){
+      rotateCubeUp();
+      rotateCubeUp();
+      rotateCubeUp();
+      rotateCubeUp();
+      rotateCubeUp();
+    }
 
   } else{                       //when startY = endY
     return;
