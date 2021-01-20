@@ -337,7 +337,7 @@ function processTouchEnd(ev){
   console.log('endY: '  + endY);
 
   if(timeNew - fingerPressTime >= 500){return;}
-alert(endY-startY);
+alert(timeNew - fingerPressTime);
   ev.preventDefault('startY: '  + startY);
 
   if(startY < endY){
