@@ -337,11 +337,11 @@ function processTouchEnd(ev){
 
 
   if(startY < endY){
-    if (endY - startY > 280) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
+    if (endY - startY > 220) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
     rotateCubeDown();
 
   } else if(startY > endY){
-    if (startY - endY > 280) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
+    if (startY - endY > 220) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
     rotateCubeUp();
 
   }
