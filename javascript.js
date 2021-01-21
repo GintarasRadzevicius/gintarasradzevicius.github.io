@@ -336,12 +336,14 @@ function processTouchEnd(ev){
   ev.preventDefault();
 
 
-
   if(startY < endY){
+    alert('distance: ' + (endY - startY));
+
     if (endY - startY > 200) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
     rotateCubeDown();
 
   } else if(startY > endY){
+    alert('distance: ' + (startY - endY));
     if (startY - endY > 200) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
     rotateCubeUp();
 
