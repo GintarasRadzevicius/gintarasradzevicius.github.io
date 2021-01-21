@@ -84,6 +84,7 @@ fromContainer6.addEventListener('touchend', processTouchEnd, false);
 
 
 var startY = 0;
+var firstStartY = 0;
 var fingerPressTime;
 var time;
 var endY;
@@ -101,6 +102,7 @@ function processTouchStart(ev){
   date = new Date();
   time = date.getTime();
   fingerPressTime = time;
+  firstStartY = startY;
 }
 
 function identifyWhichCube(ev){ //sita vieta taisyti
@@ -148,10 +150,6 @@ function processTouchMove(ev){
   endY = ev.changedTouches[0].pageY;
 
   if(timeNew - time < 500){return;}
-
-  console.log('startY: '  + startY);
-  console.log('endY: '  + endY);
-  console.log(' ');
 
   if(startY < endY){
     distance = distance + endY - startY;
@@ -333,35 +331,20 @@ function findFrontAfterChange(cube, rotation){
 
 
 function processTouchEnd(ev){
-  console.log('startY: '  + startY);
-  console.log('endY: '  + endY);
-
   if(timeNew - fingerPressTime >= 500){return;}
 
-  ev.preventDefault('startY: '  + startY);
+  ev.preventDefault();
+
+
 
   if(startY < endY){
+    if (endY - startY > 180) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
     rotateCubeDown();
-    if(timeNew - fingerPressTime < 100){
-      rotateCubeDown();
-      rotateCubeDown();
-      rotateCubeDown();
-      rotateCubeDown();
-      rotateCubeDown();
-    }
 
   } else if(startY > endY){
+    if (startY - endY > 180) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
     rotateCubeUp();
-    if(timeNew - fingerPressTime < 100){
-      rotateCubeUp();
-      rotateCubeUp();
-      rotateCubeUp();
-      rotateCubeUp();
-      rotateCubeUp();
-    }
 
-  } else{                       //when startY = endY
-    return;
   }
 }
 
