@@ -51,7 +51,7 @@ firstFillCubeNumbers();
 // }
 
 let arrContainers = document.getElementsByClassName('container');
-let fromContainer1 = arrContainers[0];
+var fromContainer1 = arrContainers[0];
 let fromContainer2 = arrContainers[1];
 let fromContainer3 = arrContainers[2];
 let fromContainer4 = arrContainers[3];
@@ -61,6 +61,7 @@ let fromContainer6 = arrContainers[5];
 fromContainer1.addEventListener('touchmove', processTouchMove, false);
 fromContainer1.addEventListener('touchstart', processTouchStart, false);
 fromContainer1.addEventListener('touchend', processTouchEnd, false);
+fromContainer1.addEventListener("pressHold", doSomething, false);
 
 fromContainer2.addEventListener('touchmove', processTouchMove, false);
 fromContainer2.addEventListener('touchstart', processTouchStart, false);
@@ -90,10 +91,47 @@ var time;
 var endY;
 var targetElement;
 
+
+var pressHoldDuration = 50;
+var timerID;
+var counter = 0;
+var pressHoldEvent = new CustomEvent("pressHold");
+
+function timer() {
+
+  if (counter < pressHoldDuration) {
+    timerID = requestAnimationFrame(timer);
+    counter++;
+  } else {
+    console.log("Press threshold reached!");
+    fromContainer1.dispatchEvent(pressHoldEvent);
+    timerID = requestAnimationFrame(timer);
+
+    counter = 0;
+  }
+}
+
+function doSomething(e) {
+
+  console.log("pressHold event fired!");
+  console.log("firstStartY: " + firstStartY);
+  console.log("endY: " + endY);
+
+  if (firstStartY > endY) {
+    rotateCubeUp();
+
+  } else if(firstStartY < endY){
+    rotateCubeDown()
+  }
+
+}
+
 function processTouchStart(ev){
   // console.dir(ev.target);
 
+  requestAnimationFrame(timer);
   ev.preventDefault();
+
   identifyWhichCube(ev);
 
   startY = ev.changedTouches[0].pageY;
@@ -103,6 +141,61 @@ function processTouchStart(ev){
   time = date.getTime();
   fingerPressTime = time;
   firstStartY = startY;
+}
+
+function processTouchEnd(ev){
+
+  cancelAnimationFrame(timerID);
+  counter = 0;
+
+  if(timeNew - fingerPressTime >= 500){return;}
+
+  ev.preventDefault();
+
+
+  if(startY < endY){
+    if (endY - startY > 220) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
+    rotateCubeDown();
+
+  } else if(startY > endY){
+    if (startY - endY > 220) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
+    rotateCubeUp();
+
+  }
+}
+
+function processTouchMove(ev){
+  ev.preventDefault();
+
+  // date = new Date();
+  // timeNew = date.getTime();
+
+  endY = ev.changedTouches[0].pageY;
+
+  // if(timeNew - time < 500){return;}
+
+  // if(startY < endY){
+  //   distance = distance + endY - startY;
+  //   console.log('distance: '  + distance);
+  //   console.log(' ');
+
+  //   if(distance < 30){return;}     //to limit rotations
+  //   rotateCubeDown();
+
+  // } else{
+  //   distance = distance + startY - endY;
+  //   console.log('distance else: '  + distance);
+  //   console.log(' ');
+
+  //   if(distance < 30){return;}     //to limit rotations
+  //   rotateCubeUp();
+  // }
+  
+  // distance = 0;
+  // startY = ev.changedTouches[0].pageY;
+
+  // date = new Date();
+  // time = date.getTime();
 }
 
 function identifyWhichCube(ev){ //sita vieta taisyti
@@ -140,40 +233,6 @@ function identifyWhichCube(ev){ //sita vieta taisyti
 var date;
 var timeNew;
 var distance = 0;
-
-function processTouchMove(ev){
-  ev.preventDefault();
-
-  date = new Date();
-  timeNew = date.getTime();
-
-  endY = ev.changedTouches[0].pageY;
-
-  if(timeNew - time < 500){return;}
-
-  if(startY < endY){
-    distance = distance + endY - startY;
-    console.log('distance: '  + distance);
-    console.log(' ');
-
-    if(distance < 30){return;}     //to limit rotations
-    rotateCubeDown();
-
-  } else{
-    distance = distance + startY - endY;
-    console.log('distance else: '  + distance);
-    console.log(' ');
-
-    if(distance < 30){return;}     //to limit rotations
-    rotateCubeUp();
-  }
-  
-  distance = 0;
-  startY = ev.changedTouches[0].pageY;
-
-  date = new Date();
-  time = date.getTime();
-}
 
 var arrRotateXDegree = [0,0,0,0,0,0];
 var arrSideCounter = [0,0,0,0,0,0];
@@ -330,22 +389,7 @@ function findFrontAfterChange(cube, rotation){
 // }
 
 
-function processTouchEnd(ev){
-  if(timeNew - fingerPressTime >= 500){return;}
 
-  ev.preventDefault();
-
-
-  if(startY < endY){
-    if (endY - startY > 220) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
-    rotateCubeDown();
-
-  } else if(startY > endY){
-    if (startY - endY > 220) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
-    rotateCubeUp();
-
-  }
-}
 
 // http://www.javascriptkit.com/javatutors/touchevents.shtml
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
