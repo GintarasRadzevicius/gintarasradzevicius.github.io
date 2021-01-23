@@ -85,7 +85,6 @@ fromContainer6.addEventListener('touchend', processTouchEnd, false);
 
 
 var startY = 0;
-var firstStartY = 0;
 var fingerPressTime;
 var time;
 var endY;
@@ -107,30 +106,25 @@ function timer() {
     fromContainer1.dispatchEvent(pressHoldEvent);
     timerID = requestAnimationFrame(timer);
 
-    counter = 0;
+    counter = 25;
   }
 }
 
-function doSomething(e) {
+function doSomething() {
 
-  console.log("pressHold event fired!");
-  console.log("firstStartY: " + firstStartY);
-  console.log("endY: " + endY);
-
-  if (firstStartY > endY) {
+  if (startY > endY) {
     rotateCubeUp();
 
-  } else if(firstStartY < endY){
+  } else if(startY < endY){
     rotateCubeDown()
   }
 
 }
 
 function processTouchStart(ev){
-  // console.dir(ev.target);
 
   requestAnimationFrame(timer);
-  ev.preventDefault();
+  // ev.preventDefault();
 
   identifyWhichCube(ev);
 
@@ -140,18 +134,17 @@ function processTouchStart(ev){
   date = new Date();
   time = date.getTime();
   fingerPressTime = time;
-  firstStartY = startY;
 }
 
-function processTouchEnd(ev){
+function processTouchEnd(){
 
   cancelAnimationFrame(timerID);
   counter = 0;
 
+
+  // ev.preventDefault();
+
   if(timeNew - fingerPressTime >= 500){return;}
-
-  ev.preventDefault();
-
 
   if(startY < endY){
     if (endY - startY > 220) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
@@ -164,41 +157,9 @@ function processTouchEnd(ev){
   }
 }
 
-function processTouchMove(ev){
-  ev.preventDefault();
+function processTouchMove(ev){endY = ev.changedTouches[0].pageY;}
 
-  // date = new Date();
-  // timeNew = date.getTime();
-
-  endY = ev.changedTouches[0].pageY;
-
-  // if(timeNew - time < 500){return;}
-
-  // if(startY < endY){
-  //   distance = distance + endY - startY;
-  //   console.log('distance: '  + distance);
-  //   console.log(' ');
-
-  //   if(distance < 30){return;}     //to limit rotations
-  //   rotateCubeDown();
-
-  // } else{
-  //   distance = distance + startY - endY;
-  //   console.log('distance else: '  + distance);
-  //   console.log(' ');
-
-  //   if(distance < 30){return;}     //to limit rotations
-  //   rotateCubeUp();
-  // }
-  
-  // distance = 0;
-  // startY = ev.changedTouches[0].pageY;
-
-  // date = new Date();
-  // time = date.getTime();
-}
-
-function identifyWhichCube(ev){ //sita vieta taisyti
+function identifyWhichCube(ev){ //sita vieta taisyti ????
   targetElement = ev.targetTouches[0].target;
 
   switch (targetElement.className) {
@@ -240,7 +201,7 @@ var arrCubeSidesClasses = ['cubeSideFrontText', 'cubeSideTopText', 'cubeSideBack
 
 function rotateCubeUp(){
   let cubeNo = Number(targetElement[4]) - 1;
-  //**********!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!********bandom !!!!!!!!!!!!!!*/
+
   arrRotateXDegree[cubeNo] += 90;
 
 switch (cubeNo) {
@@ -259,50 +220,7 @@ switch (cubeNo) {
 
   changeNumbersUp(cubeNo);
 
-  //**********!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!********bandom !!!!!!!!!!!!!!*/
- 
 
-  // switch (targetElement) {
-  //   case 'cube1':
-  //     arrRotateXDegree[cubeNo] += 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
-      
-  //     changeNumbersUp(cubeNo);
-
-  //   break;
-
-  //   case 'cube4':
-
-  //     arrRotateXDegree[cubeNo] += 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
-      
-  //     changeNumbersUp(cubeNo);
-  //     break;
-      
-  //   case 'cube2':
-  //   case 'cube5':
-  //     arrRotateXDegree[1] += 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
-      
-  //     changeNumbersUp(cubeNo);
-  //     break;
-
-  //   case 'cube3':
-  //   case 'cube6':
-  //     arrRotateXDegree[2] += 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
-
-  //     changeNumbersUp(cubeNo);
-  //     break;
-
-  //   default:
-  //     break;
-
-
-
-
-
-  // }
 }
 
 function rotateCubeDown(){
@@ -310,55 +228,22 @@ function rotateCubeDown(){
   //**********!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!********bandom !!!!!!!!!!!!!!*/
   arrRotateXDegree[cubeNo] -= 90;
 
-switch (cubeNo) {
-  case 0:
-  case 1:
-  case 2:
-    document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
-  break;
+  switch (cubeNo) {
+    case 0:
+    case 1:
+    case 2:
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
+    break;
 
-  case 3:
-  case 4:
-  case 5:
-    document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
-  break;
+    case 3:
+    case 4:
+    case 5:
+      document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[cubeNo] + 'deg)';
+    break;
   }
 
   changeNumbersDown(cubeNo);
 
-
-
-
-
-
-
-  // switch (targetElement) {
-
-  //   case 'cube1':
-  //     arrRotateXDegree[0] -= 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
-      
-  //     changeNumbersDown(0);
-
-  //     break;
-      
-  //   case 'cube2':
-  //     arrRotateXDegree[1] -= 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)';
-      
-  //     changeNumbersDown(1);
-  //     break;
-
-  //   case 'cube3':
-  //     arrRotateXDegree[2] -= 90;
-  //     document.getElementById(targetElement).style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
-      
-  //     changeNumbersDown(2);
-  //     break;
-
-  //   default:
-  //     break;
-  // }
 }
 
 function findFrontAfterChange(cube, rotation){
@@ -378,22 +263,6 @@ function findFrontAfterChange(cube, rotation){
 
 }
 
-// function processTouchStart(ev){
-//   console.log(' ');
-
-//   ev.preventDefault();
-//   for (var i=0; i < ev.changedTouches.length; i++) {
-//     console.log(ev.changedTouches[i].pageX);
-//     console.log(ev.changedTouches[i].pageY);
-//   }
-// }
-
-
-
-
-// http://www.javascriptkit.com/javatutors/touchevents.shtml
-// https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
-// https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Using_Touch_Events
 
 /***********************************************************cube numbers start*******************************************************/
 var maxDays;
