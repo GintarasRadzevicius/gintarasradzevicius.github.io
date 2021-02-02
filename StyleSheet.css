@@ -153,7 +153,7 @@ h2{
     font-size: 40px;
 }
 @-moz-document url-prefix() {
-    #cubeContainer3 .side, #cubeContainer4 .side {font-size:35pt;}
+    #cubeContainer3 .side, #cubeContainer4 .side {font-size:15pt;}
 }
 
 #cubeContainer2 .front, #cubeContainer5 .front{transform: translateZ(35px);}
@@ -180,7 +180,7 @@ h2{
 #cubeContainer1 .bottom, #cubeContainer6 .bottom{transform: rotateX(-90deg) translateZ(25px);}
 #cubeContainer3 .bottom, #cubeContainer4 .bottom{transform: rotateX(-90deg) translateZ(47px);}
 
-.cubeSideFrontText, .cubeSideBackText, .cubeSideRightText, .cubeSideLeftText, .cubeSideTopText, .cubeSideBottomText{transition: transform 1s ease-out;}
+.cubeSideFrontText, .cubeSideBackText, .cubeSideRightText, .cubeSideLeftText, .cubeSideTopText, .cubeSideBottomText{transition: transform 0.5s ease-out;}
 
 /* **********************************************************cube_end*******************************************************/
 
