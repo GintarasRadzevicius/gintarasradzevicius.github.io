@@ -338,6 +338,7 @@ function changeDayAccordingToMonth(cubeNumber) {
 }
 
 function updateDateUp(cubeNumber){
+  
   switch (cubeNumber) {
 
     case 0:
@@ -369,8 +370,6 @@ function updateDateUp(cubeNumber){
       yearTo--;
       return yearTo;
       break;
-    
-                                          
   }
 }
 
@@ -381,26 +380,30 @@ function updateDateDown(cubeNumber){
     case 0:
       if (dayFrom > 27) {
         let maxDays = getDaysfromMonthAndYear(monthFrom, yearFrom);
-        if(dayFrom == maxDays){dayFrom = 1;} else{dayFrom++;}
+        if(dayFrom >= maxDays){dayFrom = 0;};
       }
+      dayFrom++;
       return dayFrom;
       break;
   
     case 3:
       if (dayTo > 27) {
         let maxDays = getDaysfromMonthAndYear(monthFrom, yearFrom);
-        if(dayTo == maxDays){dayTo = 1;} else{dayTo++;}
+        if(dayTo >= maxDays){dayTo = 0;};
       }
+      dayTo++;
       return dayTo;
       break;
   
     case 1:
-      if(monthTo == 12){monthTo = 1;} else{monthTo++;}
-      return monthTo;
+      if(monthFrom == 12){monthFrom = 0;};
+      monthFrom++;
+      return monthFrom;
       break;
     
     case 4:
-      if(monthTo == 12){monthTo = 1;} else{monthTo++;}
+      if(monthTo == 12){monthTo = 1;};
+      monthTo++;
       return monthTo;
       break;
       
