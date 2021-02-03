@@ -292,7 +292,7 @@ function changeNumbersUp(cubeNumber){
   activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
   document.getElementById(cubeId).getElementsByClassName(activeFrontClass)[0].innerText = updateDateUp(cubeNumber);
   
-  changeDayAccordingToMonth(cubeNumber); //changing day when month and year changes
+  changeDayAccordingToMonth(cubeNumber);
 
 }
 
@@ -310,11 +310,11 @@ function changeNumbersDown(cubeNumber){
 
 }
 
-function changeDayAccordingToMonth(cubeNumber) {
+function changeDayAccordingToMonth(cubeNumber) {  //changing day when month and year changes(changes 2nd(28/29 days) and other months (30 days) )
   switch (cubeNumber) {   
     case 1:
     case 2:
-      if (monthFrom == 2 && dayFrom > 27) {
+      if (dayFrom > 27) {
         let maxDays = getDaysfromMonthAndYear(monthFrom, yearFrom);
         if (dayFrom > maxDays) {
           document.getElementById('cube1').getElementsByClassName(arrCubeSidesClasses[arrSideCounter[0]])[0].innerText = maxDays;
@@ -325,7 +325,7 @@ function changeDayAccordingToMonth(cubeNumber) {
 
     case 4:
     case 5:
-      if (monthTo == 2 && dayTo > 27) {
+      if (dayTo > 27) {
         let maxDays = getDaysfromMonthAndYear(monthTo, yearTo);
         if (dayTo > maxDays) {
           document.getElementById('cube4').getElementsByClassName(arrCubeSidesClasses[arrSideCounter[3]])[0].innerText = maxDays;
@@ -388,7 +388,7 @@ function updateDateDown(cubeNumber){
   
     case 3:
       if (dayTo > 27) {
-        let maxDays = getDaysfromMonthAndYear(monthFrom, yearFrom);
+        let maxDays = getDaysfromMonthAndYear(monthTo, yearTo);
         if(dayTo >= maxDays){dayTo = 0;};
       }
       dayTo++;
