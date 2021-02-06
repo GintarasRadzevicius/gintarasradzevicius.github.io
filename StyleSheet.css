@@ -287,3 +287,21 @@ h2{
   label { margin-right: 10px; }
 
   /***********************************************************rectangle_end*******************************************************/
+
+
+  #calcText{
+      font-size: 60px;
+
+  }
+
+.box{
+    animation: animationArrowUp 2s infinite;
+    /* width: 300px;
+    height: 200px; */
+
+}
+@keyframes animationArrowUp{
+    0%   {width: 300px;}
+    50%  {width: 400px;}
+    100% {width: 300px;}
+}

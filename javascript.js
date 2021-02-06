@@ -114,9 +114,11 @@ function doSomething() {
 
   if (startY > endY) {
     rotateCubeUp();
+    calculateResult();
 
   } else if(startY < endY){
     rotateCubeDown()
+    calculateResult();
   }
 }
 
@@ -139,19 +141,23 @@ function processTouchStart(ev){
 function processTouchEnd(ev){
 
   cancelAnimationFrame(timerID);
+
   counter = 0;
 
   ev.preventDefault();
 
-  if(timeNew - fingerPressTime >= 500){return;}
+  date = new Date();
+  if(date.getTime() - fingerPressTime >= 500){return;}
 
   if(startY < endY){
-    if (endY - startY > 220) {rotateCubeDown(); rotateCubeDown(); rotateCubeDown(); rotateCubeDown();}
+    if (endY - startY > 220) {rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult();}
     rotateCubeDown();
+    calculateResult();
 
   } else if(startY > endY){
-    if (startY - endY > 220) {rotateCubeUp(); rotateCubeUp(); rotateCubeUp(); rotateCubeUp();}
+    if (startY - endY > 220) {rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult();}
     rotateCubeUp();
+    calculateResult();
 
   }
 }
@@ -196,7 +202,6 @@ function identifyWhichCube(ev){
 }
 
 var date;
-var timeNew;
 var distance = 0;
 
 var arrRotateXDegree = [0,0,0,0,0,0];
@@ -223,8 +228,6 @@ switch (cubeNo) {
   }
 
   changeNumbersUp(cubeNo);
-  // calculateResult();
-
 }
 
 function rotateCubeDown(){
@@ -247,7 +250,6 @@ function rotateCubeDown(){
   }
 
   changeNumbersDown(cubeNo);
-  // calculateResult();
 }
 
 function findFrontAfterChange(cube, rotation){
@@ -453,15 +455,6 @@ function getDomElements(){
   arrCube_6_ElRef[3] = document.getElementById('cube6').getElementsByClassName('cubeSideBottomText')[0];
 }
 
-var dayFrom;
-var monthFrom;
-var yearFrom;
-var dayTo;
-var monthTo;
-var yearTo;
-
-
-
 function firstFillCubeNumbers(){
   
   getDomElements();
@@ -573,67 +566,44 @@ function isLeapYearCheck(varYear){
 /***********************************************************cube numbers end*******************************************************/
 
 /***********************************************************Calculation start*******************************************************/
-/*
 
-function getAllNumbers(){
-        
-  dayFrom = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[0]])[0].innerText;
-  monthFrom = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[1]])[0].innerText;
-  yearFrom = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[2]])[0].innerText;
-  dayTo = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[3]])[0].innerText;
-  monthTo = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[4]])[0].innerText;
-  yearTo = document.getElementsByClassName(arrCubeSidesClasses[arrSideCounter[5]])[0].innerText;
-alert(arrCubeSidesClasses[arrSideCounter[0]]);
-  console.log('dayFrom: ' + dayFrom);
-  console.log('monthFrom: ' + monthFrom);
-  console.log('yearFrom: ' + yearFrom);
-  console.log('dayTo: ' + dayTo);
-  console.log('monthTo: ' + monthTo);
-  console.log('yearTo: ' + yearTo);
-}
+
+
 
 
 function calculateResult(){
 
-  getAllNumbers();
+  let bReverseDate = bDateShouldBeReversed();
 
-  let dateFrom, dateTo;
-
-  let bReverseDate = bDateShouldBeReversed();           //just for test
-
-  if (bReverseDate != true && bReverseDate != false) {  //just for test
-    alert("Error in bDateShouldBeReversed() !!!!!!");
-  }
+let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
 
   if (bReverseDate){
-    dateFrom = getDate("dateTo");
-    dateTo = getDate("dateFrom");
-
+    dayStart = dayTo;
+    monthStart = monthTo;
+    yearStart = yearTo;
+    dayEnd = dayFrom;
+    monthEnd = monthFrom;
+    yearEnd = yearFrom;
   } else {
-    dateFrom = getDate("dateFrom");
-    dateTo = getDate("dateTo");
+    dayStart = dayFrom;
+    monthStart = monthFrom;
+    yearStart = yearFrom;
+    dayEnd = dayTo;
+    monthEnd = monthTo;
+    yearEnd = yearTo;
+
   }
+  console.clear();
+
+  // console.log('From: ' + dayStart + '-' + monthStart + '-' + yearStart);
+  // console.log('To: ' + dayEnd + '-' + monthEnd + '-' + yearEnd);
+
+  let daysQuantity = countDaysQuantity(yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
+  
+  document.getElementById('calcText').innerText = daysQuantity; 
+  
 
 
-  let arrDateFrom = dateFrom.split("-");
-  let arrDateTo = dateTo.split("-");
-
-  let dayFrom = arrDateFrom[0];
-  let monthFrom = arrDateFrom[1];
-  let yearFrom = arrDateFrom[2];
-
-  let dayTo = arrDateTo[0];
-  let monthTo = arrDateTo[1];
-  let yearTo = arrDateTo[2];
-
-  if (Number(yearFrom) > Number(yearTo)){
-  }
-
-
-  let daysQuantity = countDaysQuantity(Number(yearFrom), Number(yearTo), Number(monthFrom), Number(monthTo), Number(dayFrom), Number(dayTo));
-
-  let resultNumbers = document.getElementsByClassName("resultNumbers");
-  resultNumbers[0].innerText = daysQuantity; 
 
 
 }
@@ -763,25 +733,16 @@ function getDaysQuantityInYears(yearStart, yearEnd){
 
 function bDateShouldBeReversed(){
 
-  let yearFrom = document.getElementsByClassName("dateFrom")[0].children[1].children[2].innerText;
-  let yearTo = document.getElementsByClassName("dateTo")[0].children[1].children[2].innerText;
-
-  let monthFrom = document.getElementsByClassName("dateFrom")[0].children[1].children[1].innerText;
-  let monthTo = document.getElementsByClassName("dateTo")[0].children[1].children[1].innerText;
-
-  let dayFrom = document.getElementsByClassName("dateFrom")[0].children[1].children[0].innerText;
-  let dayTo = document.getElementsByClassName("dateTo")[0].children[1].children[0].innerText;
-
-  if(Number(yearFrom) - Number(yearTo) > 0){
+  if(yearFrom - yearTo > 0){
     return true;
 
   } else if (yearFrom == yearTo) {
 
-    if (Number(monthFrom) - Number(monthTo) > 0){
+    if (monthFrom - monthTo > 0){
       return true;
 
     } else if(monthFrom == monthTo){
-        if (Number(dayFrom) - Number(dayTo) > 0){
+        if (dayFrom - dayTo > 0){
           return true;
 
         } else{
@@ -797,13 +758,6 @@ function bDateShouldBeReversed(){
   }
 }
 
-function getDate(dateFromOrTo){
-  let date;
-  date = document.getElementsByClassName(dateFromOrTo)[0].children[1].children[0].innerText;
-  date = date + "-" + document.getElementsByClassName(dateFromOrTo)[0].children[1].children[1].innerText;
-  date = date + "-"+ document.getElementsByClassName(dateFromOrTo)[0].children[1].children[2].innerText;
-  return date;
-}
 
 
 
