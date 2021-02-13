@@ -316,12 +316,11 @@ label { margin-right: 10px; }
 }
 
 @keyframes rectangleAnimation3{
-    0%   {transform-origin: 12vmin center;}
-    25%   {transform-origin: center center; transform: rotateX(15deg) rotateY(-25deg);width: 300px;}
+    0%   {transform-origin: center;}
+    25%  {transform: rotateX(15deg) rotateY(-25deg);width: 300px;}
     75%  {transform: rotateX(-5deg) rotateY(25deg);width: 500px;}
     100% {transform: rotateX(15deg) rotateY(-25deg);width: 300px;}
 }
-
 
 
 #cubeContainer1{
@@ -423,3 +422,15 @@ label { margin-right: 10px; }
 
 
 /***********************************************************animation_end*******************************************************/
+
+.inputNumber1{
+
+}
+
+.inputNumber2{
+
+}
+
+.inputNumber3{
+
+}

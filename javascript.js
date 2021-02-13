@@ -50,18 +50,20 @@ firstFillCubeNumbers();
 //    }
 // }
 
+document.addEventListener('touchstart', processGlobalTouchStart, false);
+
 let arrContainers = document.getElementsByClassName('container');
 var fromContainer1 = arrContainers[0];
 let fromContainer2 = arrContainers[1];
 let fromContainer3 = arrContainers[2];
-let fromContainer4 = arrContainers[3];
-let fromContainer5 = arrContainers[4];
-let fromContainer6 = arrContainers[5];
+let toContainer4 = arrContainers[3];
+let toContainer5 = arrContainers[4];
+let toContainer6 = arrContainers[5];
 
 fromContainer1.addEventListener('touchmove', processTouchMove, false);
 fromContainer1.addEventListener('touchstart', processTouchStart, false);
 fromContainer1.addEventListener('touchend', processTouchEnd, false);
-fromContainer1.addEventListener("pressHold", doSomething, false);
+fromContainer1.addEventListener("pressHold", doSomething, false); //it works while only on this. It should be done differently, but it is as it is.
 
 fromContainer2.addEventListener('touchmove', processTouchMove, false);
 fromContainer2.addEventListener('touchstart', processTouchStart, false);
@@ -71,17 +73,17 @@ fromContainer3.addEventListener('touchmove', processTouchMove, false);
 fromContainer3.addEventListener('touchstart', processTouchStart, false);
 fromContainer3.addEventListener('touchend', processTouchEnd, false);
 
-fromContainer4.addEventListener('touchmove', processTouchMove, false);
-fromContainer4.addEventListener('touchstart', processTouchStart, false);
-fromContainer4.addEventListener('touchend', processTouchEnd, false);
+toContainer4.addEventListener('touchmove', processTouchMove, false);
+toContainer4.addEventListener('touchstart', processTouchStart, false);
+toContainer4.addEventListener('touchend', processTouchEnd, false);
 
-fromContainer5.addEventListener('touchmove', processTouchMove, false);
-fromContainer5.addEventListener('touchstart', processTouchStart, false);
-fromContainer5.addEventListener('touchend', processTouchEnd, false);
+toContainer5.addEventListener('touchmove', processTouchMove, false);
+toContainer5.addEventListener('touchstart', processTouchStart, false);
+toContainer5.addEventListener('touchend', processTouchEnd, false);
 
-fromContainer6.addEventListener('touchmove', processTouchMove, false);
-fromContainer6.addEventListener('touchstart', processTouchStart, false);
-fromContainer6.addEventListener('touchend', processTouchEnd, false);
+toContainer6.addEventListener('touchmove', processTouchMove, false);
+toContainer6.addEventListener('touchstart', processTouchStart, false);
+toContainer6.addEventListener('touchend', processTouchEnd, false);
 
 
 var startY = 0;
@@ -92,7 +94,6 @@ var targetElement;
 
 
 var pressHoldDuration = 50;
-var timerID;
 var counter = 0;
 var pressHoldEvent = new CustomEvent("pressHold");
 
@@ -103,11 +104,21 @@ function timer() {
     counter++;
   } else {
     console.log("Press threshold reached!");
+
+    // if (holdTouchCounter == 20) { //This block because sometimes cancelAnimationFrame does not work on touch end
+    //   cancelAnimationFrame(timerID);
+    //   holdTouchCounter = 0;
+    //   return;
+    // } else{
+    //   holdTouchCounter++;
+    // }
+
     fromContainer1.dispatchEvent(pressHoldEvent);
     timerID = requestAnimationFrame(timer);
 
     counter = 25;
   }
+  console.log('counter: ' + counter);
 }
 
 function doSomething() {
@@ -122,24 +133,118 @@ function doSomething() {
   }
 }
 
+var doubleTouchFirstPressTime = 0;
+var holdTouchCounter = 0;
+var bInputOpened = false;
+var elInput;
+var textElement;
+var timerID;
+
 function processTouchStart(ev){
-
-  requestAnimationFrame(timer);
-  ev.preventDefault();
-
-  identifyWhichCube(ev);
 
   startY = ev.changedTouches[0].pageY;
   endY = startY;
 
-  date = new Date();
-  time = date.getTime();
+  time = new Date().getTime();
   fingerPressTime = time;
+  
+  identifyWhichCube(ev);
+
+  if (timerID){cancelAnimationFrame(timerID);}  //when input is opened cancel animation fram does not work
+
+  if (bInputOpened) {closeNumberInput();} 
+
+  if (fingerPressTime - doubleTouchFirstPressTime < 200) {
+    bInputOpened = true;
+    openNumberInput(ev);
+    return;
+  }
+
+  doubleTouchFirstPressTime = fingerPressTime;
+
+  requestAnimationFrame(timer);
+  ev.preventDefault();
+}
+
+var touchCounter = 0;
+
+function processGlobalTouchStart(ev) {            //This function made because processTouchStart scope is little
+    if (timerID){cancelAnimationFrame(timerID);}
+    
+    if (bInputOpened){
+      touchCounter++;
+      if(touchCounter > 2){touchCounter = 0;}
+      if (touchCounter == 2) {closeNumberInput();touchCounter = 0;}
+    }
+}
+
+function openNumberInput(ev){
+
+  // targetElement = ev.targetTouches[0].target;
+  let numberAreaClass = ev.targetTouches[0].target.className;
+
+  switch (numberAreaClass) {
+    case 'cubeSideFrontText':
+    case 'cubeSideTopText':
+    case 'cubeSideBackText':
+    case 'cubeSideBottomText':
+
+      let cubeClassName;
+
+      switch (targetElement) {
+        case 'cube1':
+        case 'cube6':
+          cubeClassName = 'inputNumber1'
+          break;
+ 
+        case 'cube2':
+        case 'cube5':
+          cubeClassName = 'inputNumber2'
+          break;
+
+        case 'cube3':
+        case 'cube4':
+          cubeClassName = 'inputNumber3'
+          break;
+        
+        default:
+          alert('Error in openNumberInput');
+          break;
+
+      }
+      elInput = document.createElement("input");
+      elInput.setAttribute('class', cubeClassName)
+
+      textElement = document.getElementById(targetElement).getElementsByClassName(numberAreaClass)[0];
+      textElement.style.display = 'none';
+      textElement.parentElement.appendChild(elInput);
+
+      elInput.focus();
+
+      break;
+
+  }
+  
+  
+   
+
 
 }
 
-function processTouchEnd(ev){
+function closeNumberInput(){
 
+  console.log('closeNumberInputcloseNumberInputcloseNumberInputcloseNumberInput')
+
+  elInput.remove();
+  textElement.style.display = 'block';
+  
+  bInputOpened = false;
+
+}
+
+
+
+function processTouchEnd(ev){
   cancelAnimationFrame(timerID);
 
   counter = 0;
@@ -161,6 +266,8 @@ function processTouchEnd(ev){
 
   }
 }
+
+
 
 function processTouchMove(ev){
 
@@ -593,7 +700,6 @@ let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
     yearEnd = yearTo;
 
   }
-  console.clear();
 
   // console.log('From: ' + dayStart + '-' + monthStart + '-' + yearStart);
   // console.log('To: ' + dayEnd + '-' + monthEnd + '-' + yearEnd);
