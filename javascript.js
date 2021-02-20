@@ -152,11 +152,11 @@ function processTouchStart(ev){
 
   if (timerID){cancelAnimationFrame(timerID);}  //when input is opened cancel animation fram does not work
 
-  if (bInputOpened) {closeNumberInput();} 
+  if (bInputOpened) {inputCloseNumber();} 
 
-  if (fingerPressTime - doubleTouchFirstPressTime < 200) {
+  if (fingerPressTime - doubleTouchFirstPressTime < 300) {
     bInputOpened = true;
-    openNumberInput(ev);
+    inputOpenNumber(ev);
     return;
   }
 
@@ -174,11 +174,11 @@ function processGlobalTouchStart(ev) {            //This function made because p
     if (bInputOpened){
       touchCounter++;
       if(touchCounter > 2){touchCounter = 0;}
-      if (touchCounter == 2) {closeNumberInput();touchCounter = 0;}
+      if (touchCounter == 2) {inputCloseNumber();touchCounter = 0;}
     }
 }
 
-function openNumberInput(ev){
+function inputOpenNumber(ev){
 
   // targetElement = ev.targetTouches[0].target;
   let numberAreaClass = ev.targetTouches[0].target.className;
@@ -194,26 +194,29 @@ function openNumberInput(ev){
       switch (targetElement) {
         case 'cube1':
         case 'cube6':
-          cubeClassName = 'inputNumber1'
+          cubeClassName = 'inputNumber1';
           break;
  
         case 'cube2':
         case 'cube5':
-          cubeClassName = 'inputNumber2'
+          cubeClassName = 'inputNumber2';
           break;
 
         case 'cube3':
         case 'cube4':
-          cubeClassName = 'inputNumber3'
+          cubeClassName = 'inputNumber3';
           break;
         
         default:
-          alert('Error in openNumberInput');
+          alert('Error in inputOpenNumber');
           break;
 
       }
+      
       elInput = document.createElement("input");
-      elInput.setAttribute('class', cubeClassName)
+      elInput.setAttribute('type', 'number');
+      elInput.setAttribute('class', cubeClassName);
+      elInput.addEventListener('keyup', inputCheckKeypress);
 
       textElement = document.getElementById(targetElement).getElementsByClassName(numberAreaClass)[0];
       textElement.style.display = 'none';
@@ -222,18 +225,123 @@ function openNumberInput(ev){
       elInput.focus();
 
       break;
-
   }
-  
-  
-   
-
-
 }
 
-function closeNumberInput(){
 
-  console.log('closeNumberInputcloseNumberInputcloseNumberInputcloseNumberInput')
+function inputCheckKeypress(event) {
+  alert(111);
+  switch (event.key) {
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+      break;
+
+    case 'Enter':
+    case 'Escape':
+      inputClosureManage();
+      return;
+  
+    default:                                      //characters i.e. + - are typing in, therefore we should remove it
+      let inputValue = elInput.value;
+      console.log(inputValue);
+      if (inputValue.length == 1) {
+        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqq');
+        elInput.value = '';
+      } else{
+
+      }
+
+      // if (inputValue[(inputValue.length - 1)] == undefined) {
+      //   inputValue[(inputValue.length - 1)] = '';
+      // }
+      console.log(inputValue[(inputValue.length - 1)]);
+
+      return;
+  }
+    inputCheckNumbers();
+}
+
+function inputClosureManage() {
+  
+}
+
+function inputCheckNumbers() {
+
+  let inputNumber = elInput.value;
+  let inputString = inputNumber.toString();
+
+  switch (targetElement) {
+    case 'cube1':
+    case 'cube4':
+      if(inputString.length > 2){
+        elInput.value = inputString.substring(0,2);
+      }
+      let maxDays = inputGetMaxDays();
+
+      if (inputString.length == 1 ) {     //first inputNumber can not be 0 and biggen than 2 or 3 depending on leap year
+        if (inputNumber == 0){elInput.value = '';}
+      } else{
+        if (elInput.value > maxDays){
+          elInput.value = (elInput.value)[0];
+        }
+      }
+      
+      break;
+
+    case 'cube2':
+    case 'cube5':
+      if(inputString.length > 2){
+        elInput.value = inputString.substring(0,2);
+      }
+      if (inputString.length == 1 ) {     //first inputNumber can not be 0 and biggen than 1
+        if (inputNumber == 0){elInput.value = '';}
+      } else{
+        if (elInput.value > 12){
+          elInput.value = (elInput.value)[0];
+        }
+      }
+      break;
+
+    case 'cube3':
+    case 'cube6':
+      if(inputString.length > 4){
+        elInput.value = inputString.substring(0,4);
+      }
+      if (inputString.length == 1 ) {     //first inputNumber can not be 0
+        if (inputNumber == 0){elInput.value = '';}
+      } else{
+        if (elInput.value > 12){
+          elInput.value = (elInput.value)[0];
+        }
+      }
+
+
+      break;
+  }
+}
+
+function inputGetMaxDays() {
+
+  switch (targetElement) {
+    case 'cube1':
+      return getDaysfromMonthAndYear(monthFrom, yearFrom);
+  
+    case 'cube4':
+      return getDaysfromMonthAndYear(monthTo, yearTo);
+  }
+}
+
+function inputCloseNumber(){
+
+  console.log('inputCloseNumberinputCloseNumberinputCloseNumberinputCloseNumber')
 
   elInput.remove();
   textElement.style.display = 'block';
@@ -255,11 +363,13 @@ function processTouchEnd(ev){
   if(date.getTime() - fingerPressTime >= 500){return;}
 
   if(startY < endY){
+    if (endY - startY < 10){return;}  //for double touch
     if (endY - startY > 220) {rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult();}
     rotateCubeDown();
     calculateResult();
 
   } else if(startY > endY){
+    if (startY - endY < 10){return;}  //for double touch
     if (startY - endY > 220) {rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult();}
     rotateCubeUp();
     calculateResult();
