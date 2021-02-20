@@ -230,7 +230,6 @@ function inputOpenNumber(ev){
 
 
 function inputCheckKeypress(event) {
-  alert(111);
   switch (event.key) {
     case '0':
     case '1':
@@ -250,19 +249,10 @@ function inputCheckKeypress(event) {
       return;
   
     default:                                      //characters i.e. + - are typing in, therefore we should remove it
-      let inputValue = elInput.value;
-      console.log(inputValue);
-      if (inputValue.length == 1) {
-        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqq');
-        elInput.value = '';
-      } else{
+      elInput.value ='';
+      // let pattern = /[0-9]/g;
+      // var result = inputValue.match(pattern);
 
-      }
-
-      // if (inputValue[(inputValue.length - 1)] == undefined) {
-      //   inputValue[(inputValue.length - 1)] = '';
-      // }
-      console.log(inputValue[(inputValue.length - 1)]);
 
       return;
   }
