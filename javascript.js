@@ -185,11 +185,13 @@ function inputOpenNumber(ev){
     case 'cubeSideBottomText':
 
       let cubeClassName;
+      let width;
 
       switch (targetElement) {
         case 'cube1':
           cubeNr = 1;
           cubeClassName = 'inputNumber1';
+          // width = 
           break;
 
         case 'cube6':
@@ -351,32 +353,32 @@ let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
 
   switch (cubeNr) {
     case 1:
-      dayFrom = inputValue;
+      dayFrom = Number(inputValue);
       break;
 
     case 2:
-      monthFrom = inputValue;
+      monthFrom = Number(inputValue);
       break;
 
     case 3:
-      yearFrom = inputValue;
+      yearFrom = Number(inputValue);
       break;
 
     case 4:
-      dayTo = inputValue;
+      dayTo = Number(inputValue);
       break;
     
     case 5:
-      monthTo = inputValue;
+      monthTo = Number(inputValue);
      break;
 
     case 6:
-      yearTo = inputValue;
+      yearTo = Number(inputValue);
       break;
   }
 
   console.log('Date from: ' + dayFrom + '-'+ monthFrom + '-' + yearFrom);
-  console.log('Date from: ' + dayTo + '-'+ monthTo + '-' + yearTo);
+  console.log('Date to: ' + dayTo + '-'+ monthTo + '-' + yearTo);
   console.log('');
 
   calculateResult();
