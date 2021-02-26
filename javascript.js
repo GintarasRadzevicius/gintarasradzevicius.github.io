@@ -26,30 +26,6 @@ var arrCube_6_ElRef = [];
 firstFillCubeNumbers();
 
 
-// window.ontouchstart = function(event){                              /*For Iphone !!!!!!!!!!!!!!! not updated*/ 
-
-//   let cubeDayFrom = document.getElementById('cube1').firstElementChild;
-//   let cubeMonthFrom = document.getElementById('cube2').firstElementChild;
-//   let cubeYearFrom = document.getElementById('cube3').firstElementChild;
-//   console.log(event.target.className);
-
-//   switch (event.target) {
-//     case cubeDayFrom:
-//       document.querySelector('.cube').style.transform =
-//       // 'rotateX(' + 90 + 'deg)'+
-//       'rotateY(0deg)' +
-//       'rotateX(90deg)' +
-//       'rotateZ(20deg)';
-//       break;
-//     case cubeMonthFrom:
-//       animationHideModal(modalDay);
-//       break;
-//     case cubeYearFrom:
-//       animationHideModal(modalDay);
-//       break;
-//    }
-// }
-
 document.addEventListener('touchstart', processGlobalTouchStart, false);
 
 let arrContainers = document.getElementsByClassName('container');
@@ -95,6 +71,7 @@ var targetElement;
 
 var pressHoldDuration = 50;
 var counter = 0;
+var countHoldTrigger = 0;
 var pressHoldEvent = new CustomEvent("pressHold");
 
 function timer() {
@@ -104,7 +81,7 @@ function timer() {
     counter++;
   } else {
     console.log("Press threshold reached!");
-
+    countHoldTrigger++;
     // if (holdTouchCounter == 20) { //This block because sometimes cancelAnimationFrame does not work on touch end
     //   cancelAnimationFrame(timerID);
     //   holdTouchCounter = 0;
@@ -118,7 +95,7 @@ function timer() {
 
     counter = 25;
   }
-  console.log('counter: ' + counter);
+  console.log('Timer: ' + countHoldTrigger);
 }
 
 function doSomething() {
@@ -148,11 +125,11 @@ function processTouchStart(ev){
   time = new Date().getTime();
   fingerPressTime = time;
   
-  identifyWhichCube(ev);
+  // identifyWhichCube(ev);
 
-  if (timerID){cancelAnimationFrame(timerID);}  //when input is opened cancel animation fram does not work
+  // if (timerID){cancelAnimationFrame(timerID);}  //when input is opened cancel animation fram does not work
 
-  if (bInputOpened) {inputCloseNumber();} 
+  // if (bInputOpened) {inputCloseAndCalculateResult();} 
 
   if (fingerPressTime - doubleTouchFirstPressTime < 300) {
     bInputOpened = true;
@@ -170,13 +147,31 @@ var touchCounter = 0;
 
 function processGlobalTouchStart(ev) {            //This function made because processTouchStart scope is little
     if (timerID){cancelAnimationFrame(timerID);}
-    
-    if (bInputOpened){
-      touchCounter++;
-      if(touchCounter > 2){touchCounter = 0;}
-      if (touchCounter == 2) {inputCloseNumber();touchCounter = 0;}
+
+    switch (ev.targetTouches[0].target.className) { //this block since cancelAnimationFrame does not work when touch input
+      case 'inputNumber1':
+      case 'inputNumber2':
+      case 'inputNumber3':
+        cancelAnimationFrame(timerID++);
+        cancelAnimationFrame(timerID++);
+        cancelAnimationFrame(timerID++);
+        cancelAnimationFrame(timerID++);
+        cancelAnimationFrame(timerID++);
+      break;
     }
+    
+    identifyWhichCube(ev);
+
+    if (targetElement == null){
+      console.log('target: ' + targetElement);
+    }
+
+    if (touchCounter && bInputOpened) {touchCounter = 0; inputCloseAndCalculateResult();}
+
+    if (bInputOpened){touchCounter++;}else{touchCounter = 0;}
 }
+
+var cubeNr;
 
 function inputOpenNumber(ev){
 
@@ -193,17 +188,32 @@ function inputOpenNumber(ev){
 
       switch (targetElement) {
         case 'cube1':
+          cubeNr = 1;
+          cubeClassName = 'inputNumber1';
+          break;
+
         case 'cube6':
+          cubeNr = 6;
           cubeClassName = 'inputNumber1';
           break;
  
         case 'cube2':
+          cubeNr = 2;
+          cubeClassName = 'inputNumber2';
+          break;
+
         case 'cube5':
+          cubeNr = 5;
           cubeClassName = 'inputNumber2';
           break;
 
         case 'cube3':
+          cubeNr = 3;
+          cubeClassName = 'inputNumber3';
+          break;
+
         case 'cube4':
+          cubeNr = 4;
           cubeClassName = 'inputNumber3';
           break;
         
@@ -245,22 +255,16 @@ function inputCheckKeypress(event) {
 
     case 'Enter':
     case 'Escape':
-      inputClosureManage();
+      inputCloseAndCalculateResult();
       return;
   
     default:                                      //characters i.e. + - are typing in, therefore we should remove it
       elInput.value ='';
       // let pattern = /[0-9]/g;
       // var result = inputValue.match(pattern);
-
-
       return;
   }
     inputCheckNumbers();
-}
-
-function inputClosureManage() {
-  
 }
 
 function inputCheckNumbers() {
@@ -308,11 +312,10 @@ function inputCheckNumbers() {
       if (inputString.length == 1 ) {     //first inputNumber can not be 0
         if (inputNumber == 0){elInput.value = '';}
       } else{
-        if (elInput.value > 12){
-          elInput.value = (elInput.value)[0];
+        if (elInput.value > 9999){
+          elInput.value = (elInput.value)[4];
         }
       }
-
 
       break;
   }
@@ -329,14 +332,54 @@ function inputGetMaxDays() {
   }
 }
 
-function inputCloseNumber(){
+function inputCloseAndCalculateResult(){
 
-  console.log('inputCloseNumberinputCloseNumberinputCloseNumberinputCloseNumber')
+  let inputValue = elInput.value;
 
   elInput.remove();
   textElement.style.display = 'block';
-  
   bInputOpened = false;
+
+  if (!inputValue) {return;}
+
+
+let cubeId = 'cube' + cubeNr;
+let cubeNumber = Number(cubeNr) - 1;
+let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
+
+  document.getElementById(cubeId).getElementsByClassName(activeFrontClass)[0].innerText = inputValue;
+
+  switch (cubeNr) {
+    case 1:
+      dayFrom = inputValue;
+      break;
+
+    case 2:
+      monthFrom = inputValue;
+      break;
+
+    case 3:
+      yearFrom = inputValue;
+      break;
+
+    case 4:
+      dayTo = inputValue;
+      break;
+    
+    case 5:
+      monthTo = inputValue;
+     break;
+
+    case 6:
+      yearTo = inputValue;
+      break;
+  }
+
+  console.log('Date from: ' + dayFrom + '-'+ monthFrom + '-' + yearFrom);
+  console.log('Date from: ' + dayTo + '-'+ monthTo + '-' + yearTo);
+  console.log('');
+
+  calculateResult();
 
 }
 
@@ -379,6 +422,8 @@ function processTouchMove(ev){
 function identifyWhichCube(ev){
   targetElement = ev.targetTouches[0].target;
 
+  if (targetElement.classList.length == 0){return null;}
+
   switch (targetElement.className) {
     case 'container':
     case 'cubeContainer':
@@ -387,8 +432,10 @@ function identifyWhichCube(ev){
 
       while (targetElement.className != 'cube') {
         targetElement = targetElement.children[0];
+        if (targetElement.classList.length == 0){return null;}
         i++;
-        if (i == 5) {alert('ERROR in identifyWhichCube -> while (targetElement.className != cube)');}
+        // if (i == 5) {alert('ERROR in identifyWhichCube -> while (targetElement.className != cube)');}
+        if (i == 5) {return null;}  //return null made for function processGlobalTouchStart()
       }
     
       break;
@@ -397,14 +444,20 @@ function identifyWhichCube(ev){
       let j = 0;
       while (targetElement.className != 'cube') {
         targetElement = targetElement.parentElement;
+
+        if (targetElement == null){return null;}//when pressing in input shows error
+        if (targetElement.classList.length == 0){return null;}
+
         j++;
-        if (j == 5) {alert('ERROR in identifyWhichCube -> DEFAULT while (targetElement.className != cube)');}
+        // if (j == 5) {alert('ERROR in identifyWhichCube -> DEFAULT while (targetElement.className != cube)');}
+        if (j == 5) {return null;}
       }
       break;
     }
 
 
-  if (targetElement.className != 'cube') {alert('error in identifyWhichCube -> container');}
+  // if (targetElement.className != 'cube') {alert('error in identifyWhichCube -> container');}
+  if (targetElement.className != 'cube') {return null;}
   targetElement = targetElement.id;
 }
 
