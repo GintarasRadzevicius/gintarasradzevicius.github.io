@@ -95,7 +95,6 @@ function timer() {
 
     counter = 25;
   }
-  console.log('Timer: ' + countHoldTrigger);
 }
 
 function doSomething() {
@@ -132,7 +131,9 @@ function processTouchStart(ev){
 
   // if (bInputOpened) {inputCloseAndCalculateResult();} 
 
-  if (fingerPressTime - doubleTouchFirstPressTime < 300) {
+console.log('bCubeRotated: ' + bCubeRotated);
+
+  if (fingerPressTime - doubleTouchFirstPressTime < 300 && !bCubeRotated) {
     bInputOpened = true;
     inputOpenNumber(ev);
     return;
@@ -401,24 +402,27 @@ function processTouchEnd(ev){
 
   ev.preventDefault();
 
+  bCubeRotated = false;
+
   date = new Date();
   if(date.getTime() - fingerPressTime >= 500){return;}
 
-  bCubeRotated = false;
 
   if(startY < endY){
     if (endY - startY < 10){return;}  //for double touch
     if (endY - startY > 220) {rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult();}
     rotateCubeDown();
     calculateResult();
-
+    
   } else if(startY > endY){
     if (startY - endY < 10){return;}  //for double touch
     if (startY - endY > 220) {rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult();}
     rotateCubeUp();
     calculateResult();
+    
+  }else if(startY == endY){ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa testing why input
+    return;
   }
-
   bCubeRotated = true;
 
 }
