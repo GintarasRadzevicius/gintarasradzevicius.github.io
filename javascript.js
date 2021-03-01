@@ -116,6 +116,7 @@ var bInputOpened = false;
 var elInput;
 var textElement;
 var timerID;
+var bCubeRotated = false;
 
 function processTouchStart(ev){
 
@@ -191,32 +192,37 @@ function inputOpenNumber(ev){
         case 'cube1':
           cubeNr = 1;
           cubeClassName = 'inputNumber1';
-          // width = 
+          width = '40';
           break;
 
         case 'cube6':
           cubeNr = 6;
           cubeClassName = 'inputNumber1';
+          width = '40';
           break;
  
         case 'cube2':
           cubeNr = 2;
           cubeClassName = 'inputNumber2';
+          width = '60';
           break;
 
         case 'cube5':
           cubeNr = 5;
           cubeClassName = 'inputNumber2';
+          width = '60';
           break;
 
         case 'cube3':
           cubeNr = 3;
           cubeClassName = 'inputNumber3';
+          width = '84';
           break;
 
         case 'cube4':
           cubeNr = 4;
           cubeClassName = 'inputNumber3';
+          width = '84';
           break;
         
         default:
@@ -228,6 +234,7 @@ function inputOpenNumber(ev){
       elInput = document.createElement("input");
       elInput.setAttribute('type', 'number');
       elInput.setAttribute('class', cubeClassName);
+      elInput.style.width = width + 'px';
       elInput.addEventListener('keyup', inputCheckKeypress);
 
       textElement = document.getElementById(targetElement).getElementsByClassName(numberAreaClass)[0];
@@ -397,6 +404,8 @@ function processTouchEnd(ev){
   date = new Date();
   if(date.getTime() - fingerPressTime >= 500){return;}
 
+  bCubeRotated = false;
+
   if(startY < endY){
     if (endY - startY < 10){return;}  //for double touch
     if (endY - startY > 220) {rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult(); rotateCubeDown(); calculateResult();}
@@ -408,8 +417,10 @@ function processTouchEnd(ev){
     if (startY - endY > 220) {rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult(); rotateCubeUp(); calculateResult();}
     rotateCubeUp();
     calculateResult();
-
   }
+
+  bCubeRotated = true;
+
 }
 
 
@@ -494,7 +505,6 @@ switch (cubeNo) {
 
 function rotateCubeDown(){
   let cubeNo = Number(targetElement[4]) - 1;
-  //**********!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!********bandom !!!!!!!!!!!!!!*/
   arrRotateXDegree[cubeNo] -= 90;
 
   switch (cubeNo) {
