@@ -139,12 +139,11 @@ h2{
     text-align: center;
     color: whitesmoke;
     background-color: rgba(6, 20, 102, 0.8);
-    padding-top: 18px;
+    padding-top: 2px;
 }
 
 #cubeContainer1 .side, #cubeContainer6 .side{
     font-size: 20px;
-    padding-top: 2px;
 
 }
 #cubeContainer2 .side, #cubeContainer5 .side{
@@ -160,8 +159,29 @@ h2{
 .cube1Name{
     font-size: 7px;
     margin-bottom: 5px;
-    padding: 0;
 }
+.cube2Name{
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+.cube3Name{
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.cube4Name{
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.cube5Name{
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+.cube6Name{
+    font-size: 7px;
+    margin-bottom: 5px;
+}
+
+
 
 #cubeContainer2 .front, #cubeContainer5 .front{transform: translateZ(35px);}
 #cubeContainer1 .front, #cubeContainer6 .front{transform: translateZ(25px);}
