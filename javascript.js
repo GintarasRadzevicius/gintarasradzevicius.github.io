@@ -420,7 +420,7 @@ function processTouchEnd(ev){
     rotateCubeUp();
     calculateResult();
     
-  }else if(startY == endY){ //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa testing why input
+  }else if(startY == endY){
     return;
   }
   bCubeRotated = true;
@@ -640,11 +640,13 @@ function updateDateUp(cubeNumber){
       break;
       
     case 2:
+      if(yearFrom == 1){yearFrom = 10000;};
       yearFrom--;
       return yearFrom;
       break;
   
     case 5:
+      if(yearTo == 1){yearTo = 10000;};
       yearTo--;
       return yearTo;
       break;
@@ -686,11 +688,13 @@ function updateDateDown(cubeNumber){
       break;
       
     case 2:
+      if(yearFrom == 9999){yearFrom = 0;};
       yearFrom++;
       return yearFrom;
       break;
   
     case 5:
+      if(yearTo == 9999){yearTo = 0;};
       yearTo++;
       return yearTo;
       break;
