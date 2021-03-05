@@ -17,6 +17,7 @@ body{
     position: relative;
     background-color: #1e1e1e;
     color: whitesmoke;
+
 }
 
 #header {
@@ -56,10 +57,7 @@ h2{
     clear: both;
   }
 
-  .column p{
-    font-size: 20px;
-    color: #f5f5f5;
-}
+
 /* **********************************************************cube*******************************************************/
 
 .cubeContainer{
