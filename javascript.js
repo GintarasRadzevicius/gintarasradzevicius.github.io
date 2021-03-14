@@ -874,16 +874,11 @@ let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
 
   }
 
-  // console.log('From: ' + dayStart + '-' + monthStart + '-' + yearStart);
-  // console.log('To: ' + dayEnd + '-' + monthEnd + '-' + yearEnd);
-
   let daysQuantity = countDaysQuantity(yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
-  
-  document.getElementById('calcText').innerText = daysQuantity; 
-  
+  document.getElementById('calcText').innerText = daysQuantity;
 
 
-
+  countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
 
 }
 
@@ -1041,3 +1036,192 @@ function bDateShouldBeReversed(){
 
 
 /***********************************************************Calculation end*******************************************************/
+
+// var weekday = new Array(7);
+// weekday[0] = "Sunday";
+// weekday[1] = "Monday";
+// weekday[2] = "Tuesday";
+// weekday[3] = "Wednesday";
+// weekday[4] = "Thursday";
+// weekday[5] = "Friday";
+// weekday[6] = "Saturday";
+
+// let dayStart = 6;
+// let monthStart = 3;
+// let yearStart = 2020;
+// let dayEnd = 16;
+// let monthEnd = 3;
+// let yearEnd = 2021;
+
+
+
+
+function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
+
+
+
+  let daysToRemoveFromBeginning = countDaysToRemoveFromBeginning(monthStart, dayStart, yearStart);
+  let daysToRemoveFromEnd = countDaysToRemoveFromEnd(monthEnd, dayEnd, yearEnd);                  //not counting last day
+
+
+  let workingDaysOneWeek = 0;
+  let dummyWeekdayBeginning = weekdayBeginning;
+
+  if (allDays < 8) {
+    if (allDays == 0) {alert('workingDaysOneWeek: 0');return;}
+
+    if ((weekdayBeginning + allDays) < 8 && weekdayBeginning != 0){                               //check if the same week
+      
+      for (let i = 0; i < allDays; i++) {
+        
+        if (dummyWeekdayBeginning == 6) {break;}
+        dummyWeekdayBeginning++;
+        workingDaysOneWeek++;
+      }
+      
+      alert('workingDaysOneWeek: ' + workingDaysOneWeek);
+      return workingDaysOneWeek;
+     
+    } else if (weekdayBeginning == 0) {
+      alert('workingDaysOneWeek: 0');
+
+      return 0;
+    }
+  }
+
+
+  let fullWeeksAllDays = allDays - daysToRemoveFromBeginning - daysToRemoveFromEnd;
+
+  if (fullWeeksAllDays % 7 != 0){alert('error: fullWeeksAllDays % 7');}                           //just for testing
+
+  let weeks = 0;
+
+  if (fullWeeksAllDays >= 7) {weeks = fullWeeksAllDays / 7;  }
+
+  let fullWeeksWorkingDays = 0;
+
+  if (weeks) {fullWeeksWorkingDays = weeks * 5;}
+
+  let workingDaysFirstWeek = countWorkingDaysFirstWeek();
+  let workingDaysLastWeek = countWorkingDaysLastWeek();
+  
+  let workingDays = fullWeeksWorkingDays + workingDaysFirstWeek + workingDaysLastWeek;
+
+  console.log('workingDays: ' + workingDays);
+
+}
+
+
+function countFullWeeksAllDays(allDays) {
+  
+}
+
+function countWorkingDaysFirstWeek() {
+  switch (weekdayBeginning) {
+    case 0:
+    case 6:
+      return 0;
+  
+    case 1:
+      return 5;
+
+    case 2:
+      return 4;
+
+    case 3:
+      return 3;
+
+    case 4:
+      return 2;
+
+    case 5:
+      return 1;
+
+    default:
+      alert('Error in countWorkingDaysFirstWeek');
+  }
+}
+
+function countWorkingDaysLastWeek() {
+  switch (weekdayEnd) {
+    case 0:
+    case 6:
+      return 0;
+  
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      return weekdayEnd;
+  
+    default:
+      alert('Error in countWorkingDaysLastWeek');
+  }
+}
+
+var weekdayBeginning;
+
+function countDaysToRemoveFromBeginning(monthStart, dayStart, yearStart) {
+  
+  let dateBeginning = new Date(monthStart + ' ' + dayStart + ' ' + yearStart);
+  weekdayBeginning = dateBeginning.getDay();
+  
+  switch (weekdayBeginning) {
+    case 0:
+      return 1;
+
+    case 1:
+      return 7;
+
+    case 2:
+      return 6;
+
+    case 3:
+      return 5;
+
+    case 4:
+      return 4;
+
+    case 5:
+      return 3;
+
+    case 6:
+      return 2;
+
+    default:
+      alert('Error in countDaysToRemoveFromBeginning');
+  }
+}
+
+var weekdayEnd;
+
+function countDaysToRemoveFromEnd(monthEnd, dayEnd, yearEnd) {
+
+  let dateEnd = new Date(monthEnd + ' ' + dayEnd + ' ' + yearEnd);
+  weekdayEnd = dateEnd.getDay();
+
+  if (weekdayEnd == 0) {
+    weekdayEnd = 6
+  } else{
+    weekdayEnd--;
+  }
+  
+  switch (weekdayEnd) {       //-1 because not counting last day
+    case 0:
+      return 7;
+  
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return weekdayEnd;
+  
+    default:
+      alert('Error in countDaysToRemoveFromEnd');
+  }
+  
+  
+}
