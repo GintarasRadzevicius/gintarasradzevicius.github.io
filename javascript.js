@@ -875,10 +875,11 @@ let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
   }
 
   let daysQuantity = countDaysQuantity(yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
-  document.getElementById('calcText').innerText = daysQuantity;
+  // document.getElementById('calcText').innerText = daysQuantity;
 
 
-  countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
+  let workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
+  document.getElementById('calcText').innerText = workingDaysQuantity;
 
 }
 
@@ -1068,7 +1069,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
   let dummyWeekdayBeginning = weekdayBeginning;
 
   if (allDays < 8) {
-    if (allDays == 0) {alert('workingDaysOneWeek: 0');return;}
+    if (allDays == 0) {return 0;}
 
     if ((weekdayBeginning + allDays) < 8 && weekdayBeginning != 0){                               //check if the same week
       
@@ -1079,11 +1080,11 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
         workingDaysOneWeek++;
       }
       
-      alert('workingDaysOneWeek: ' + workingDaysOneWeek);
+      // alert('workingDaysOneWeek: ' + workingDaysOneWeek);
       return workingDaysOneWeek;
      
     } else if (weekdayBeginning == 0) {
-      alert('workingDaysOneWeek: 0');
+      // alert('workingDaysOneWeek: 0');
 
       return 0;
     }
