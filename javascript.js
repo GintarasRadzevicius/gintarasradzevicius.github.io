@@ -1096,8 +1096,8 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
   if (weeks) {fullWeeksWorkingDays = weeks * 5;}
 
-  let workingDaysFirstWeek = countWorkingDaysFirstWeek();
-  let workingDaysLastWeek = countWorkingDaysLastWeek();
+  let workingDaysFirstWeek = countWorkingDaysFirstWeek(weekdayBeginning);
+  let workingDaysLastWeek = countWorkingDaysLastWeek(weekdayEnd);
   
   let workingDays = fullWeeksWorkingDays + workingDaysFirstWeek + workingDaysLastWeek;
 
@@ -1135,7 +1135,7 @@ function getWeekdayEnd(monthEnd, dayEnd, yearEnd) {
   return dateEnd.getDay();
 }
 
-function countWorkingDaysFirstWeek() {
+function countWorkingDaysFirstWeek(weekdayBeginning) {
   switch (weekdayBeginning) {
     case 0:
     case 6:
@@ -1161,7 +1161,7 @@ function countWorkingDaysFirstWeek() {
   }
 }
 
-function countWorkingDaysLastWeek() {
+function countWorkingDaysLastWeek(weekdayEnd) {
   switch (weekdayEnd) {
     case 0:
     case 6:
