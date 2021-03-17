@@ -1061,57 +1061,62 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
   let weekdayBeginning = getWeekdayBeginning(monthStart, dayStart, yearStart);
   let weekdayEnd = getWeekdayEnd(monthEnd, dayEnd, yearEnd);
 
-  let workingDaysOneWeek = 0;
-  let dummyWeekdayBeginning = weekdayBeginning;
-
-
-  return countWorkingDaysFor2Weeks(allDays, weekdayBeginning);
-
-
-
-
-  if (allDays < 8) {
-
-    if (allDays == 0) {return 0;}
-
-    if ((weekdayBeginning + allDays) < 8 && weekdayBeginning != 0){                               //check if the same week
-      for (let i = 0; i < allDays; i++) {
-        if (dummyWeekdayBeginning == 6) {break;}
-        dummyWeekdayBeginning++;
-        workingDaysOneWeek++;
-      }
-      return workingDaysOneWeek;
-
-    } else{
-      return countWorkingDaysFor2Weeks(allDays, weekdayBeginning);
-    }
-  }
+  // let workingDaysOneWeek = 0;
+  // let dummyWeekdayBeginning = weekdayBeginning;
 
   let daysToRemoveFromBeginning = countDaysToRemoveFromBeginning(weekdayBeginning);
   let daysToRemoveFromEnd = countDaysToRemoveFromEnd(weekdayEnd);                                 //not including last day
+  let workingDays = 0;
 
+  if (allDays > 14) {
+    workingDays = countWorkingDaysMoreThan15Days(allDays, daysToRemoveFromBeginning, daysToRemoveFromEnd);
+
+  }else{
+    if (allDays == 0) {return 0;}
+    workingDays = countWorkingDaysUpTo15Days(allDays, weekdayBeginning);
+  }
+
+  return workingDays;
+
+
+  // if (allDays < 8) {
+
+
+  //   if ((weekdayBeginning + allDays) < 8 && weekdayBeginning != 0){                               //check if the same week
+  //     for (let i = 0; i < allDays; i++) {
+  //       if (dummyWeekdayBeginning == 6) {break;}
+  //       dummyWeekdayBeginning++;
+  //       workingDaysOneWeek++;
+  //     }
+  //     return workingDaysOneWeek;
+
+  //   } else{
+  //     return countWorkingDaysUpTo15Days(allDays, weekdayBeginning);
+  //   }
+  // }
+
+}
+
+function countWorkingDaysMoreThan15Days(allDays, daysToRemoveFromBeginning, daysToRemoveFromEnd) {
   let fullWeeksAllDays = allDays - daysToRemoveFromBeginning - daysToRemoveFromEnd;
 
   if (fullWeeksAllDays % 7 != 0){alert('error: fullWeeksAllDays % 7');}                           //just for testing
 
   let weeks = 0;
-
-  if (fullWeeksAllDays >= 7) {weeks = fullWeeksAllDays / 7;  }
+  weeks = fullWeeksAllDays / 7;
 
   let fullWeeksWorkingDays = 0;
-
-  if (weeks) {fullWeeksWorkingDays = weeks * 5;}
+  fullWeeksWorkingDays = weeks * 5;
 
   let workingDaysFirstWeek = countWorkingDaysFirstWeek(weekdayBeginning);
   let workingDaysLastWeek = countWorkingDaysLastWeek(weekdayEnd);
   
   let workingDays = fullWeeksWorkingDays + workingDaysFirstWeek + workingDaysLastWeek;
 
-  console.log('workingDays: ' + workingDays);
-
+  return workingDays;
 }
 
-function countWorkingDaysFor2Weeks(allDays, weekdayBeginning) {
+function countWorkingDaysUpTo15Days(allDays, weekdayBeginning) {
 
   let dummyWeekdayBeginning = weekdayBeginning;
   let workingDaysOneWeek = 0;
@@ -1123,14 +1128,9 @@ function countWorkingDaysFor2Weeks(allDays, weekdayBeginning) {
 
     dummyWeekdayBeginning++;
     workingDaysOneWeek++;
-    console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);
   }
 
   return workingDaysOneWeek;
-
-
-
-
 }
 
 function getWeekdayBeginning(monthStart, dayStart, yearStart) {
