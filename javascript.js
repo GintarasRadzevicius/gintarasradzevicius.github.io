@@ -1064,6 +1064,12 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
   let workingDaysOneWeek = 0;
   let dummyWeekdayBeginning = weekdayBeginning;
 
+
+  return countWorkingDaysFor2Weeks(allDays, weekdayBeginning);
+
+
+
+
   if (allDays < 8) {
 
     if (allDays == 0) {return 0;}
@@ -1077,7 +1083,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
       return workingDaysOneWeek;
 
     } else{
-      return countWorkingDaysFor2Weeks(allDays, weekdayBeginning, weekdayEnd);
+      return countWorkingDaysFor2Weeks(allDays, weekdayBeginning);
     }
   }
 
@@ -1105,17 +1111,19 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
 }
 
-function countWorkingDaysFor2Weeks(allDays, weekdayBeginning, weekdayEnd) {
+function countWorkingDaysFor2Weeks(allDays, weekdayBeginning) {
 
   let dummyWeekdayBeginning = weekdayBeginning;
   let workingDaysOneWeek = 0;
 
-  for (let i = 1; i < allDays; i++) {
-    if (dummyWeekdayBeginning == 7) {dummyWeekdayBeginning = 0;}
-    if (dummyWeekdayBeginning == 6 || dummyWeekdayBeginning == 0) {dummyWeekdayBeginning++; continue;}
+  for (let i = 0; i < allDays; i++) {
+    
+    if (dummyWeekdayBeginning == 6) {dummyWeekdayBeginning = 0; console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);continue;}
+    if (dummyWeekdayBeginning == 0) {dummyWeekdayBeginning++; console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);continue;}
 
     dummyWeekdayBeginning++;
     workingDaysOneWeek++;
+    console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);
   }
 
   return workingDaysOneWeek;
