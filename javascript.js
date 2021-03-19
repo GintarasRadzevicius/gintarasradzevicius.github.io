@@ -1066,10 +1066,11 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
   let daysToRemoveFromBeginning = countDaysToRemoveFromBeginning(weekdayBeginning);
   let daysToRemoveFromEnd = countDaysToRemoveFromEnd(weekdayEnd);                                 //not including last day
+  
   let workingDays = 0;
 
   if (allDays > 14) {
-    workingDays = countWorkingDaysMoreThan15Days(allDays, daysToRemoveFromBeginning, daysToRemoveFromEnd);
+    workingDays = countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, daysToRemoveFromBeginning, daysToRemoveFromEnd);
 
   }else{
     if (allDays == 0) {return 0;}
@@ -1097,7 +1098,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
 }
 
-function countWorkingDaysMoreThan15Days(allDays, daysToRemoveFromBeginning, daysToRemoveFromEnd) {
+function countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, daysToRemoveFromBeginning, daysToRemoveFromEnd) {
   let fullWeeksAllDays = allDays - daysToRemoveFromBeginning - daysToRemoveFromEnd;
 
   if (fullWeeksAllDays % 7 != 0){alert('error: fullWeeksAllDays % 7');}                           //just for testing
@@ -1110,7 +1111,10 @@ function countWorkingDaysMoreThan15Days(allDays, daysToRemoveFromBeginning, days
 
   let workingDaysFirstWeek = countWorkingDaysFirstWeek(weekdayBeginning);
   let workingDaysLastWeek = countWorkingDaysLastWeek(weekdayEnd);
-  
+
+console.log('workingDaysFirstWeek: ' + workingDaysFirstWeek);
+console.log('workingDaysLastWeek: ' + workingDaysLastWeek);
+
   let workingDays = fullWeeksWorkingDays + workingDaysFirstWeek + workingDaysLastWeek;
 
   return workingDays;
@@ -1123,8 +1127,8 @@ function countWorkingDaysUpTo15Days(allDays, weekdayBeginning) {
 
   for (let i = 0; i < allDays; i++) {
     
-    if (dummyWeekdayBeginning == 6) {dummyWeekdayBeginning = 0; console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);continue;}
-    if (dummyWeekdayBeginning == 0) {dummyWeekdayBeginning++; console.log('dummyWeekdayBeginning: ' + dummyWeekdayBeginning);continue;}
+    if (dummyWeekdayBeginning == 6) {dummyWeekdayBeginning = 0; continue;}
+    if (dummyWeekdayBeginning == 0) {dummyWeekdayBeginning++; continue;}
 
     dummyWeekdayBeginning++;
     workingDaysOneWeek++;
@@ -1146,11 +1150,9 @@ function getWeekdayEnd(monthEnd, dayEnd, yearEnd) {
 function countWorkingDaysFirstWeek(weekdayBeginning) {
   switch (weekdayBeginning) {
     case 0:
+    case 1:                                              //case 1: Do not return 5 since it is already counted in full weeks
     case 6:
       return 0;
-  
-    case 1:
-      return 5;
 
     case 2:
       return 4;
@@ -1170,16 +1172,18 @@ function countWorkingDaysFirstWeek(weekdayBeginning) {
 }
 
 function countWorkingDaysLastWeek(weekdayEnd) {
+
   switch (weekdayEnd) {
     case 0:
     case 6:
-      return 0;
+      return 5;
   
     case 1:
     case 2:
     case 3:
     case 4:
     case 5:
+      weekdayEnd--
       return weekdayEnd;
   
     default:
@@ -1194,7 +1198,7 @@ function countDaysToRemoveFromBeginning(weekdayBeginning) {
       return 1;
 
     case 1:
-      return 7;
+      return 0;
 
     case 2:
       return 6;
@@ -1219,15 +1223,13 @@ function countDaysToRemoveFromBeginning(weekdayBeginning) {
 function countDaysToRemoveFromEnd(weekdayEnd) {
 
   if (weekdayEnd == 0) {
-    weekdayEnd = 6
+    weekdayEnd = 6;
   } else{
     weekdayEnd--;
   }
   
   switch (weekdayEnd) {       //-1 because not counting last day
     case 0:
-      return 7;
-  
     case 1:
     case 2:
     case 3:
