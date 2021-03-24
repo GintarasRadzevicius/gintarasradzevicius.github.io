@@ -131,7 +131,6 @@ function processTouchStart(ev){
 
   // if (bInputOpened) {inputCloseAndCalculateResult();} 
 
-console.log('bCubeRotated: ' + bCubeRotated);
 
   if (fingerPressTime - doubleTouchFirstPressTime < 300 && !bCubeRotated) {
     bInputOpened = true;
@@ -384,10 +383,6 @@ let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
       yearTo = Number(inputValue);
       break;
   }
-
-  console.log('Date from: ' + dayFrom + '-'+ monthFrom + '-' + yearFrom);
-  console.log('Date to: ' + dayTo + '-'+ monthTo + '-' + yearTo);
-  console.log('');
 
   calculateResult();
 
@@ -855,7 +850,7 @@ function calculateResult(){
 
   let bReverseDate = bDateShouldBeReversed();
 
-let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
+  let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
 
   if (bReverseDate){
     dayStart = dayTo;
@@ -875,11 +870,17 @@ let dayStart, monthStart, yearStart, dayEnd, monthEnd, yearEnd;
   }
 
   let daysQuantity = countDaysQuantity(yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
-  // document.getElementById('calcText').innerText = daysQuantity;
+  let workingDaysQuantity;
+  let bCountWorkingDays = true;
 
+  if (bCountWorkingDays) {
+    workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
+    document.getElementById('calcText').innerText = workingDaysQuantity;
 
-  let workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
-  document.getElementById('calcText').innerText = workingDaysQuantity;
+  } else {
+      document.getElementById('calcText').innerText = daysQuantity;
+  }
+
 
 }
 
@@ -955,8 +956,6 @@ function getDaysOfSeveralMonths(yearToCheck, firstMonthToCheck, secondMonthToChe
   
   return daysNumber;
 }
-
-
 
 function getDaysQuantityInMonth(year, month){
 
@@ -1036,34 +1035,12 @@ function bDateShouldBeReversed(){
 
 
 /***********************************************************Calculation end*******************************************************/
-
-// var weekday = new Array(7);
-// weekday[0] = "Sunday";
-// weekday[1] = "Monday";
-// weekday[2] = "Tuesday";
-// weekday[3] = "Wednesday";
-// weekday[4] = "Thursday";
-// weekday[5] = "Friday";
-// weekday[6] = "Saturday";
-
-// let dayStart = 6;
-// let monthStart = 3;
-// let yearStart = 2020;
-// let dayEnd = 16;
-// let monthEnd = 3;
-// let yearEnd = 2021;
-
-
-
+/***********************************************************Calculate working days start*******************************************************/
 
 function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
 
   let weekdayBeginning = getWeekdayBeginning(monthStart, dayStart, yearStart);
   let weekdayEnd = getWeekdayEnd(monthEnd, dayEnd, yearEnd);
-
-  // let workingDaysOneWeek = 0;
-  // let dummyWeekdayBeginning = weekdayBeginning;
-
   let daysToRemoveFromBeginning = countDaysToRemoveFromBeginning(weekdayBeginning);
   let daysToRemoveFromEnd = countDaysToRemoveFromEnd(weekdayEnd);                                 //not including last day
   
@@ -1076,25 +1053,9 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
     if (allDays == 0) {return 0;}
     workingDays = countWorkingDaysUpTo15Days(allDays, weekdayBeginning);
   }
+  workingDays = excludePublicHolidays(workingDays, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
 
   return workingDays;
-
-
-  // if (allDays < 8) {
-
-
-  //   if ((weekdayBeginning + allDays) < 8 && weekdayBeginning != 0){                               //check if the same week
-  //     for (let i = 0; i < allDays; i++) {
-  //       if (dummyWeekdayBeginning == 6) {break;}
-  //       dummyWeekdayBeginning++;
-  //       workingDaysOneWeek++;
-  //     }
-  //     return workingDaysOneWeek;
-
-  //   } else{
-  //     return countWorkingDaysUpTo15Days(allDays, weekdayBeginning);
-  //   }
-  // }
 
 }
 
@@ -1111,9 +1072,6 @@ function countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, d
 
   let workingDaysFirstWeek = countWorkingDaysFirstWeek(weekdayBeginning);
   let workingDaysLastWeek = countWorkingDaysLastWeek(weekdayEnd);
-
-console.log('workingDaysFirstWeek: ' + workingDaysFirstWeek);
-console.log('workingDaysLastWeek: ' + workingDaysLastWeek);
 
   let workingDays = fullWeeksWorkingDays + workingDaysFirstWeek + workingDaysLastWeek;
 
@@ -1138,12 +1096,14 @@ function countWorkingDaysUpTo15Days(allDays, weekdayBeginning) {
 }
 
 function getWeekdayBeginning(monthStart, dayStart, yearStart) {
-  let dateBeginning = new Date(monthStart + ' ' + dayStart + ' ' + yearStart);
+  // let dateBeginning = new Date(monthStart + ' ' + dayStart + ' ' + yearStart);
+  let dateBeginning = new Date(yearStart, --monthStart, dayStart);  // changed to below line since found this function constructor in the web
   return dateBeginning.getDay();
 }
 
 function getWeekdayEnd(monthEnd, dayEnd, yearEnd) {
-  let dateEnd = new Date(monthEnd + ' ' + dayEnd + ' ' + yearEnd);
+  // let dateEnd = new Date(monthEnd + ' ' + dayEnd + ' ' + yearEnd);           // changed to below line since found this function constructor in the web
+  let dateEnd = new Date(yearEnd, --monthEnd, dayEnd);
   return dateEnd.getDay();
 }
 
@@ -1242,3 +1202,203 @@ function countDaysToRemoveFromEnd(weekdayEnd) {
       alert('Error in countDaysToRemoveFromEnd');
   }
 }
+/***********************************************************Calculate working days end*******************************************************/
+
+/***********************************************************Calculate working days excluding public holidays start*******************************************************/
+
+function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
+
+  if (yearStart < 2016 || yearEnd > 2026) {alert('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
+
+  let fromDate = new Date(yearStart, monthStart - 1, dayStart);
+  let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
+  let checkDate;
+
+  for (let i = 0; i < arrNationalholidays.length; i++) {
+
+    if (arrNationalholidays[i][0] < yearStart || arrNationalholidays[i][0] > yearEnd) {continue;}
+
+    checkDate = new Date(arrNationalholidays[i][0], arrNationalholidays[i][1] - 1, arrNationalholidays[i][2]);
+
+    if (checkDate >= fromDate && checkDate < toDate) {
+      // console.log(arrNationalholidays[i][0] + ' ' + arrNationalholidays[i][1] + ' ' + arrNationalholidays[i][2]);
+      workingDaysQuantity--;
+    }
+  }
+
+return workingDaysQuantity;
+
+}
+
+/***********************************************************Calculate working days excluding public holidays end*******************************************************/
+
+/***********************************************************National holidays start*******************************************************/
+
+var arrNationalholidays = [];                                                                       //Already excluded weekends
+
+addNationalHolidays();
+
+
+function addNationalHolidays() {
+
+  arrNationalholidays.push([2016, 1, 1, 'Naujųjų metų diena']);
+  arrNationalholidays.push([2016, 2, 16, 'Lietuvos valstybės atkūrimo diena']);                       
+  arrNationalholidays.push([2016, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2016, 3, 28, 'Šv. Velykų antroji diena']);                                //!!! Day which is not same every year. First day is always on Sunday
+  // arrNationalholidays.push([2016, 5, 1, 'Tarptautinė darbo diena']);                               //Day in weekend
+  arrNationalholidays.push([2016, 6, 24, 'Rasos ir Joninių diena']);
+  arrNationalholidays.push([2016, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  arrNationalholidays.push([2016, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2016, 11, 1, 'Visų Šventųjų diena']);
+  // arrNationalholidays.push([2016, 12, 24, 'Šv. Kūčių diena']);                                     //Day in weekend
+  // arrNationalholidays.push([2016, 12, 25, 'Šv. Kalėdų diena']);                                    //Day in weekend
+  arrNationalholidays.push([2016, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  // arrNationalholidays.push([2017, 1, 1, 'Naujųjų metų diena']);                                    //Day in weekend
+  arrNationalholidays.push([2017, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  // arrNationalholidays.push([2017, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);             //Day in weekend
+  arrNationalholidays.push([2017, 4, 17, 'Šv. Velykų antroji diena']);                                //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2017, 5, 1, 'Tarptautinė darbo diena']);
+  // arrNationalholidays.push([2017, 6, 24, 'Rasos ir Joninių diena']);                               //Day in weekend
+  arrNationalholidays.push([2017, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  arrNationalholidays.push([2017, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2017, 11, 1, 'Visų Šventųjų diena']);
+  // arrNationalholidays.push([2017, 12, 24, 'Šv. Kūčių diena']);                                     //Day in weekend
+  arrNationalholidays.push([2017, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2017, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2018, 1, 1, 'Naujųjų metų diena']);
+  arrNationalholidays.push([2018, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  // arrNationalholidays.push([2018, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);             //Day in weekend
+  arrNationalholidays.push([2018, 4, 2, 'Šv. Velykų antroji diena']);                 //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2018, 5, 1, 'Tarptautinė darbo diena']);
+  // arrNationalholidays.push([2018, 6, 24, 'Rasos ir Joninių diena']);                               //Day in weekend
+  arrNationalholidays.push([2018, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  arrNationalholidays.push([2018, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2018, 11, 1, 'Visų Šventųjų diena']);
+  arrNationalholidays.push([2018, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2018, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2018, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2019, 1, 1, 'Naujųjų metų diena']);
+  // arrNationalholidays.push([2019, 2, 16, 'Lietuvos valstybės atkūrimo diena']);                          //Day in weekend
+  arrNationalholidays.push([2019, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2019, 4, 22, 'Šv. Velykų antroji diena']);                                      //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2019, 5, 1, 'Tarptautinė darbo diena']);
+  arrNationalholidays.push([2019, 6, 24, 'Rasos ir Joninių diena']);
+  // arrNationalholidays.push([2019, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);    //Day in weekend
+  arrNationalholidays.push([2019, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2019, 11, 1, 'Visų Šventųjų diena']);
+  arrNationalholidays.push([2019, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2019, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2019, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2020, 1, 1, 'Naujųjų metų diena']);
+  // arrNationalholidays.push([2020, 2, 16, 'Lietuvos valstybės atkūrimo diena']);                          //Day in weekend
+  arrNationalholidays.push([2020, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2020, 4, 13, 'Šv. Velykų antroji diena']);                                      //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2020, 5, 1, 'Tarptautinė darbo diena']);
+  arrNationalholidays.push([2020, 6, 24, 'Rasos ir Joninių diena']);
+  arrNationalholidays.push([2020, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  // arrNationalholidays.push([2020, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);         //Day in weekend
+  // arrNationalholidays.push([2020, 11, 1, 'Visų Šventųjų diena']);                                        //Day in weekend
+  arrNationalholidays.push([2020, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                            //!!! Day which is not same every year. 
+  arrNationalholidays.push([2020, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2020, 12, 25, 'Šv. Kalėdų diena']);
+  // arrNationalholidays.push([2020, 12, 26, 'Šv. Kalėdų antroji diena']);                                  //Day in weekend
+
+  arrNationalholidays.push([2021, 1, 1, 'Naujųjų metų diena']);
+  arrNationalholidays.push([2021, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  arrNationalholidays.push([2021, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2021, 4, 5, 'Velykų antroji diena']);                                           //!!! Day which is not same every year. First day is always on Sunday
+  // arrNationalholidays.push([2021, 5, 1, 'Tarptautinė darbo diena']);                                     //Day in weekend
+  arrNationalholidays.push([2021, 6, 24, 'Rasos ir Joninių diena']);
+  arrNationalholidays.push([2021, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  // arrNationalholidays.push([2021, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);         //Day in weekend
+  arrNationalholidays.push([2021, 11, 1, 'Visų Šventųjų diena']);
+  arrNationalholidays.push([2021, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                            //!!! Day which is not same every year. 
+  arrNationalholidays.push([2021, 12, 24, 'Šv. Kūčių diena']);
+  // arrNationalholidays.push([2021, 12, 25, 'Šv. Kalėdų diena']);                                          //Day in weekend
+  // arrNationalholidays.push([2021, 12, 26, 'Šv. Kalėdų antroji diena']);                                  //Day in weekend
+
+  // arrNationalholidays.push([2022, 1, 1, 'Naujųjų metų diena']);                                          //Day in weekend
+  arrNationalholidays.push([2022, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  arrNationalholidays.push([2022, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2022, 4, 18, 'Velykų antroji diena']);                                          //!!! Day which is not same every year. First day is always on Sunday
+  // arrNationalholidays.push([2022, 5, 1, 'Tarptautinė darbo diena']);                                     //Day in weekend
+  arrNationalholidays.push([2022, 6, 24, 'Rasos ir Joninių diena']);
+  arrNationalholidays.push([2022, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  arrNationalholidays.push([2022, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2022, 11, 1, 'Visų Šventųjų diena']);
+  arrNationalholidays.push([2022, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                            //!!! Day which is not same every year. 
+  // arrNationalholidays.push([2022, 12, 24, 'Šv. Kūčių diena']);                                           //Day in weekend
+  // arrNationalholidays.push([2022, 12, 25, 'Šv. Kalėdų diena']);                                          //Day in weekend
+  arrNationalholidays.push([2022, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  // arrNationalholidays.push([2023, 1, 1, 'Naujųjų metų diena']);                                          //Day in weekend
+  arrNationalholidays.push([2023, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  // arrNationalholidays.push([2023, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);                   //Day in weekend
+  arrNationalholidays.push([2023, 4, 10, 'Velykų antroji diena']);                                          //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2023, 5, 1, 'Tarptautinė darbo diena']);
+  // arrNationalholidays.push([2023, 6, 24, 'Rasos ir Joninių diena']);                                     //Day in weekend
+  arrNationalholidays.push([2023, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  arrNationalholidays.push([2023, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2023, 11, 1, 'Visų Šventųjų diena']);
+  arrNationalholidays.push([2023, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                            //!!! Day which is not same every year. 
+  // arrNationalholidays.push([2023, 12, 24, 'Šv. Kūčių diena']);                                           //Day in weekend
+  arrNationalholidays.push([2023, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2023, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2024, 1, 1, 'Naujųjų metų diena']);
+  arrNationalholidays.push([2024, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  arrNationalholidays.push([2024, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2024, 4, 1, 'Velykų antroji diena']);                                           //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2024, 5, 1, 'Tarptautinė darbo diena']);
+  arrNationalholidays.push([2024, 6, 24, 'Rasos ir Joninių diena']);
+  // arrNationalholidays.push([2024, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);    //Day in weekend
+  arrNationalholidays.push([2024, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  arrNationalholidays.push([2024, 11, 1, 'Visų Šventųjų diena']);
+  // arrNationalholidays.push([2024, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                         //!!! Day which is not same every year. Commented because it is Saturday
+  arrNationalholidays.push([2024, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2024, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2024, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2025, 1, 1, 'Naujųjų metų diena']);
+  // arrNationalholidays.push([2025, 2, 16, 'Lietuvos valstybės atkūrimo diena']);                          //Day in weekend
+  arrNationalholidays.push([2025, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2025, 4, 11, 'Velykų antroji diena']);                                          //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2025, 5, 1, 'Tarptautinė darbo diena']);
+  arrNationalholidays.push([2025, 6, 24, 'Rasos ir Joninių diena']);
+  // arrNationalholidays.push([2025, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);    //Day in weekend
+  arrNationalholidays.push([2025, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);
+  // arrNationalholidays.push([2025, 11, 1, 'Visų Šventųjų diena']);                                        //Day in weekend
+  // arrNationalholidays.push([2025, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                         //!!! Day which is not same every year. Commented because it is Sunday
+  arrNationalholidays.push([2025, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2025, 12, 25, 'Šv. Kalėdų diena']);
+  arrNationalholidays.push([2025, 12, 26, 'Šv. Kalėdų antroji diena']);
+
+  arrNationalholidays.push([2026, 1, 1, 'Naujųjų metų diena']);
+  arrNationalholidays.push([2026, 2, 16, 'Lietuvos valstybės atkūrimo diena']);
+  arrNationalholidays.push([2026, 3, 11, 'Lietuvos nepriklausomybės atkūrimo diena']);
+  arrNationalholidays.push([2026, 4, 6, 'Velykų antroji diena']);                                           //!!! Day which is not same every year. First day is always on Sunday
+  arrNationalholidays.push([2026, 5, 1, 'Tarptautinė darbo diena']);
+  arrNationalholidays.push([2026, 6, 24, 'Rasos ir Joninių diena']);
+  arrNationalholidays.push([2026, 7, 6, 'Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) diena']);
+  // arrNationalholidays.push([2026, 8, 15, 'Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)']);         //Day in weekend
+  // arrNationalholidays.push([2026, 11, 1, 'Visų Šventųjų diena']);                                        //Day in weekend
+  arrNationalholidays.push([2026, 11, 2, 'Mirusiųjų atminimo (Vėlinių) diena']);                            //!!! Day which is not same every year. 
+  arrNationalholidays.push([2026, 12, 24, 'Šv. Kūčių diena']);
+  arrNationalholidays.push([2026, 12, 25, 'Šv. Kalėdų diena']);
+  // arrNationalholidays.push([2026, 12, 26, 'Šv. Kalėdų antroji diena']);                                  //Day in weekend
+
+}
+
+
+
+
+
+
+
+
+//***********************************************************National holidays end*******************************************************/
+
