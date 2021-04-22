@@ -5,7 +5,8 @@
 html, body {
     padding: 0;
     margin: 0;
-    font-family: 'Times New Roman', Times, sans-serif;
+    /* font-family: 'Courier New'; , Times, sans-serif */
+    font-family: 'Roboto', sans-serif;
     letter-spacing: 0px;
     font-style: normal;
     width: 100%;
@@ -21,17 +22,27 @@ body{
 }
 
 #header {
+    margin: 0;
     text-align: center;
+    color: whitesmoke;
+    /* text-shadow: 2px 2px #a09f9f; */
+    text-shadow: 3px 3px 3px blue;
+
+        /* animation: headerTitleChange 3s infinite; */
+    
 }
 
-/* h2{
+h2{
     margin: 0;
-    padding: 25px 0;
-} */
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
 
 
-
-
+@keyframes headerTitleChange{
+    0%   {text-shadow: 1px 1px 2px blue, 0 0 25px #444444;}
+    100% {text-shadow: 1px 1px 2px blue, 0 0 25px #444444;}
+}
 
 .container{
     position: relative;
@@ -81,7 +92,7 @@ body{
 
 #cubeContainer2{
     top: 40px;
-    left: -30px;
+    left: -25px;
 }
 
 #cubeContainer3{
@@ -106,7 +117,7 @@ body{
     width: 50px;
     height: 50px;
     perspective: 100px;
-    left: -15px;
+    left: -10px;
 }
 
 #cubeContainer4{
