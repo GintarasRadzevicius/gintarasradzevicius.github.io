@@ -23,7 +23,6 @@ let margin = Math.round(heightDifference * 0.1);
 let headerMargin = Math.round(margin/2);
 
 
-
 if (screenHeight - itemsHeight > 0) {
   document.getElementById('header').style.marginTop = headerMargin + 'px';
   document.getElementsByClassName('dateText')[0].style.marginTop = margin + 'px';
