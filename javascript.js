@@ -20,11 +20,12 @@ let screenHeight = screen.height;
 let itemsHeight = 530;
 let heightDifference = screenHeight - itemsHeight;
 let margin = Math.round(heightDifference * 0.1);
-
+let headerMargin = Math.round(margin/2);
+alert(margin);
 
 
 if (screenHeight - itemsHeight > 0) {
-  document.getElementById('header').style.marginTop = margin + 'px';
+  document.getElementById('header').style.marginTop = headerMargin + 'px';
   document.getElementsByClassName('dateText')[0].style.marginTop = margin + 'px';
   document.getElementsByClassName('scene')[0].style.marginTop = margin + 'px';
 }
