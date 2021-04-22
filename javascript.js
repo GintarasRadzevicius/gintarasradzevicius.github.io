@@ -19,8 +19,8 @@ Notes:
 let screenHeight = screen.height;
 let itemsHeight = 530;
 let heightDifference = screenHeight - itemsHeight;
-let dateTextContainerMargin = Math.round(heightDifference * 0.3);
-let resultContainerMargin = Math.round(heightDifference * 0.3);
+let dateTextContainerMargin = Math.round(heightDifference * 0.1);
+let resultContainerMargin = Math.round(heightDifference * 0.1);
 
 
 
