@@ -16,6 +16,19 @@ Notes:
 // }
 // *****For future*****
 
+let screenHeight = screen.height;
+let itemsHeight = 530;
+let heightDifference = screenHeight - itemsHeight;
+let dateTextContainerMargin = Math.round(heightDifference * 0.3);
+let resultContainerMargin = Math.round(heightDifference * 0.3);
+
+
+
+if (screenHeight - itemsHeight > 0) {
+  document.getElementsByClassName('dateText')[0].style.marginTop = dateTextContainerMargin + 'px';
+  document.getElementsByClassName('scene')[0].style.marginTop = resultContainerMargin + 'px';
+}
+
 var arrCube_1_ElRef = [];
 var arrCube_2_ElRef = [];
 var arrCube_3_ElRef = [];
