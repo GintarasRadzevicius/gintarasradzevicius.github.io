@@ -51,13 +51,13 @@ h2{
     /* margin: 0 auto; */
     /* align-items: center; */
     height: 170px;
-    background-color: #1e1e1e;
+    /* background-color: #1e1e1e; */
 }
 
 .column {
     float: left;
     width: 33.33%;
-    background-color: #272727;
+    /* background-color: #272727; */
     text-align: center;
   }
   
@@ -92,7 +92,7 @@ h2{
 
 #cubeContainer2{
     top: 40px;
-    left: -25px;
+    left: -27px;
 }
 
 #cubeContainer3{
