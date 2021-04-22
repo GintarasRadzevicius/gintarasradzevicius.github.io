@@ -19,14 +19,14 @@ Notes:
 let screenHeight = screen.height;
 let itemsHeight = 530;
 let heightDifference = screenHeight - itemsHeight;
-let dateTextContainerMargin = Math.round(heightDifference * 0.1);
-let resultContainerMargin = Math.round(heightDifference * 0.1);
+let margin = Math.round(heightDifference * 0.1);
 
 
 
 if (screenHeight - itemsHeight > 0) {
-  document.getElementsByClassName('dateText')[0].style.marginTop = dateTextContainerMargin + 'px';
-  document.getElementsByClassName('scene')[0].style.marginTop = resultContainerMargin + 'px';
+  document.getElementById('header').style.marginTop = margin + 'px';
+  document.getElementsByClassName('dateText')[0].style.marginTop = margin + 'px';
+  document.getElementsByClassName('scene')[0].style.marginTop = margin + 'px';
 }
 
 var arrCube_1_ElRef = [];
