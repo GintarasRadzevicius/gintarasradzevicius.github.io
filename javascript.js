@@ -21,7 +21,7 @@ let itemsHeight = 530;
 let heightDifference = screenHeight - itemsHeight;
 let margin = Math.round(heightDifference * 0.1);
 let headerMargin = Math.round(margin/2);
-alert(margin);
+
 
 
 if (screenHeight - itemsHeight > 0) {
