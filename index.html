@@ -38,26 +38,35 @@
     <div id='stars'></div>
     <div id='stars2'></div>
     <div id='stars3'></div>
-
-    <div class="hamburgerContainer">
-      <div id="hamburgerCube">
-        <div class="hamburgerCubeSide hamburgerCubeFront" onclick="menuClick()">
-          <div id="menuLines">
-            <div class="hamburgerStartMenuLineActive"></div>
-            <div class="hamburgerStartMenuLineActive"></div>
-            <div class="hamburgerStartMenuLineActive"></div>
+    <div id='menuOverlay'>
+      <div class="hamburgerContainer">
+        <div id="hamburgerCube">
+          <div class="hamburgerCubeSide hamburgerCubeFront" onclick="menuClick()">
+            <div id="menuLines">
+              <div class="hamburgerStartMenuLineActive"></div>
+              <div class="hamburgerStartMenuLineActive"></div>
+              <div class="hamburgerStartMenuLineActive"></div>
+            </div>
           </div>
-        </div>
-        <div class="hamburgerCubeSide hamburgerCubeTop"></div>
-        <div class="hamburgerCubeSide hamburgerCubeBack"></div>
-        <div class="hamburgerCubeSide hamburgerCubeBottom" onclick="menuExitClick()">
-          <div id="menuExit">
-            <div class="hamburgerExitMenuLine1ActiveNot"></div>
-            <div class="hamburgerExitMenuLine2ActiveNot"></div>
+          <div class="hamburgerCubeSide hamburgerCubeTop"></div>
+          <div class="hamburgerCubeSide hamburgerCubeBack"></div>
+          <div class="hamburgerCubeSide hamburgerCubeBottom" onclick="menuExitClick()">
+            <div id="menuExit">
+              <div class="hamburgerExitMenuLine1ActiveNot"></div>
+              <div class="hamburgerExitMenuLine2ActiveNot"></div>
+            </div>
           </div>
+          <div class="hamburgerCubeSide hamburgerCubeRight"></div>
+          <div class="hamburgerCubeSide hamburgerCubeLeft"></div>
         </div>
-        <div class="hamburgerCubeSide hamburgerCubeRight"></div>
-        <div class="hamburgerCubeSide hamburgerCubeLeft"></div>
+      </div>
+      <div id="menuItems">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
       </div>
     </div>
 

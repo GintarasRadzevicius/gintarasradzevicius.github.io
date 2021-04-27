@@ -1422,6 +1422,7 @@ function menuClick() {
   document.getElementById("hamburgerCube").style.transform = "rotateX(90deg)";
   document.getElementById("menuLines").style.opacity = 0;
   document.getElementById("menuExit").style.opacity = 1;
+  document.getElementById("menuItems").style.transform = "scale(1)";
 
 
   
@@ -1432,6 +1433,7 @@ function menuExitClick() {
   document.getElementById("hamburgerCube").style.transform = "rotateX(0)";
   document.getElementById("menuLines").style.opacity = 1;
   document.getElementById("menuExit").style.opacity = 0;
+  document.getElementById("menuItems").style.transform = "scale(0)";
 
   
 }
