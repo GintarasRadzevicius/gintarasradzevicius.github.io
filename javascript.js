@@ -1422,9 +1422,19 @@ function menuClick() {
   document.getElementById("hamburgerCube").style.transform = "rotateX(90deg)";
   document.getElementById("menuLines").style.opacity = 0;
   document.getElementById("menuExit").style.opacity = 1;
-  document.getElementById("menuItems").style.transform = "scale(1)";
+  // document.getElementById("menuItems").style.transform = "scale(1)";
 
+  // document.getElementById("cubeContainer1").style.animation = "cubeContainer1ExitAnimation 1s";
+  // document.getElementById("cube1").style.transition = "all 2s ease";
+  let cube1rotation = arrRotateXDegree[0] - 50;
+  let cube2rotation = arrRotateXDegree[1] + 50;
+  let cube3rotation = arrRotateXDegree[2] + 50;
 
+  document.getElementById('cube1').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube1rotation + 'deg)';
+  document.getElementById('cubeContainer1').style.left = '-500px';
+  document.getElementById('cube2').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube2rotation + 'deg)' + 'scale3d(0, 0, 0)';
+  document.getElementById('cube3').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube3rotation + 'deg)';
+  document.getElementById('cubeContainer3').style.left = '500px';
   
 }
 
@@ -1433,9 +1443,15 @@ function menuExitClick() {
   document.getElementById("hamburgerCube").style.transform = "rotateX(0)";
   document.getElementById("menuLines").style.opacity = 1;
   document.getElementById("menuExit").style.opacity = 0;
-  document.getElementById("menuItems").style.transform = "scale(0)";
+  // document.getElementById("menuItems").style.transform = "scale(0)";
 
-  
+  document.getElementById('cube1').style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[0] + 'deg)';
+  document.getElementById('cubeContainer1').style.left = '0';
+  document.getElementById('cube2').style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)' + 'scale3d(1, 1, 1)';
+  document.getElementById('cube3').style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
+  document.getElementById('cubeContainer3').style.left = '0';
+
+
 }
 
 //***********************************************************Menu end*******************************************************/

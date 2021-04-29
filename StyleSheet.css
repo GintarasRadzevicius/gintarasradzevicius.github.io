@@ -37,6 +37,7 @@ h2{
     margin: 0;
     padding-top: 20px;
     padding-bottom: 5px;
+    font-size: 20px;
 }
 
 
@@ -88,6 +89,7 @@ h2{
     width: 50px;
     height: 50px;
     perspective: 100px;
+    transition: 1s;
 }
 
 #cubeContainer2{
@@ -100,6 +102,8 @@ h2{
     width: 94px;
     height: 94px;
     perspective: 188px;
+    transition: 1s;
+
 }
 
 #cubeContainer4{
@@ -365,6 +369,14 @@ label { margin-right: 10px; }
     100% {left: 0;}
 }
 
+/* #cubeContainer1{
+    animation: cubeContainer1ExitAnimation 1s;
+} */
+@keyframes cubeContainer1ExitAnimation{
+    0%   {left: 0;}
+    100% {left: -500px;}
+}
+
 #cube1{
     animation: cube1Animation 2s;
 }
@@ -552,6 +564,7 @@ label { margin-right: 10px; }
     height: 30px;
     perspective: 60px;
     z-index: 15;
+    /* visibility: visible; */
 }
 
 #hamburgerCube{
@@ -563,6 +576,8 @@ label { margin-right: 10px; }
     /* transform: rotate3d(0.1,1,0,-18deg); */
     /* transform: rotateX(0) rotateY(-20deg); */
     /* transform: rotateX(90deg); */
+    visibility: visible;
+
 }
 
 .hamburgerCubeSide{
@@ -584,6 +599,7 @@ label { margin-right: 10px; }
 
 #menuLines{
     transition: 1.5s;
+    /* visibility: visible; */
 }
 
 .hamburgerStartMenuLineActive{
@@ -592,6 +608,7 @@ label { margin-right: 10px; }
     height: 2px;
     background-color: whitesmoke;
     margin: 4px auto;
+
   }
 
 #menuExit{
@@ -606,7 +623,7 @@ label { margin-right: 10px; }
     background-color: whitesmoke;
     -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
     transform: rotate(-45deg) translate(-2px, 3px) ;
-    
+
 }
 .hamburgerExitMenuLine2ActiveNot{
     width: 20px;
@@ -628,29 +645,29 @@ label { margin-right: 10px; }
     align-items: center;
     justify-content: center;
     z-index: 15;
-
+    display: none;
 }
 
 #menuItems{
-background-color: rgba(102, 51, 153, 0.97);
-border-radius: 50%;
-width: 300vw;
-height: 300vw;
-display: flex;
-flex: none;
-align-items: center;
-justify-content: center;
-transform: scale(0);
-transition: all 0.5s ease;
-
+    background-color: rgba(102, 51, 153, 0.97);
+    border-radius: 50%;
+    width: 300vw;
+    height: 300vw;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    transition: all 0.5s ease;
+    display: none;
 }
 
 #menuItems ul{
-padding: 0;
-align-items: center;
-text-align: center;
-max-width: 90vw;
-max-height: 100vh;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
 }
 
 #menuItems ul li{
@@ -665,3 +682,4 @@ max-height: 100vh;
     text-decoration: none;
 }
  /***********************************************************hamburger_end*******************************************************/
+
