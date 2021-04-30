@@ -650,7 +650,7 @@ label { margin-right: 10px; }
     z-index: 15;
     transition: all .5s;
     transition-delay: .2s;
-
+display: none;
 }
 
 #menuItems{
