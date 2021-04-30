@@ -1428,14 +1428,24 @@ function menuClick() {
   // document.getElementById("cube1").style.transition = "all 2s ease";
   let cube1rotation = arrRotateXDegree[0] - 50;
   let cube2rotation = arrRotateXDegree[1] + 50;
-  let cube3rotation = arrRotateXDegree[2] + 50;
+  let cube3rotation = arrRotateXDegree[2] - 50;
+  let cube4rotation = arrRotateXDegree[3] + 50;
+  let cube5rotation = arrRotateXDegree[4] - 50;
+  let cube6rotation = arrRotateXDegree[5] + 50;
 
   document.getElementById('cube1').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube1rotation + 'deg)';
   document.getElementById('cubeContainer1').style.left = '-500px';
   document.getElementById('cube2').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube2rotation + 'deg)' + 'scale3d(0, 0, 0)';
   document.getElementById('cube3').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube3rotation + 'deg)';
   document.getElementById('cubeContainer3').style.left = '500px';
-  
+  document.getElementById('cube4').style.transform = 'rotate3d(0.1,1,0,75deg) rotateX(' + cube4rotation + 'deg)';
+  document.getElementById('cubeContainer4').style.left = '-500px';
+  document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,-75deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(5, 5, 5)';
+  document.getElementById('cube6').style.transform = 'rotate3d(0.1,1,0,75deg) rotateX(' + cube6rotation + 'deg)';
+  document.getElementById('cubeContainer6').style.left = '500px';
+  document.getElementById('rectangularScene').style.transform = 'scale3d(0.1, 0.1, 0.1)';
+
+  // document.getElementById('menuOverlay').style.backgroundColor = 'rgba(102, 51, 153, 1)';
 }
 
 function menuExitClick() {
@@ -1450,6 +1460,13 @@ function menuExitClick() {
   document.getElementById('cube2').style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[1] + 'deg)' + 'scale3d(1, 1, 1)';
   document.getElementById('cube3').style.transform = 'rotate3d(0.1,1,0,-18deg) rotateX(' + arrRotateXDegree[2] + 'deg)';
   document.getElementById('cubeContainer3').style.left = '0';
+  document.getElementById('cube4').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[3]  + 'deg)';
+  document.getElementById('cubeContainer4').style.left = '0';
+  document.getElementById('cube5').style.transform = 'rotate3d(0.1, 1, 0, 18deg) rotateX(' + arrRotateXDegree[4] + 'deg)' + 'scale3d(1, 1, 1)';
+  document.getElementById('cube6').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[5] + 'deg)';
+  document.getElementById('cubeContainer6').style.left = '0';
+  document.getElementById('rectangularScene').style.transform = 'scale3d(1, 1, 1)';
+
 
 
 }
