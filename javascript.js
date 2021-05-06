@@ -1451,6 +1451,7 @@ function menuClick() {
 switch (arrSideCounter[4]) {
   case 0:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateZ(-50px)';
+    document.getElementById('cube5').style['webkit Transform'] = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateZ(-50px)';
     break;
   case 1:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(50px) translateZ(-50px)';
