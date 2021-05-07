@@ -494,6 +494,7 @@ var arrSideCounter = [0,0,0,0,0,0];
 var arrCubeSidesClasses = ['cubeSideFrontText', 'cubeSideTopText', 'cubeSideBackText', 'cubeSideBottomText'];
 
 function rotateCubeUp(){
+  alert(1);
   let cubeNo = Number(targetElement[4]) - 1;
 
   arrRotateXDegree[cubeNo] += 90;
