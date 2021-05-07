@@ -1497,6 +1497,7 @@ function menuExitClick() {
   document.getElementById('cube4').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[3]  + 'deg)';
   document.getElementById('cubeContainer4').style.left = '0';
   document.getElementById('cube5').style.transform = 'rotate3d(0.1, 1, 0, 18deg) rotateX(' + arrRotateXDegree[4] + 'deg)' + 'scale3d(1, 1, 1)' + 'translateZ(0)';
+  document.getElementById('cube5').style['webkit Transform'] = 'rotate3d(0.1, 1, 0, 18deg) rotateX(' + arrRotateXDegree[4] + 'deg)' + 'scale3d(1, 1, 1)' + 'translateZ(0)';
   document.getElementById('cube6').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[5] + 'deg)';
   document.getElementById('cubeContainer6').style.left = '0';
   document.getElementById('rectangularScene').style.transform = 'scale3d(1, 1, 1)';
