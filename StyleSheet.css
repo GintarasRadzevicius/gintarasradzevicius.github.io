@@ -27,7 +27,7 @@ body{
     color: whitesmoke;
     /* text-shadow: 2px 2px #a09f9f; */
     text-shadow: 3px 3px 3px blue;
-
+    transition: 1s;
         /* animation: headerTitleChange 3s infinite; */
     
 }
@@ -270,9 +270,8 @@ h2{
 
 .box__face {
 position: absolute;
-/* border: 2px solid black; */
 border: 1px solid rgb(0, 132, 255);
-font-size: 40px;
+/* font-size: 40px; */
 font-weight: bold;
 color: white;
 text-align: center;
@@ -281,14 +280,14 @@ text-align: center;
 .box__face--front,
 .box__face--back {
 width: 300px;
-height: 100px;
-line-height: 100px;
+height: 80px;
+line-height: 80px;
 }
 
 .box__face--right,
 .box__face--left {
 width: 100px;
-height: 100px;
+height: 80px;
 left: 100px;
 line-height: 100px;
 }
@@ -303,7 +302,7 @@ line-height: 100px;
 .box__face--bottom {
 width: 300px;
 height: 100px;
-top: -50px;
+top: -70px;
 line-height: 100px;
 }
 
@@ -330,10 +329,16 @@ label { margin-right: 10px; }
 /***********************************************************rectangle_end*******************************************************/
 
 /***********************************************************animation_start*******************************************************/
+#labelResult{
+    font-size: 10px;
+    line-height: 1.5;
+    /* margin-top: 10px; */
+}
 
 #calcText{
-    font-size: 60px;
-
+    font-size: 50px;
+    margin-top: 5px;
+    line-height: 1;
 }
 
 .scene{
@@ -730,3 +735,5 @@ label { margin-right: 10px; }
     color: red;
     margin-top: 100px;
  } */
+
+

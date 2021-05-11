@@ -1505,28 +1505,35 @@ function menuAnimationInitialiseEnd() {
       },
 
       scale: 0,
-      duration: 2000,
+      // duration: 1500,
+      delay : anime.stagger(100),
+
   })
 
 }
 function menuClick() {
+  document.getElementById('header').style.transform = 'translateY(200px) scale(0)';
+
   menuClickCubesAnimation();
+  
   document.getElementById("menuOverlay").style.display = 'flex';
+  
   menuAnimationStart.play();
 
-  // setTimeout(menuDisplayItems, 2000);
 
 }
 
 function menuExitClick() {
   menuAnimationEnd.play();
-
-  // document.getElementById("menuOverlay").style.display = 'none';
-
-  // menuExitCubesAnimation();
+  
+  setTimeout(function() {
+    // code to be executed after 2 seconds
+    document.getElementById("menuOverlay").style.display = 'none';
+    menuExitCubesAnimation();
+    document.getElementById('header').style.transform = 'translateY(0) scale(1)';
+  }, 2500);
+  
 }
-
-
 
 function menuClickCubesAnimation() {
 
