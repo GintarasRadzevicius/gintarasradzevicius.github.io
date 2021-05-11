@@ -1416,29 +1416,137 @@ function addNationalHolidays() {
 //***********************************************************National holidays end*******************************************************/
 
 //***********************************************************Menu start*******************************************************/
+let menuAnimationStart;
+let menuAnimationEnd;
 
+menuAnimationInitialise()
+
+function menuAnimationInitialise() {
+
+  const menuItem = document.querySelectorAll('.menuItem');
+  menuItem[0].innerHTML = menuItem[0].textContent.replace(/\S/g, "<span>$&</span>");
+  menuItem[1].innerHTML = menuItem[1].textContent.replace(/\S/g, "<span>$&</span>");
+  menuItem[2].innerHTML = menuItem[2].textContent.replace(/\S/g, "<span>$&</span>");
+  menuItem[3].innerHTML = menuItem[3].textContent.replace(/\S/g, "<span>$&</span>");
+
+  menuAnimationInitialiseStart();
+  menuAnimationInitialiseEnd();
+}
+
+function menuAnimationInitialiseStart() {
+
+  menuAnimationStart = anime.timeline({
+    targets:'.menuItem span',
+    easing: 'easeInOutExpo',
+    loop: false,
+    autoplay: false,
+
+  });
+
+  menuAnimationStart
+  .add({
+      rotate : function(){
+          return anime.random(-360, 360)
+      },
+
+      translateX : function(){
+          return anime.random(-300, 300)
+      },
+
+      translateY : function(){
+          return anime.random(-300, 300)
+      },
+
+      scale: 0,
+      duration: 0,
+  })
+
+  .add({
+    rotate : 0,
+    translateX : 0,
+    translateY : 0,
+    // duration: 2000,
+    scale: 1,
+    delay : anime.stagger(100),
+  })
+}
+
+function menuAnimationInitialiseEnd() {
+
+  menuAnimationEnd = anime.timeline({
+    targets:'.menuItem span',
+    easing: 'easeInOutExpo',
+    loop: false,
+    autoplay: false,
+
+  });
+
+  menuAnimationEnd
+  .add({
+    rotate : 0,
+    translateX : 0,
+    translateY : 0,
+    duration: 0,
+    scale: 1,
+    // delay : anime.stagger(100),
+  })
+
+  .add({
+      rotate : function(){
+          return anime.random(-360, 360)
+      },
+
+      translateX : function(){
+          return anime.random(-300, 300)
+      },
+
+      translateY : function(){
+          return anime.random(-300, 300)
+      },
+
+      scale: 0,
+      duration: 2000,
+  })
+
+}
 function menuClick() {
+  menuClickCubesAnimation();
+  document.getElementById("menuOverlay").style.display = 'flex';
+  menuAnimationStart.play();
+
+  // setTimeout(menuDisplayItems, 2000);
+
+}
+
+function menuExitClick() {
+  menuAnimationEnd.play();
+
+  // document.getElementById("menuOverlay").style.display = 'none';
+
+  // menuExitCubesAnimation();
+}
+
+
+
+function menuClickCubesAnimation() {
 
   document.getElementById("hamburgerCube").style.transform = "rotateX(90deg)";
   document.getElementById("menuLines").style.opacity = 0;
   document.getElementById("menuExit").style.opacity = 1;
-  // document.getElementById("menuItems").style.transform = "scale(1)";
 
-  // document.getElementById("cubeContainer1").style.animation = "cubeContainer1ExitAnimation 1s";
-  // document.getElementById("cube1").style.transition = "all 2s ease";
   let cube1rotation = arrRotateXDegree[0] - 50;
   let cube2rotation = arrRotateXDegree[1] + 50;
   let cube3rotation = arrRotateXDegree[2] - 50;
   let cube4rotation = arrRotateXDegree[3] + 50;
   let cube5rotation = arrRotateXDegree[4] - 180;
   let cube6rotation = arrRotateXDegree[5] + 50;
-  document.getElementsByClassName('cube')[0].style.transition = '2s';
-  document.getElementsByClassName('cube')[1].style.transition = '2s';
-  document.getElementsByClassName('cube')[2].style.transition = '4s';
-  document.getElementsByClassName('cube')[3].style.transition = '2s';
-  document.getElementsByClassName('cube')[4].style.transition = '2s';
-  document.getElementsByClassName('cube')[4].style.transitionDelay = '0.1s';
-  document.getElementsByClassName('cube')[5].style.transition = '2s';
+
+  document.getElementsByClassName('cube')[0].style.transition = '1s';
+  document.getElementsByClassName('cube')[1].style.transition = '1s';
+  document.getElementsByClassName('cube')[2].style.transition = '1s';
+  document.getElementsByClassName('cube')[3].style.transition = '1s';
+  document.getElementsByClassName('cube')[4].style.transition = '1s';
+  document.getElementsByClassName('cube')[5].style.transition = '1s';
 
   document.getElementById('cube1').style.transform = 'rotate3d(0.1,1,0,-175deg) rotateX(' + cube1rotation + 'deg)';
   document.getElementById('cubeContainer1').style.left = '-500px';
@@ -1448,24 +1556,20 @@ function menuClick() {
   document.getElementById('cube4').style.transform = 'rotate3d(0.1,1,0,75deg) rotateX(' + cube4rotation + 'deg)';
   document.getElementById('cubeContainer4').style.left = '-500px';
 
-switch (arrSideCounter[4]) {
+  switch (arrSideCounter[4]) {
   case 0:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateZ(-50px)';
-    // document.getElementById('cube5').style['Webkit Transform'] = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateZ(-50px)';
     break;
   case 1:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(50px) translateZ(-50px)';
-    // document.getElementById('cube5').style['Webkit Transform'] = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(50px) translateZ(-50px)';
     break;
   case 2:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(50px) translateZ(50px)';
-    // document.getElementById('cube5').style['Webkit Transform'] = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(50px) translateZ(50px)';
     break;
   case 3:
     document.getElementById('cube5').style.transform = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(-50px) translateZ(50px)';
-    // document.getElementById('cube5').style['Webkit Transform'] = 'rotate3d(0.1,1,0,0deg) rotateX(' + cube5rotation + 'deg)' + 'scale3d(10, 10, 10)' + 'translateY(-50px) translateZ(50px)';
     break;
-}
+  }
 
   document.getElementById('cube6').style.transform = 'rotate3d(0.1,1,0,75deg) rotateX(' + cube6rotation + 'deg)';
   document.getElementById('cubeContainer6').style.left = '500px';
@@ -1473,20 +1577,12 @@ switch (arrSideCounter[4]) {
   // document.getElementById('menuOverlay').style.backgroundColor = 'rgba(102, 51, 153, 1)';
 }
 
-function menuExitClick() {
+function menuExitCubesAnimation() {
 
   document.getElementById("hamburgerCube").style.transform = "rotateX(0)";
   document.getElementById("menuLines").style.opacity = 1;
   document.getElementById("menuExit").style.opacity = 0;
-  // document.getElementById("menuItems").style.transform = "scale(0)";
 
-  // document.getElementsByClassName('cube')[0].style.transition = '0.5s';
-  // document.getElementsByClassName('cube')[0].style.transitionDelay = '0.2s';
-  // document.getElementsByClassName('cube')[1].style.transition = '0.5s';
-  // document.getElementsByClassName('cube')[2].style.transition = '0.5s';
-  // document.getElementsByClassName('cube')[3].style.transition = '0.5s';
-  // document.getElementsByClassName('cube')[4].style.transition = '0.5s';
-  // document.getElementsByClassName('cube')[5].style.transition = '0.5s';
 
   document.getElementById('cubeContainer1').style.left = '0';
 
@@ -1497,20 +1593,22 @@ function menuExitClick() {
   document.getElementById('cube4').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[3]  + 'deg)';
   document.getElementById('cubeContainer4').style.left = '0';
   document.getElementById('cube5').style.transform = 'rotate3d(0.1, 1, 0, 18deg) rotateX(' + arrRotateXDegree[4] + 'deg)' + 'scale3d(1, 1, 1)' + 'translateZ(0)';
-  // document.getElementById('cube5').style['Webkit Transform'] = 'rotate3d(0.1, 1, 0, 18deg) rotateX(' + arrRotateXDegree[4] + 'deg)' + 'scale3d(1, 1, 1)' + 'translateZ(0)';
   document.getElementById('cube6').style.transform = 'rotate3d(0.1,1,0,18deg) rotateX(' + arrRotateXDegree[5] + 'deg)';
   document.getElementById('cubeContainer6').style.left = '0';
   document.getElementById('rectangularScene').style.transform = 'scale3d(1, 1, 1)';
 
-  document.getElementsByClassName('cube')[0].style.transition = '0.5s';
-  document.getElementsByClassName('cube')[0].style.transitionDelay = '0';
-  document.getElementsByClassName('cube')[1].style.transition = '0.5s';
-  document.getElementsByClassName('cube')[2].style.transition = '0.5s';
-  document.getElementsByClassName('cube')[3].style.transition = '0.5s';
-  document.getElementsByClassName('cube')[4].style.transition = '0.5s';
-  document.getElementsByClassName('cube')[5].style.transition = '0.5s';
-
+  setTimeout(function() {
+    // code to be executed after 2 seconds
+      document.getElementsByClassName('cube')[0].style.transition = '0.5s';
+      document.getElementsByClassName('cube')[1].style.transition = '0.5s';
+      document.getElementsByClassName('cube')[2].style.transition = '0.5s';
+      document.getElementsByClassName('cube')[3].style.transition = '0.5s';
+      document.getElementsByClassName('cube')[4].style.transition = '0.5s';
+      document.getElementsByClassName('cube')[5].style.transition = '0.5s';
+  
+  }, 2000);
 
 }
 
 //***********************************************************Menu end*******************************************************/
+
