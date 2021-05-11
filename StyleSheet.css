@@ -688,8 +688,9 @@ label { margin-right: 10px; }
 #menuItems ul li{
     list-style: none;
     color: #fff;
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 #menuItems ul li a{

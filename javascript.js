@@ -1467,7 +1467,7 @@ function menuAnimationInitialiseStart() {
     translateY : 0,
     // duration: 2000,
     scale: 1,
-    delay : anime.stagger(100),
+    delay : anime.stagger(50),
   })
 }
 
@@ -1506,11 +1506,12 @@ function menuAnimationInitialiseEnd() {
 
       scale: 0,
       // duration: 1500,
-      delay : anime.stagger(100),
+      delay : anime.stagger(50),
 
   })
 
 }
+
 function menuClick() {
   document.getElementById('header').style.transform = 'translateY(200px) scale(0)';
 
