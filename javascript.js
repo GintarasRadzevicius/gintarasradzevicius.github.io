@@ -1526,18 +1526,13 @@ function menuClick() {
 }
 
 function menuExitClick() {
-  menuAnimationEnd.play();
+  // menuAnimationEnd.play();
   
   setTimeout(function() {
     // code to be executed after 2 seconds
     document.getElementById("menuOverlay").style.display = 'none';
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';
-
-    let activeFrontClass = arrCubeSidesClasses[arrSideCounter[2]];
-
-    document.getElementById('cube3').getElementsByClassName(activeFrontClass)[0].innerText = document.getElementById('cube3').getElementsByClassName(activeFrontClass)[0].innerText;
-  
 
   }, 2500);
   
