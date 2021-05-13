@@ -1519,13 +1519,13 @@ function menuClick() {
   
   document.getElementById("menuOverlay").style.display = 'flex';
   
-  menuAnimationStart.play();
+  // menuAnimationStart.play();
 
 
 }
 
 function menuExitClick() {
-  menuAnimationEnd.play();
+  // menuAnimationEnd.play();
   
   setTimeout(function() {
     // code to be executed after 2 seconds
