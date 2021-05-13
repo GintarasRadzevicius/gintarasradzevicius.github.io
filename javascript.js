@@ -594,7 +594,6 @@ function changeNumbersDown(cubeNumber){
 
   changeDayAccordingToMonth(cubeNumber);
 
-  alert(document.getElementById(cubeId).getElementsByClassName(activeFrontClass)[0].innerHTML);
 }
 
 function changeDayAccordingToMonth(cubeNumber) {  //changing day when month and year changes(changes 2nd(28/29 days) and other months (30 days) )
@@ -1534,6 +1533,12 @@ function menuExitClick() {
     document.getElementById("menuOverlay").style.display = 'none';
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';
+
+    let activeFrontClass = arrCubeSidesClasses[arrSideCounter[2]];
+
+    document.getElementById('cube3').getElementsByClassName(activeFrontClass)[0].innerText = document.getElementById('cube3').getElementsByClassName(activeFrontClass)[0].innerText;
+  
+
   }, 2500);
   
 }
