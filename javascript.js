@@ -1459,6 +1459,7 @@ function menuAnimationInitialiseStart() {
 
       scale: 0,
       duration: 0,
+      delay: 1500,
   })
 
   .add({
@@ -1519,13 +1520,13 @@ function menuClick() {
   
   document.getElementById("menuOverlay").style.display = 'flex';
   
-  // menuAnimationStart.play();
-
+  menuAnimationStart.play();
+  
 
 }
 
 function menuExitClick() {
-  // menuAnimationEnd.play();
+  menuAnimationEnd.play();
   
   setTimeout(function() {
     // code to be executed after 2 seconds
@@ -1549,12 +1550,12 @@ function menuClickCubesAnimation() {
   let cube5rotation = arrRotateXDegree[4] - 180;
   let cube6rotation = arrRotateXDegree[5] + 50;
 
-  document.getElementsByClassName('cube')[0].style.transition = '1s';
-  document.getElementsByClassName('cube')[1].style.transition = '1s';
-  document.getElementsByClassName('cube')[2].style.transition = '1s';
-  document.getElementsByClassName('cube')[3].style.transition = '1s';
-  document.getElementsByClassName('cube')[4].style.transition = '1s';
-  document.getElementsByClassName('cube')[5].style.transition = '1s';
+  document.getElementsByClassName('cube')[0].style.transition = '2s';
+  document.getElementsByClassName('cube')[1].style.transition = '2s';
+  document.getElementsByClassName('cube')[2].style.transition = '2s';
+  document.getElementsByClassName('cube')[3].style.transition = '2s';
+  document.getElementsByClassName('cube')[4].style.transition = '2s';
+  document.getElementsByClassName('cube')[5].style.transition = '2s';
 
   document.getElementById('cube1').style.transform = 'rotate3d(0.1,1,0,-175deg) rotateX(' + cube1rotation + 'deg)';
   document.getElementById('cubeContainer1').style.left = '-500px';
