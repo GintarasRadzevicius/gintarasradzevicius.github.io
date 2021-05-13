@@ -594,6 +594,7 @@ function changeNumbersDown(cubeNumber){
 
   changeDayAccordingToMonth(cubeNumber);
 
+  alert(document.getElementById(cubeId).getElementsByClassName(activeFrontClass)[0].innerHTML);
 }
 
 function changeDayAccordingToMonth(cubeNumber) {  //changing day when month and year changes(changes 2nd(28/29 days) and other months (30 days) )
