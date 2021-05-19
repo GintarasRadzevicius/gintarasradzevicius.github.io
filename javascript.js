@@ -1418,7 +1418,7 @@ function addNationalHolidays() {
 //***********************************************************Menu start*******************************************************/
 let animation;
 
-// menuAnimationInitialise();
+menuAnimationInitialise();
 
 function menuAnimationInitialise() {
 
@@ -1428,7 +1428,7 @@ function menuAnimationInitialise() {
   menuItem[2].innerHTML = menuItem[2].textContent.replace(/\S/g, "<span>$&</span>");
   menuItem[3].innerHTML = menuItem[3].textContent.replace(/\S/g, "<span>$&</span>");
 
-  menuAnimationInitialiseStart();
+  // menuAnimationInitialiseStart();
 
 }
 
@@ -1471,6 +1471,79 @@ function menuAnimationInitialiseStart() {
   })
 }
 
+async function menuAnimationStartItem(number) {
+
+  let parent = document.getElementsByClassName('menuItem')[number];
+  let children = parent.children;
+
+  for (let i = 0; i < children.length; i++) {
+    const element = children[i];
+    
+    let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+
+    let random = (Math.floor(Math.random() * 359)) * plusOrMinus;
+    let randomTranslateX = Math.floor((Math.random() * window.innerWidth)) * plusOrMinus;
+    let randomTranslateY = Math.floor((Math.random() * window.innerHeight)) * plusOrMinus;
+
+    element.style.transform = 'rotate(' + random + 'deg) translate(' + randomTranslateX +'px,' + randomTranslateY + 'px) scale(0)';
+  }
+
+  parent.style.display = 'block';
+
+  for (let j = 0; j < children.length; j++) {
+    await sleep(100);
+    const element = children[j];
+    element.style.transform = 'rotate(0deg) translate(0px,0px) scale(1)';
+  }
+}
+
+async function menuAnimationStart() {
+  menuAnimationStartItem(0);
+  await sleep(2000);
+  menuAnimationStartItem(1);
+  await sleep(2000);
+  menuAnimationStartItem(2);
+  await sleep(500);
+  menuAnimationStartItem(3);
+}
+
+async function menuAnimationEnd() {
+  menuAnimationEndItem(3);
+  await sleep(500);
+  menuAnimationEndItem(2);
+  await sleep(500);
+  menuAnimationEndItem(1);
+  await sleep(500);
+  menuAnimationEndItem(0);
+  document.getElementsByClassName('menuItem')[3].style.display = 'none';
+  document.getElementsByClassName('menuItem')[2].style.display = 'none';
+  document.getElementsByClassName('menuItem')[1].style.display = 'none';
+  document.getElementsByClassName('menuItem')[0].style.display = 'none';
+
+}
+
+async function menuAnimationEndItem(number) {
+
+  let parent = document.getElementsByClassName('menuItem')[number];
+  let children = parent.children;
+
+  for (let i = children.length - 1; i >= 0; i--) {
+    const element = children[i];
+    let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  
+    let random = (Math.floor(Math.random() * 359)) * plusOrMinus;
+    let randomTranslateX = Math.floor((Math.random() * window.innerWidth)) * plusOrMinus;
+    let randomTranslateY = Math.floor((Math.random() * window.innerHeight)) * plusOrMinus;
+
+    element.style.transform = 'rotate(' + random + 'deg) translate(' + randomTranslateX +'px,' + randomTranslateY + 'px) scale(0)';
+    await sleep(100);
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function menuClick() {
   
   document.getElementById('header').style.transform = 'translateY(200px) scale(0)';
@@ -1479,15 +1552,21 @@ function menuClick() {
   
   document.getElementById("menuOverlay").style.display = 'flex';
 
-  // animation.play();
+
+
+  setTimeout(function() {
+    // document.getElementsByClassName('menuItem')[0].firstElementChild.style.transform = 'rotate(45deg)';
+    menuAnimationStart();
+    
+  }, 1000);
+
 }
 
 function menuExitClick() {
   
-  // animation.play();
+  menuAnimationEnd();
 
   setTimeout(function() {
-    // code to be executed after 2 seconds
     document.getElementById("menuOverlay").style.display = 'none';
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';

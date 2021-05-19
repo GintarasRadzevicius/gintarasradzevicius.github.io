@@ -705,11 +705,13 @@ label { margin-right: 10px; }
     color: #00cefe;
     margin: 10px;
     max-width: 300px;
+    display: none;
 }
 
 .menuItem span{
     position: relative;
     display: inline-block;
+    transition: all 2s ease-out;
 }
 
 
