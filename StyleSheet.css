@@ -674,6 +674,7 @@ label { margin-right: 10px; }
     overflow: hidden;
 
     z-index: 20;
+    scale:0;
 }
 
 

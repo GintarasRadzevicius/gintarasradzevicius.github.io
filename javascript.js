@@ -1416,10 +1416,9 @@ function addNationalHolidays() {
 //***********************************************************National holidays end*******************************************************/
 
 //***********************************************************Menu start*******************************************************/
-let menuAnimationStart;
-let menuAnimationEnd;
+let animation;
 
-menuAnimationInitialise()
+menuAnimationInitialise();
 
 function menuAnimationInitialise() {
 
@@ -1430,111 +1429,70 @@ function menuAnimationInitialise() {
   menuItem[3].innerHTML = menuItem[3].textContent.replace(/\S/g, "<span>$&</span>");
 
   menuAnimationInitialiseStart();
-  menuAnimationInitialiseEnd();
+
 }
 
 function menuAnimationInitialiseStart() {
 
-  menuAnimationStart = anime.timeline({
+  animation = anime.timeline({
     targets:'.menuItem span',
     easing: 'easeInOutExpo',
     loop: false,
     autoplay: false,
-
   });
 
-  menuAnimationStart
+  animation
   .add({
-      rotate : function(){
-          return anime.random(-360, 360)
-      },
-
-      translateX : function(){
-          return anime.random(-300, 300)
-      },
-
-      translateY : function(){
-          return anime.random(-300, 300)
-      },
-
-      scale: 0,
-      duration: 0,
-      delay: 1500,
-  })
-
-  .add({
-    rotate : 0,
-    translateX : 0,
-    translateY : 0,
-    // duration: 2000,
-    scale: 1,
-    delay : anime.stagger(50),
-  })
-}
-
-function menuAnimationInitialiseEnd() {
-
-  menuAnimationEnd = anime.timeline({
-    targets:'.menuItem span',
-    easing: 'easeInOutExpo',
-    loop: false,
-    autoplay: false,
-
-  });
-
-  menuAnimationEnd
-  .add({
-    rotate : 0,
-    translateX : 0,
-    translateY : 0,
+    rotate : function(){return anime.random(-360, 360)},
+    translateX : function(){return anime.random(-300, 300)},
+    translateY : function(){return anime.random(-300, 300)},
+    scale: 0,
     duration: 0,
+  })
+
+  .add ({
+    rotate : 0,
+    translateX : 0,
+    translateY : 0,
+    duration: 2000,
     scale: 1,
-    // delay : anime.stagger(100),
+    delay : anime.stagger(100),
+    complete : animation.pause,
   })
 
   .add({
-      rotate : function(){
-          return anime.random(-360, 360)
-      },
-
-      translateX : function(){
-          return anime.random(-300, 300)
-      },
-
-      translateY : function(){
-          return anime.random(-300, 300)
-      },
-
-      scale: 0,
-      // duration: 1500,
-      delay : anime.stagger(50),
-
+    rotate : function(){return anime.random(-360, 360)},
+    translateX : function(){return anime.random(-300, 300)},
+    translateY : function(){return anime.random(-300, 300)},
+    scale: 0,
+    duration: 2000,
+    delay : anime.stagger(100),
+    complete : animation.pause,
   })
-
 }
 
 function menuClick() {
+  
   document.getElementById('header').style.transform = 'translateY(200px) scale(0)';
 
   menuClickCubesAnimation();
   
   document.getElementById("menuOverlay").style.display = 'flex';
-  
-  menuAnimationStart.play();
-  
 
+  animation.play();
 }
 
 function menuExitClick() {
-  // menuAnimationEnd.play();
   
+  animation.play();
+
   setTimeout(function() {
     // code to be executed after 2 seconds
     document.getElementById("menuOverlay").style.display = 'none';
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';
 
-  }, 2500);
+  }, 5000);
   
 }
 
