@@ -1418,7 +1418,7 @@ function addNationalHolidays() {
 //***********************************************************Menu start*******************************************************/
 let animation;
 
-menuAnimationInitialise();
+// menuAnimationInitialise();
 
 function menuAnimationInitialise() {
 
@@ -1479,12 +1479,12 @@ function menuClick() {
   
   document.getElementById("menuOverlay").style.display = 'flex';
 
-  animation.play();
+  // animation.play();
 }
 
 function menuExitClick() {
   
-  animation.play();
+  // animation.play();
 
   setTimeout(function() {
     // code to be executed after 2 seconds
