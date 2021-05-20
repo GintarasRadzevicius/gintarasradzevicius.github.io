@@ -1531,7 +1531,8 @@ async function menuAnimationStart() {
   menuStartHide(1);
   menuStartHide(2);
   menuStartHide(3);
-  document.getElementById("menuOverlay").style.display = 'flex';
+  // document.getElementById("menuOverlay").style.display = 'flex';
+  document.getElementById("menuOverlay").id = 'menuOverlayActive'
 
   menuStartShow(0);
   await sleep(2000);
@@ -1587,13 +1588,13 @@ function menuClick() {
   menuClickCubesAnimation();
   menuAnimationStart();
 }
-
 function menuExitClick() {
   
   menuEnd();
 
   setTimeout(function() {
-    document.getElementById("menuOverlay").style.display = 'none';
+    // document.getElementById("menuOverlay").style.display = 'none';
+    document.getElementById("menuOverlayActive").id = 'menuOverlay'
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';
 
