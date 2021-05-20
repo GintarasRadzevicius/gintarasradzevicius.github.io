@@ -650,13 +650,11 @@ label { margin-right: 10px; }
     height: 100%;
     overflow: hidden;
     display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
     align-items: center;
     justify-content: center;
     z-index: 15;
-    /* transition: all .5s;
-    transition-delay: .2s; */
-    /* transition: all 3s;
-    transition-delay: 3s; */
     display: none;
 }
 
@@ -666,13 +664,12 @@ label { margin-right: 10px; }
     height: 300vw;
     min-height: 100vh;
     display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
     flex: none;
     align-items: center;
     justify-content: center;
-    /* transition: all 2s ease; */
-    /* transition-delay: .3s; */
     overflow: hidden;
-
     z-index: 20;
     scale:0;
 }
@@ -705,7 +702,6 @@ label { margin-right: 10px; }
     color: #00cefe;
     margin: 10px;
     max-width: 300px;
-    display: none;
 }
 
 .menuItem span{
@@ -713,7 +709,6 @@ label { margin-right: 10px; }
     display: inline-block;
     transition: all 2s ease-out;
 }
-
 
 
 

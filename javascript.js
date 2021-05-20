@@ -1471,7 +1471,7 @@ function menuAnimationInitialiseStart() {
   })
 }
 
-async function menuAnimationStartItem(number) {
+async function menuStartHide(number) {
 
   let parent = document.getElementsByClassName('menuItem')[number];
   let children = parent.children;
@@ -1488,7 +1488,35 @@ async function menuAnimationStartItem(number) {
     element.style.transform = 'rotate(' + random + 'deg) translate(' + randomTranslateX +'px,' + randomTranslateY + 'px) scale(0)';
   }
 
-  parent.style.display = 'block';
+  // parent.style.display = 'block';
+  // const menuItem = document.querySelectorAll('.menuItem span');
+  // const menuItem = document.querySelectorAll('span:nth-child(3)');
+
+  // for (let index = 0; index < menuItem.length; index++) {
+  //   menuItem[index].style.display = 'inline-block';
+  // }
+
+  // for (let j = 0; j < children.length; j++) {
+  //   await sleep(50);
+  //   const element = children[j];
+  //   element.style.transform = 'rotate(0deg) translate(0px,0px) scale(1)';
+  // }
+}
+
+async function menuStartShow(number) {
+
+  let parent = document.getElementsByClassName('menuItem')[number];
+  let children = parent.children;
+
+
+
+  // parent.style.display = 'block';
+  // const menuItem = document.querySelectorAll('.menuItem span');
+  // const menuItem = document.querySelectorAll('span:nth-child(3)');
+
+  // for (let index = 0; index < menuItem.length; index++) {
+  //   menuItem[index].style.display = 'inline-block';
+  // }
 
   for (let j = 0; j < children.length; j++) {
     await sleep(100);
@@ -1498,31 +1526,41 @@ async function menuAnimationStartItem(number) {
 }
 
 async function menuAnimationStart() {
-  menuAnimationStartItem(0);
-  await sleep(2000);
-  menuAnimationStartItem(1);
-  await sleep(2000);
-  menuAnimationStartItem(2);
-  await sleep(500);
-  menuAnimationStartItem(3);
-}
 
-async function menuAnimationEnd() {
-  menuAnimationEndItem(3);
+  menuStartHide(0);
+  menuStartHide(1);
+  menuStartHide(2);
+  menuStartHide(3);
+  document.getElementById("menuOverlay").style.display = 'flex';
+
+  menuStartShow(0);
+  await sleep(2000);
+  menuStartShow(1);
+  await sleep(2000);
+  menuStartShow(2);
   await sleep(500);
-  menuAnimationEndItem(2);
-  await sleep(500);
-  menuAnimationEndItem(1);
-  await sleep(500);
-  menuAnimationEndItem(0);
-  document.getElementsByClassName('menuItem')[3].style.display = 'none';
-  document.getElementsByClassName('menuItem')[2].style.display = 'none';
-  document.getElementsByClassName('menuItem')[1].style.display = 'none';
-  document.getElementsByClassName('menuItem')[0].style.display = 'none';
+  menuStartShow(3);
+  await sleep(2000);
 
 }
 
-async function menuAnimationEndItem(number) {
+async function menuEnd() {
+  menuEndHide(3);
+  await sleep(500);
+  menuEndHide(2);
+  await sleep(500);
+  menuEndHide(1);
+  await sleep(500);
+  menuEndHide(0);
+  await sleep(2000);
+  // document.getElementsByClassName('menuItem')[3].style.display = 'none';
+  // document.getElementsByClassName('menuItem')[2].style.display = 'none';
+  // document.getElementsByClassName('menuItem')[1].style.display = 'none';
+  // document.getElementsByClassName('menuItem')[0].style.display = 'none';
+
+}
+
+async function menuEndHide(number) {
 
   let parent = document.getElementsByClassName('menuItem')[number];
   let children = parent.children;
@@ -1545,33 +1583,21 @@ function sleep(ms) {
 }
 
 function menuClick() {
-  
   document.getElementById('header').style.transform = 'translateY(200px) scale(0)';
-
   menuClickCubesAnimation();
-  
-  document.getElementById("menuOverlay").style.display = 'flex';
-
-
-
-  setTimeout(function() {
-    // document.getElementsByClassName('menuItem')[0].firstElementChild.style.transform = 'rotate(45deg)';
-    menuAnimationStart();
-    
-  }, 1000);
-
+  menuAnimationStart();
 }
 
 function menuExitClick() {
   
-  menuAnimationEnd();
+  menuEnd();
 
   setTimeout(function() {
     document.getElementById("menuOverlay").style.display = 'none';
     menuExitCubesAnimation();
     document.getElementById('header').style.transform = 'translateY(0) scale(1)';
 
-  }, 5000);
+  }, 3000);
   
 }
 
