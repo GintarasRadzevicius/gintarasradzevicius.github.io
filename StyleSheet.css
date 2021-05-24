@@ -642,7 +642,6 @@ label { margin-right: 10px; }
 }
 
 #menuOverlay{
-
     position: fixed;
     top: 0;
     left: 0;
@@ -650,12 +649,10 @@ label { margin-right: 10px; }
     height: 100%;
     overflow: hidden;
     display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
     align-items: center;
     justify-content: center;
     z-index: 15;
-    /* display: none; */
+    display: none;
 }
 
 #menuOverlayActive{
@@ -666,8 +663,8 @@ label { margin-right: 10px; }
     height: 100%;
     overflow: hidden;
     display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
+    /* -moz-display: flex;
+    -webkit-display: flex; */
     align-items: center;
     justify-content: center;
     z-index: 15;
@@ -679,16 +676,13 @@ label { margin-right: 10px; }
     height: 300vw;
     min-height: 100vh;
     display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
     flex: none;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     z-index: 20;
-    scale:0;
+    /* transform: scale(0); */
 }
-
 
 #menuItems ul{
     padding: 0;

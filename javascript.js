@@ -1542,7 +1542,6 @@ async function menuAnimationStart() {
   await sleep(500);
   menuStartShow(3);
   await sleep(2000);
-
 }
 
 async function menuEnd() {
@@ -1588,6 +1587,7 @@ function menuClick() {
   menuClickCubesAnimation();
   menuAnimationStart();
 }
+
 function menuExitClick() {
   
   menuEnd();
