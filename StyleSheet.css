@@ -26,10 +26,8 @@ body{
     text-align: center;
     color: whitesmoke;
     /* text-shadow: 2px 2px #a09f9f; */
-    text-shadow: 3px 3px 3px blue;
+    text-shadow: 3px 3px 3px rgb(8, 117, 62);
     transition: 1s;
-        /* animation: headerTitleChange 3s infinite; */
-    
 }
 
 h2{
@@ -41,10 +39,6 @@ h2{
 }
 
 
-@keyframes headerTitleChange{
-    0%   {text-shadow: 1px 1px 2px blue, 0 0 25px #444444;}
-    100% {text-shadow: 1px 1px 2px blue, 0 0 25px #444444;}
-}
 
 .container{
     position: relative;
@@ -149,10 +143,11 @@ h2{
     position: absolute;
     width: inherit;
     height: inherit;
-    border: 1px solid rgb(0, 132, 255);
+    /* border: 1px solid rgb(0, 132, 255); */
     text-align: center;
     color: whitesmoke;
-    background-color: rgba(6, 20, 102, 0.8);
+    background: rgba(8, 117, 62, 0.8);
+    box-shadow: 0 0 10px #000a inset;
     padding-top: 2px;
 }
 
@@ -270,8 +265,8 @@ h2{
 
 .box__face {
 position: absolute;
-border: 1px solid rgb(0, 132, 255);
-/* font-size: 40px; */
+background: rgba(8, 117, 62, 0.8);
+box-shadow: 0 0 10px #000a inset;
 font-weight: bold;
 color: white;
 text-align: center;
@@ -307,13 +302,13 @@ line-height: 100px;
 }
 
 
-
+/* 
 .box__face--front  { background: rgba(6, 20, 102, 0.8); }
 .box__face--right  { background: rgba(6, 20, 102, 0.8); }
 .box__face--back   { background: rgba(6, 20, 102, 0.8); }
 .box__face--left   { background: rgba(6, 20, 102, 0.8); }
 .box__face--top    { background: rgba(6, 20, 102, 0.8); }
-.box__face--bottom { background: rgba(6, 20, 102, 0.8); }
+.box__face--bottom { background: rgba(6, 20, 102, 0.8); } */
 
 .box__face--front  { transform: rotateY(  0deg) translateZ( 50px); }
 .box__face--back   { transform: rotateY(180deg) translateZ( 50px); }
@@ -708,7 +703,7 @@ label { margin-right: 10px; }
 .menuItem{
     position: relative;
     text-align: center;
-    color: #00cefe;
+    /* color: #00cefe; */
     margin: 10px;
     max-width: 300px;
 }
@@ -717,6 +712,8 @@ label { margin-right: 10px; }
     position: relative;
     display: inline-block;
     transition: all 2s ease-out;
+    text-shadow: 3px 3px 3px rgb(8, 117, 62);
+    ;
 }
 
 
