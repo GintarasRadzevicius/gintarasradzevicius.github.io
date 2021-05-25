@@ -26,7 +26,7 @@ body{
     text-align: center;
     color: whitesmoke;
     /* text-shadow: 2px 2px #a09f9f; */
-    text-shadow: 3px 3px 3px rgb(8, 117, 62);
+    text-shadow: 3px 3px 3px rgb(3, 141, 72);
     transition: 1s;
 }
 
@@ -147,7 +147,7 @@ h2{
     text-align: center;
     color: whitesmoke;
     /* background: rgba(8, 117, 62, 0.8); */
-    background: rgb(3, 141, 72);
+    background: rgba(3, 141, 72, 0.9);
     box-shadow: 0 0 10px #000a inset;
     padding-top: 2px;
 }
@@ -267,7 +267,7 @@ h2{
 .box__face {
 position: absolute;
 /* background: rgba(8, 117, 62, 0.8); */
-background: rgb(8, 117, 62);
+background: rgba(3, 141, 72, 0.9);
 box-shadow: 0 0 10px #000a inset;
 font-weight: bold;
 color: white;
@@ -715,7 +715,7 @@ label { margin-right: 10px; }
     display: inline-block;
     transition: all 2s ease-out;
     /* color: rgba(8, 117, 62, 0.8); */
-    color: rgba(16, 172, 94, 0.8);
+    color: rgba(3, 141, 72, 0.8);
     /* text-shadow: 3px 3px 3px rgb(8, 117, 62); */
     text-shadow: 1px 1px 1px #fff;
 

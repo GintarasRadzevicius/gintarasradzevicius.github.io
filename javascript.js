@@ -855,9 +855,8 @@ function isLeapYearCheck(varYear){
 
 /***********************************************************Calculation start*******************************************************/
 
-
-
-
+let bCountWorkingDays = true;
+let bCountAllDays = false;
 
 function calculateResult(){
 
@@ -884,13 +883,12 @@ function calculateResult(){
 
   let daysQuantity = countDaysQuantity(yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
   let workingDaysQuantity;
-  let bCountWorkingDays = true;
 
   if (bCountWorkingDays) {
     workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
     document.getElementById('calcText').innerText = workingDaysQuantity;
 
-  } else {
+  } else if(bCountAllDays){
       document.getElementById('calcText').innerText = daysQuantity;
   }
 
@@ -1074,7 +1072,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
 function countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, daysToRemoveFromBeginning, daysToRemoveFromEnd) {
   let fullWeeksAllDays = allDays - daysToRemoveFromBeginning - daysToRemoveFromEnd;
-
+console.log(fullWeeksAllDays);
   if (fullWeeksAllDays % 7 != 0){alert('error: fullWeeksAllDays % 7');}                           //just for testing
 
   let weeks = 0;
@@ -1686,3 +1684,22 @@ function menuExitCubesAnimation() {
 
 //***********************************************************Menu end*******************************************************/
 
+
+
+function menuClickChooseCalc(text){
+  document.getElementById('header').children[0].innerText = 'Skaičiuoti ' + text + ' dienas';
+  menuExitClick();
+
+  switch (text) {
+    case 'kalendorines':
+      bCountWorkingDays = false;
+      bCountAllDays = true;
+      break;
+  
+    case 'darbo':
+      bCountWorkingDays = true;
+      bCountAllDays = false;
+      
+      break;
+  }
+}
