@@ -1704,4 +1704,19 @@ function menuClickChooseCalc(text){
   }
 }
 
-document.addEventListener("touchmove", function(e) { e.preventDefault() });
+document.addEventListener("touchstart", preventFullScreenOnMozilla);
+
+function preventFullScreenOnMozilla(){
+  let body = document.documentElement;
+  if (body.requestFullscreen) {
+    body.requestFullscreen();
+  } else if (body.webkitrequestFullscreen) {
+    body.webkitrequestFullscreen();
+  } else if (body.mozrequestFullscreen) {
+    body.mozrequestFullscreen();
+  } else if (body.msrequestFullscreen) {
+    body.msrequestFullscreen();
+  }
+  removeEventListener("touchstart", preventFullScreenOnMozilla);
+}
+
