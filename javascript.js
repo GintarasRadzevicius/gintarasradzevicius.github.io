@@ -1721,6 +1721,4 @@ function menuClickChooseCalc(text){
 //   removeEventListener("touchstart", preventFullScreenOnMozilla);
 // }
 
-  document.body.addEventListener("touchmove", function(e) {alert(2); e.preventDefault() });
-
-
+window.addEventListener('touchmove', preventDefault);
