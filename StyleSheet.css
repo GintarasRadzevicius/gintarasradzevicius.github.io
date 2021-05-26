@@ -145,8 +145,7 @@ h2{
     height: inherit;
     /* border: 1px solid rgb(0, 132, 255); */
     text-align: center;
-    /* color: whitesmoke; */
-    color: #0F0F0F;
+    color: whitesmoke;
     /* background: rgba(8, 117, 62, 0.8); */
     background: rgba(3, 141, 72, 0.9);
     box-shadow: 0 0 10px #000a inset;
