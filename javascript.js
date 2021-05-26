@@ -1707,6 +1707,7 @@ function menuClickChooseCalc(text){
 document.addEventListener("touchstart", preventFullScreenOnMozilla);
 
 function preventFullScreenOnMozilla(){
+  alert(1);
   let body = document.documentElement;
   if (body.requestFullscreen) {
     body.requestFullscreen();
