@@ -1704,20 +1704,23 @@ function menuClickChooseCalc(text){
   }
 }
 
-document.addEventListener("touchstart", preventFullScreenOnMozilla);
+// document.addEventListener("touchmove", preventFullScreenOnMozilla);
 
-function preventFullScreenOnMozilla(){
-  alert(1);
-  let body = document.documentElement;
-  if (body.requestFullscreen) {
-    body.requestFullscreen();
-  } else if (body.webkitrequestFullscreen) {
-    body.webkitrequestFullscreen();
-  } else if (body.mozrequestFullscreen) {
-    body.mozrequestFullscreen();
-  } else if (body.msrequestFullscreen) {
-    body.msrequestFullscreen();
-  }
-  removeEventListener("touchstart", preventFullScreenOnMozilla);
-}
+// function preventFullScreenOnMozilla(){
+//   alert(1);
+//   let body = document.documentElement;
+//   if (body.requestFullscreen) {
+//     body.requestFullscreen();
+//   } else if (body.webkitrequestFullscreen) {
+//     body.webkitrequestFullscreen();
+//   } else if (body.mozrequestFullscreen) {
+//     body.mozrequestFullscreen();
+//   } else if (body.msrequestFullscreen) {
+//     body.msrequestFullscreen();
+//   }
+//   removeEventListener("touchstart", preventFullScreenOnMozilla);
+// }
+
+  document.body.addEventListener("touchmove", function(e) {alert(2); e.preventDefault() });
+
 
