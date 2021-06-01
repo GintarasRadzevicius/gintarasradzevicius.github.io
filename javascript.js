@@ -248,6 +248,9 @@ function inputOpenNumber(ev){
       elInput.setAttribute('type', 'number');
       elInput.setAttribute('class', cubeClassName);
       elInput.style.width = width + 'px';
+      elInput.style.background = 'rgb(3, 141, 72)';
+      elInput.style.color = 'whitesmoke';
+      elInput.style.fontWeight  = '700';
       elInput.addEventListener('keyup', inputCheckKeypress);
 
       textElement = document.getElementById(targetElement).getElementsByClassName(numberAreaClass)[0];
@@ -355,19 +358,32 @@ function inputGetMaxDays() {
 }
 
 function inputCloseAndCalculateResult(){
+//Need below switch since according to documentation year if year 99 and below then it assumes that it is year 1999
+  switch (cubeNr) {
+    case 3:
+      if (elInput.value.length < 3 ){
+        elInput.value = yearFrom;
+      }
+
+      break;
+
+    case 6:
+      if (elInput.value.length < 3 ){
+        elInput.value = yearTo;
+      }
+      break;
+  }
 
   let inputValue = elInput.value;
-
   elInput.remove();
   textElement.style.display = 'block';
   bInputOpened = false;
 
   if (!inputValue) {return;}
 
-
-let cubeId = 'cube' + cubeNr;
-let cubeNumber = Number(cubeNr) - 1;
-let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
+  let cubeId = 'cube' + cubeNr;
+  let cubeNumber = Number(cubeNr) - 1;
+  let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
 
   document.getElementById(cubeId).getElementsByClassName(activeFrontClass)[0].innerText = inputValue;
 
@@ -381,6 +397,7 @@ let activeFrontClass = arrCubeSidesClasses[arrSideCounter[cubeNumber]];
       break;
 
     case 3:
+
       yearFrom = Number(inputValue);
       break;
 
@@ -649,12 +666,14 @@ function updateDateUp(cubeNumber){
       
     case 2:
       if(yearFrom == 1){yearFrom = 10000;};
+      if(yearFrom == 100){yearFrom = 2022;};
       yearFrom--;
       return yearFrom;
       break;
   
     case 5:
       if(yearTo == 1){yearTo = 10000;};
+      if(yearTo == 100){yearTo = 2022;};
       yearTo--;
       return yearTo;
       break;
@@ -696,13 +715,13 @@ function updateDateDown(cubeNumber){
       break;
       
     case 2:
-      if(yearFrom == 9999){yearFrom = 0;};
+      if(yearFrom == 9999){yearFrom = 99;};
       yearFrom++;
       return yearFrom;
       break;
   
     case 5:
-      if(yearTo == 9999){yearTo = 0;};
+      if(yearTo == 9999){yearTo = 99;};
       yearTo++;
       return yearTo;
       break;
@@ -1054,7 +1073,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
   let weekdayEnd = getWeekdayEnd(monthEnd, dayEnd, yearEnd);
   let daysToRemoveFromBeginning = countDaysToRemoveFromBeginning(weekdayBeginning);
   let daysToRemoveFromEnd = countDaysToRemoveFromEnd(weekdayEnd);                                 //not including last day
-  
+
   let workingDays = 0;
 
   if (allDays > 14) {
@@ -1072,7 +1091,7 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
 function countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, daysToRemoveFromBeginning, daysToRemoveFromEnd) {
   let fullWeeksAllDays = allDays - daysToRemoveFromBeginning - daysToRemoveFromEnd;
-console.log(fullWeeksAllDays);
+
   if (fullWeeksAllDays % 7 != 0){alert('error: fullWeeksAllDays % 7');}                           //just for testing
 
   let weeks = 0;
@@ -1108,6 +1127,7 @@ function countWorkingDaysUpTo15Days(allDays, weekdayBeginning) {
 
 function getWeekdayBeginning(monthStart, dayStart, yearStart) {
   // let dateBeginning = new Date(monthStart + ' ' + dayStart + ' ' + yearStart);
+
   let dateBeginning = new Date(yearStart, --monthStart, dayStart);  // changed to below line since found this function constructor in the web
   return dateBeginning.getDay();
 }
@@ -1219,7 +1239,7 @@ function countDaysToRemoveFromEnd(weekdayEnd) {
 
 function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
 
-  if (yearStart < 2016 || yearEnd > 2026) {alert('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
+  if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
 
   let fromDate = new Date(yearStart, monthStart - 1, dayStart);
   let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
@@ -1702,4 +1722,15 @@ function menuClickChooseCalc(text){
       
       break;
   }
+}
+
+errorMessage('tralialia');
+
+function errorMessage(){
+  const errorMessageItem = document.querySelectorAll('.errorMessage');
+  errorMessageItem[0].innerText = 'tralialia';
+  errorMessageItem[0].innerHTML = errorMessageItem[0].textContent.replace(/\S/g, "<span>$&</span>");
+
+
+  
 }
