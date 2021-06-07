@@ -491,14 +491,12 @@ function identifyWhichCube(ev){
         if (targetElement.classList.length == 0){return null;}
 
         j++;
-        // if (j == 5) {alert('ERROR in identifyWhichCube -> DEFAULT while (targetElement.className != cube)');}
         if (j == 5) {return null;}
       }
       break;
     }
 
 
-  // if (targetElement.className != 'cube') {alert('error in identifyWhichCube -> container');}
   if (targetElement.className != 'cube') {return null;}
   targetElement = targetElement.id;
 }
@@ -904,6 +902,15 @@ function calculateResult(){
   let workingDaysQuantity;
 
   if (bCountWorkingDays) {
+
+    if (yearStart < 2016 || yearEnd > 2026) {
+      errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');
+      document.getElementById('calcText').innerText = '***********';
+
+      return;
+    }
+
+
     workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
     document.getElementById('calcText').innerText = workingDaysQuantity;
 
@@ -1239,7 +1246,7 @@ function countDaysToRemoveFromEnd(weekdayEnd) {
 
 function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
 
-  if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
+  // if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
 
   let fromDate = new Date(yearStart, monthStart - 1, dayStart);
   let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
@@ -1722,12 +1729,24 @@ function menuClickChooseCalc(text){
       
       break;
   }
-}
 
-errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');
+  calculateResult();
+
+}
 
 function errorMessage(message){
 
+document.getElementById('errorMessage').innerText = message;
+document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
 
-  
+setTimeout(function() {
+  document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
+
+}, 5000);
+
+}
+
+
+function infoMessage() {
+  alert(1111111);
 }
