@@ -904,6 +904,15 @@ function calculateResult(){
   let workingDaysQuantity;
 
   if (bCountWorkingDays) {
+
+    if (yearStart < 2016 || yearEnd > 2026) {
+      errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');
+      document.getElementById('calcText').innerText = '***********';
+
+      return;
+    }
+
+
     workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
     document.getElementById('calcText').innerText = workingDaysQuantity;
 
@@ -1239,7 +1248,7 @@ function countDaysToRemoveFromEnd(weekdayEnd) {
 
 function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
 
-  if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
+  // if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
 
   let fromDate = new Date(yearStart, monthStart - 1, dayStart);
   let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
@@ -1722,15 +1731,19 @@ function menuClickChooseCalc(text){
       
       break;
   }
+
+  calculateResult();
+  
 }
 
-errorMessage('tralialia');
+function errorMessage(message){
 
-function errorMessage(){
-  const errorMessageItem = document.querySelectorAll('.errorMessage');
-  errorMessageItem[0].innerText = 'tralialia';
-  errorMessageItem[0].innerHTML = errorMessageItem[0].textContent.replace(/\S/g, "<span>$&</span>");
+document.getElementById('errorMessage').innerText = message;
+document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
 
+setTimeout(function() {
+  document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
 
-  
+}, 5000);
+
 }

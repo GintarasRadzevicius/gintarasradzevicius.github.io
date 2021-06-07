@@ -48,47 +48,50 @@ h2{
     z-index: 15;
 
 } */
+.errorOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    display: none;
+    transition: 2s ease-in-out;
+
+}
+
+.errorOverlayActive{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    /* display: none; */
+    transition: 2s ease-in-out;
+}
+
 #errorMessage{
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 5%;
     right: 5%;
-    /* transform: translateX(-50%); */
-    overflow: auto;
-    /* padding: 20px; */
-    z-index: 15;
-
-}
-
-#errorMessage span{
-    /* text-align: center;
-    color: rgb(3, 141, 72);
-    margin: 10px;
-    border-radius: 100%;
     background-color: red;
-    transition: 2s; */
-
-
-    /* background: #ff0000;
-    color: #fff;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 50%;
-    font-size: 15px; */
-    display: inline-block;
-
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
+    overflow: auto;
+    z-index: 15;
+    /* transition: 3s ease-in-out; */
+    border-radius: 5px;
     padding: 10px;
-    background: #fff;
-    border: 3px solid #000;
-    color: #000;
-    text-align: center;
-    line-height: 7px;
-    font-size: 18px;
-}
 
+}
 
 .container{
     position: relative;
