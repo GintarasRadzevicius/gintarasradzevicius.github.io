@@ -37,17 +37,6 @@ h2{
     font-size: 20px;
 }
 
-/* #errorMessage{
-    position: absolute;
-    background-color: red;
-    height: 50%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 15;
-
-} */
 .errorOverlay{
     position: fixed;
     top: 0;
@@ -390,6 +379,68 @@ label { margin-right: 10px; }
     margin-top: 5px;
     line-height: 1;
 }
+.infoOverlayInactive{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    background-color: transparent;
+    /* display: none; */
+    animation: infoAnimationOut 1s;
+}
+
+@keyframes infoAnimationOut {
+    0% {background-color: green;width: 100%;}
+    100% {background-color: transparent;width:0}
+}
+
+.infoOverlayActive{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    background-color: green;
+    /* display: none; */
+
+    /* transition: 2s ease-in-out; */
+    animation: infoAnimation 1s;
+    overflow: scroll;
+
+}
+
+@keyframes infoAnimation {
+    0% {background-color: transparent; width: 0;}
+    100% {background-color: green; width: 100%;}
+}
+
+#infoMessage{
+    position: relative;
+    padding: 0 10px;
+    /* box-sizing: border-box; */
+    z-index: 15;
+    /* word-wrap:break-word; */
+    overflow: scroll;
+    animation: infoAnimationText 1s;
+    color: whitesmoke;
+}
+
+@keyframes infoAnimationText {
+    0% {color: transparent;}
+    100% {color: whitesmoke;}
+}
+
 #info{
     position: absolute;
     line-height: 0;
@@ -399,12 +450,12 @@ label { margin-right: 10px; }
     color: whitesmoke;
     background-color: rgba(54, 54, 190, 0.5);
     box-shadow: 10px 10px 10px #000a inset;
-
     font-size: 15px;
     line-height: 7px;
     border-radius: 50%;
-    /* display: none; */
+    display: none;
 }
+
 .scene{
     animation: rectangleAnimation1 3s;
 }
@@ -648,7 +699,7 @@ label { margin-right: 10px; }
     /* transform: rotateX(0) rotateY(-20deg); */
     /* transform: rotateX(90deg); */
     visibility: visible;
-
+    z-index: 20;
 }
 
 .hamburgerCubeSide{

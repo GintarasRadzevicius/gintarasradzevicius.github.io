@@ -914,6 +914,14 @@ function calculateResult(){
     workingDaysQuantity = countWorkingDays(daysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd);
     document.getElementById('calcText').innerText = workingDaysQuantity;
 
+    if(stringPublicHolidays){
+      document.getElementById('info').style.display = "block";
+    }else{
+      document.getElementById('info').style.display = "none";
+    }
+
+
+
   } else if(bCountAllDays){
       document.getElementById('calcText').innerText = daysQuantity;
   }
@@ -1244,6 +1252,8 @@ function countDaysToRemoveFromEnd(weekdayEnd) {
 
 /***********************************************************Calculate working days excluding public holidays start*******************************************************/
 
+let stringPublicHolidays = '';
+
 function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthStart, monthEnd, dayStart, dayEnd) {
 
   // if (yearStart < 2016 || yearEnd > 2026) {errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');return;}
@@ -1251,6 +1261,7 @@ function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthSta
   let fromDate = new Date(yearStart, monthStart - 1, dayStart);
   let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
   let checkDate;
+  stringPublicHolidays = '';
 
   for (let i = 0; i < arrNationalholidays.length; i++) {
 
@@ -1259,7 +1270,8 @@ function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthSta
     checkDate = new Date(arrNationalholidays[i][0], arrNationalholidays[i][1] - 1, arrNationalholidays[i][2]);
 
     if (checkDate >= fromDate && checkDate < toDate) {
-      // console.log(arrNationalholidays[i][0] + ' ' + arrNationalholidays[i][1] + ' ' + arrNationalholidays[i][2]);
+      stringPublicHolidays += arrNationalholidays[i][0] + '.' + arrNationalholidays[i][1] + '.' + arrNationalholidays[i][2] + ': ' + arrNationalholidays[i][3] + '\n\n';
+      
       workingDaysQuantity--;
     }
   }
@@ -1615,6 +1627,18 @@ function menuClick() {
 
 function menuExitClick() {
   
+  if(document.getElementsByClassName('infoOverlayActive').length){ //checking if class exist. Made for info message.
+    
+    document.getElementById("hamburgerCube").style.transform = "rotateX(0)";
+    document.getElementById("menuLines").style.opacity = 1;
+    document.getElementById("menuExit").style.opacity = 0;
+  
+    document.getElementsByClassName('infoOverlayActive')[0].className = 'infoOverlayInactive';
+    document.getElementById('infoMessage').innerText = '';
+  
+    return;
+  }
+
   menuEnd();
 
   setTimeout(function() {
@@ -1721,12 +1745,15 @@ function menuClickChooseCalc(text){
     case 'kalendorines':
       bCountWorkingDays = false;
       bCountAllDays = true;
+      document.getElementById('info').style.display = "none";
       break;
   
     case 'darbo':
       bCountWorkingDays = true;
       bCountAllDays = false;
-      
+      if(stringPublicHolidays){
+        document.getElementById('info').style.display = "block";
+      }
       break;
   }
 
@@ -1747,6 +1774,11 @@ setTimeout(function() {
 }
 
 
-function infoMessage() {
-  alert(1111111);
+function infoMessageOpen() {
+  document.getElementsByClassName('infoOverlayInactive')[0].className = 'infoOverlayActive';
+  document.getElementById('infoMessage').innerText = "\nŠventinės dienos:\n\n\n" + stringPublicHolidays;
+
+  document.getElementById("hamburgerCube").style.transform = "rotateX(90deg)";
+  document.getElementById("menuLines").style.opacity = 0;
+  document.getElementById("menuExit").style.opacity = 1;
 }
