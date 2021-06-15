@@ -906,7 +906,7 @@ function calculateResult(){
     if (yearStart < 2016 || yearEnd > 2026) {
       errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');
       document.getElementById('calcText').innerText = '***********';
-
+      document.getElementById('info').style.display = "none";
       return;
     }
 
@@ -1091,6 +1091,8 @@ function countWorkingDays(allDays, yearStart, yearEnd, monthStart, monthEnd, day
 
   let workingDays = 0;
 
+  stringPublicHolidays = '';
+
   if (allDays > 14) {
     workingDays = countWorkingDaysMoreThan15Days(allDays, weekdayBeginning, weekdayEnd, daysToRemoveFromBeginning, daysToRemoveFromEnd);
 
@@ -1261,8 +1263,7 @@ function excludePublicHolidays(workingDaysQuantity, yearStart, yearEnd, monthSta
   let fromDate = new Date(yearStart, monthStart - 1, dayStart);
   let toDate   = new Date(yearEnd, monthEnd - 1, dayEnd);
   let checkDate;
-  stringPublicHolidays = '';
-
+  
   for (let i = 0; i < arrNationalholidays.length; i++) {
 
     if (arrNationalholidays[i][0] < yearStart || arrNationalholidays[i][0] > yearEnd) {continue;}

@@ -73,11 +73,13 @@ h2{
     top: 45%;
     left: 5%;
     right: 5%;
-    background-color: red;
+    background-image: radial-gradient(rgb(243, 66, 66), rgb(128, 6, 6));
+
     overflow: auto;
     z-index: 15;
     /* transition: 3s ease-in-out; */
     border-radius: 5px;
+    box-shadow: 0 0 15px #000a inset;
     padding: 10px;
 
 }
@@ -411,7 +413,9 @@ label { margin-right: 10px; }
     align-items: center;
     justify-content: center;
     z-index: 15;
-    background-color: green;
+    background-image: radial-gradient(green, rgb(1, 73, 1));
+    box-shadow: 0 0 5px #000a inset;
+
     /* display: none; */
 
     /* transition: 2s ease-in-out; */
