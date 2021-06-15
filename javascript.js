@@ -1785,6 +1785,6 @@ function infoMessageOpen() {
 }
 
 
-document.addEventListener("touch", function(event) {
+document.addEventListener("touchmove", function(event) {
   event.preventDefault();
 }, false);
