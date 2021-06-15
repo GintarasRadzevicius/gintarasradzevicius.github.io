@@ -155,7 +155,6 @@ function processTouchStart(ev){
 
   requestAnimationFrame(timer);
   ev.preventDefault();
-  ev.stopPropagation();
 }
 
 var touchCounter = 0;
@@ -427,7 +426,6 @@ function processTouchEnd(ev){
   counter = 0;
 
   ev.preventDefault();
-  ev.stopPropagation();
 
   bCubeRotated = false;
 
@@ -459,7 +457,6 @@ function processTouchEnd(ev){
 function processTouchMove(ev){
 
   ev.preventDefault();
-  ev.stopPropagation();
   endY = ev.changedTouches[0].pageY;
 
 }
@@ -1786,3 +1783,8 @@ function infoMessageOpen() {
   document.getElementById("menuLines").style.opacity = 0;
   document.getElementById("menuExit").style.opacity = 1;
 }
+
+
+document.addEventListener("mozfullscreenchange", function () {
+  fullscreenState.innerHTML = (document.mozFullScreen)? "" : "not ";
+}, false);
