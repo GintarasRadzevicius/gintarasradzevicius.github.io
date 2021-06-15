@@ -16,6 +16,7 @@ html, body {
 
 body{
     position: fixed;
+    height: 100%;
     /* position: relative; */
     background-color: #1e1e1e;
     color: whitesmoke;
