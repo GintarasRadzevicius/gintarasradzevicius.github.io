@@ -15,7 +15,8 @@ html, body {
 }
 
 body{
-    position: relative;
+    position: fixed;
+    /* position: relative; */
     background-color: #1e1e1e;
     color: whitesmoke;
 }
