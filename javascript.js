@@ -1785,6 +1785,6 @@ function infoMessageOpen() {
 }
 
 
-document.addEventListener("mozfullscreenchange", function () {
-  fullscreenState.innerHTML = (document.mozFullScreen)? "" : "not ";
+document.addEventListener("touch", function(event) {
+  event.preventDefault();
 }, false);
