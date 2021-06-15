@@ -40,6 +40,9 @@ firstFillCubeNumbers();
 
 
 document.addEventListener('touchstart', processGlobalTouchStart, false);
+// document.addEventListener("touchmove", function(event) {
+//   event.preventDefault();
+// }, false);
 
 let arrContainers = document.getElementsByClassName('container');
 var fromContainer1 = arrContainers[0];
@@ -1785,6 +1788,3 @@ function infoMessageOpen() {
 }
 
 
-document.addEventListener("touchmove", function(event) {
-  event.preventDefault();
-}, false);
