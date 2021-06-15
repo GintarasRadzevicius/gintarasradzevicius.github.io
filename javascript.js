@@ -155,6 +155,7 @@ function processTouchStart(ev){
 
   requestAnimationFrame(timer);
   ev.preventDefault();
+  ev.stopPropagation();
 }
 
 var touchCounter = 0;
@@ -426,6 +427,7 @@ function processTouchEnd(ev){
   counter = 0;
 
   ev.preventDefault();
+  ev.stopPropagation();
 
   bCubeRotated = false;
 
@@ -457,6 +459,7 @@ function processTouchEnd(ev){
 function processTouchMove(ev){
 
   ev.preventDefault();
+  ev.stopPropagation();
   endY = ev.changedTouches[0].pageY;
 
 }
@@ -904,7 +907,7 @@ function calculateResult(){
   if (bCountWorkingDays) {
 
     if (yearStart < 2016 || yearEnd > 2026) {
-      errorMessage('Atsiprašome darbo dienos skaičiuojamos tik 2016 - 2026 metams');
+      errorMessage('Darbo dienos skaičiuojamos tik 2016 - 2026 metams');
       document.getElementById('calcText').innerText = '***********';
       document.getElementById('info').style.display = "none";
       return;
