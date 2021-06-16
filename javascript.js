@@ -136,7 +136,7 @@ var timerID;
 var bCubeRotated = false;
 
 function processTouchStart(ev){
-  ev.preventDefault();
+
   startY = ev.changedTouches[0].pageY;
   endY = startY;
 
@@ -159,7 +159,7 @@ function processTouchStart(ev){
   doubleTouchFirstPressTime = fingerPressTime;
 
   requestAnimationFrame(timer);
-  // ev.preventDefault();
+  ev.preventDefault();
 }
 
 var touchCounter = 0;
