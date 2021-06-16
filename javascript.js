@@ -40,9 +40,11 @@ firstFillCubeNumbers();
 
 
 document.addEventListener('touchstart', processGlobalTouchStart, false);
-// document.addEventListener("touchmove", function(event) {
-//   event.preventDefault();
-// }, false);
+document.addEventListener("touchmove", function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+}, false);
+
 
 let arrContainers = document.getElementsByClassName('container');
 var fromContainer1 = arrContainers[0];
