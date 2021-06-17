@@ -40,11 +40,15 @@ firstFillCubeNumbers();
 
 
 document.addEventListener('touchstart', processGlobalTouchStart, false);
+document.addEventListener('touchmove', firefoxStopHidingAddressBar, false);
+function firefoxStopHidingAddressBar(ev){
+  ev.preventDefault();
+  //   event.stopPropagation();
+}
 // document.addEventListener("touchmove", function(event) {
 //   event.preventDefault();
 //   event.stopPropagation();
 // }, false);
-
 
 let arrContainers = document.getElementsByClassName('container');
 var fromContainer1 = arrContainers[0];
