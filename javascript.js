@@ -1769,12 +1769,12 @@ function errorMessage(message){
   document.getElementById('errorMessage').innerText = message;
   document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
 
-  closeErrorMessage();
+  // closeErrorMessage();
 
-  // window.setTimeout(function() {
-  //   document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
-  //   alert(1);
-  // }, 5000);
+  setTimeout(function() {
+    document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
+  }, 5000);
+  
 
 }
 
