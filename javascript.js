@@ -1772,7 +1772,7 @@ function errorMessage(message){
   window.setTimeout(function() {
     document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
     alert(1);
-  }, 5000);
+  }, 0);
 
 }
 
