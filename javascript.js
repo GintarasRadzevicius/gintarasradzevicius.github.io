@@ -40,16 +40,6 @@ firstFillCubeNumbers();
 
 
 document.addEventListener('touchstart', processGlobalTouchStart, false);
-document.addEventListener('touchmove', firefoxStopHidingAddressBar, false);
-function firefoxStopHidingAddressBar(e){
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-}
-// document.addEventListener("touchmove", function(event) {
-//   event.preventDefault();
-//   event.stopPropagation();
-// }, false);
 
 let arrContainers = document.getElementsByClassName('container');
 var fromContainer1 = arrContainers[0];
@@ -165,6 +155,7 @@ function processTouchStart(ev){
 
   requestAnimationFrame(timer);
   ev.preventDefault();
+  ev.stopImmediatePropagation()
 }
 
 var touchCounter = 0;
@@ -436,6 +427,7 @@ function processTouchEnd(ev){
   counter = 0;
 
   ev.preventDefault();
+  ev.stopImmediatePropagation()
 
   bCubeRotated = false;
 
@@ -467,6 +459,7 @@ function processTouchEnd(ev){
 function processTouchMove(ev){
 
   ev.preventDefault();
+  ev.stopImmediatePropagation()
   endY = ev.changedTouches[0].pageY;
 
 }
