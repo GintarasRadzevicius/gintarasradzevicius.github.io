@@ -155,7 +155,7 @@ function processTouchStart(ev){
 
   requestAnimationFrame(timer);
   ev.preventDefault();
-  ev.stopImmediatePropagation()
+  ev.stopImmediatePropagation();
 }
 
 var touchCounter = 0;
@@ -427,7 +427,7 @@ function processTouchEnd(ev){
   counter = 0;
 
   ev.preventDefault();
-  ev.stopImmediatePropagation()
+  ev.stopImmediatePropagation();
 
   bCubeRotated = false;
 
@@ -459,7 +459,7 @@ function processTouchEnd(ev){
 function processTouchMove(ev){
 
   ev.preventDefault();
-  ev.stopImmediatePropagation()
+  ev.stopImmediatePropagation();
   endY = ev.changedTouches[0].pageY;
 
 }
