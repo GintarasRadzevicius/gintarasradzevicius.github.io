@@ -1766,13 +1766,13 @@ function menuClickChooseCalc(text){
 
 function errorMessage(message){
 
-document.getElementById('errorMessage').innerText = message;
-document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
+  document.getElementById('errorMessage').innerText = message;
+  document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
 
-setTimeout(function() {
-  document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
-alert(1);
-}, 5000);
+  window.setTimeout(function() {
+    document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
+    alert(1);
+  }, 5000);
 
 }
 
