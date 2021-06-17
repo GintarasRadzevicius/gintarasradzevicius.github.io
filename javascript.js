@@ -43,7 +43,7 @@ document.addEventListener('touchstart', processGlobalTouchStart, false);
 document.addEventListener('touchmove', firefoxStopHidingAddressBar, false);
 function firefoxStopHidingAddressBar(ev){
   ev.preventDefault();
-  //   event.stopPropagation();
+  ev.stopPropagation();
 }
 // document.addEventListener("touchmove", function(event) {
 //   event.preventDefault();
