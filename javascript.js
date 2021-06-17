@@ -1769,10 +1769,12 @@ function errorMessage(message){
   document.getElementById('errorMessage').innerText = message;
   document.getElementsByClassName('errorOverlay')[0].className = 'errorOverlayActive';
 
-  window.setTimeout(function() {
-    document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
-    alert(1);
-  }, 0);
+  closeErrorMessage();
+
+  // window.setTimeout(function() {
+  //   document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
+  //   alert(1);
+  // }, 5000);
 
 }
 
@@ -1786,4 +1788,13 @@ function infoMessageOpen() {
   document.getElementById("menuExit").style.opacity = 1;
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function closeErrorMessage() {
+  await sleep(5000);
+  document.getElementsByClassName('errorOverlayActive')[0].className = 'errorOverlay';
+  alert(1);
+}
 
