@@ -44,6 +44,7 @@ document.addEventListener('touchmove', firefoxStopHidingAddressBar, false);
 function firefoxStopHidingAddressBar(ev){
   ev.preventDefault();
   ev.stopPropagation();
+  alert(1);
 }
 // document.addEventListener("touchmove", function(event) {
 //   event.preventDefault();
