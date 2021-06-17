@@ -41,10 +41,10 @@ firstFillCubeNumbers();
 
 document.addEventListener('touchstart', processGlobalTouchStart, false);
 document.addEventListener('touchmove', firefoxStopHidingAddressBar, false);
-function firefoxStopHidingAddressBar(ev){
-  ev.preventDefault();
-  ev.stopPropagation();
-  alert(1);
+function firefoxStopHidingAddressBar(e){
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
 }
 // document.addEventListener("touchmove", function(event) {
 //   event.preventDefault();
