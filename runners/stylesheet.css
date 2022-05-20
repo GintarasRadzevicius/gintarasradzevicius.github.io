@@ -1,0 +1,85 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  /* background-color: rgb(35, 35, 35); */
+  background: rgb(59,59,59);
+  background: radial-gradient(circle, rgba(59,59,59,1) 57%, rgba(96,95,95,1) 100%);
+}
+
+#menuLine{
+  font-size: large;
+  color: whitesmoke;
+  background-color: #4CAF50;
+  margin: 10px auto;
+  text-align: center;
+}
+
+#FinishLineSvg{
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  /* 
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); */
+  margin: auto;
+  text-align: center;
+}
+
+#allRunners {
+  /* position: absolute;
+  display: flex;
+  left: 50%;
+  transform: translate(-50%, 0); */
+  position: relative;
+}
+
+.runner {
+  display: block;
+  margin: 10px;
+  width: 75px;
+  height: 75px;
+  border: 1px solid black;
+  -webkit-transition:all 3s ease-out;
+  -moz-transition:all 3s ease-out;
+  -ms-transition:all 3s ease-out;
+  -o-transition:all 53ss ease-out;
+  transition:all 3s ease-out;
+  border-radius: 50%;
+}
+
+#runner1{
+  border: 2px solid #C9FF33;
+}
+#runner2{
+  border: 2px solid white;
+}
+#runner3{
+  border: 2px solid #33FF69;
+}
+#runner4{
+  border: 2px solid #ff33da;
+}
+#runner5{
+  border: 2px solid #ff8c00;
+}
+
+#buttonStart {
+  position: relative;
+  width: 50%;
+  display: block;
+  background-color: #4CAF50;
+  color: whitesmoke;
+  padding: 20px 0;
+  text-align: center;
+  /* display: inline-block; */
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 50px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
