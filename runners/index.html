@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Race</title>
     <link rel="stylesheet" href="stylesheet.css">
-    <script src="javascript.js"></script>
 
 
 </head>
@@ -15,18 +14,27 @@
         <h1>Runners</h1>
     </div>
     <div id="allRunners">
-        <img class="runner" id="runner1" src="Images/rabbit.jpg" alt="runner1"> </img>
-        <img class="runner" id="runner2" src="Images/Dog1.jpg" alt="runner2"> </img>
-        <img class="runner" id="runner3" src="Images/cat.jpg" alt="runner3"> </img>
-        <img class="runner" id="runner4" src="Images/horse.jpg" alt="runner4"> </img>
-        <img class="runner" id="runner5" src="Images/dog2.jpg" alt="runner5"> </img>
+        <div class="runnerContainer" id="runnerContainer1">
+            <img class="runner" id="runner1" src="Images/rabbit.jpg" alt="runner1"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer2">
+            <img class="runner" id="runner2" src="Images/Dog1.jpg" alt="runner2"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer3">
+            <img class="runner" id="runner3" src="Images/cat.jpg" alt="runner3"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer4">
+            <img class="runner" id="runner4" src="Images/horse.jpg" alt="runner4"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer5">
+            <img class="runner" id="runner5" src="Images/dog2.jpg" alt="runner5"> </img>
+        </div>
     </div>
-    <div id="buttonStart" onclick='StartButton()'>Start</div>
-    <div id="FinishLineSvg">
-        <img src="Images/Finish line.svg" alt="FinishLine">
-    </div>
+    <div id="buttonStart" onclick='startButton()'>Start</div>
+    <img id="FinishLineSvg" src="Images/Finish line.svg" alt="FinishLine">
     <!-- <button id="buttonStart" type="button" onclick="StartButton()">Start</button> -->
 
+    <script src="javascript.js"></script>
 
 </body>
 

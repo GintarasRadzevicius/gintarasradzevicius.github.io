@@ -4,7 +4,7 @@ body {
   margin: 0;
   /* background-color: rgb(35, 35, 35); */
   background: rgb(59,59,59);
-  background: radial-gradient(circle, rgba(59,59,59,1) 57%, rgba(96,95,95,1) 100%);
+  /* background: radial-gradient(circle, rgba(59,59,59,1) 57%, rgba(96,95,95,1) 100%); */
 }
 
 #menuLine{
@@ -17,7 +17,7 @@ body {
 
 #FinishLineSvg{
   position: absolute;
-  right: 20px;
+  right: 0;
   top: 40px;
   /* 
   top: 50%;
@@ -35,19 +35,27 @@ body {
   transform: translate(-50%, 0); */
   position: relative;
 }
+.runnerContainer{
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  /* -webkit-transition:all 1s;
+  -moz-transition:all 1s;
+  -ms-transition:all 1s;
+  -o-transition:all 1s;
+  transition:all 1s; */
+
+}
 
 .runner {
+  position: relative;
   display: block;
-  margin: 10px;
-  width: 75px;
-  height: 75px;
-  border: 1px solid black;
-  -webkit-transition:all 3s ease-out;
-  -moz-transition:all 3s ease-out;
-  -ms-transition:all 3s ease-out;
-  -o-transition:all 53ss ease-out;
-  transition:all 3s ease-out;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
+
 }
 
 #runner1{
