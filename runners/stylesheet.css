@@ -39,8 +39,9 @@ body {
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 80px;
-  height: 80px;
+  position: relative;
+  /* width: 80px;
+  height: 80px; */
   /* -webkit-transition:all 1s;
   -moz-transition:all 1s;
   -ms-transition:all 1s;
@@ -74,7 +75,7 @@ body {
   border: 2px solid #ff8c00;
 }
 
-#buttonStart {
+.button {
   position: relative;
   width: 50%;
   display: block;
@@ -90,4 +91,8 @@ body {
   margin-left: auto;
   margin-right: auto;
 
+}
+
+#buttonReset{
+  display: none;
 }
