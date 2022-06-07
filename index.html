@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main page</title>
+    <title>Race</title>
     <link rel="stylesheet" href="stylesheet.css">
-    <!-- <script src="javascript.js"></script> -->
 
 
 </head>
 <body>
-    <div id="container">
-        <div id="firstPage" class="pages" onclick="clickFirstPageDateCounter()">
-            <div class="pagesText">Date counter</div>
+    <div  id="menuLine">
+        <h1>Runners</h1>
+    </div>
+    <div id="allRunners">
+        <div class="runnerContainer" id="runnerContainer1">
+            <img class="runner" id="runner1" src="Images/rabbit.jpg" alt="runner1"> </img>
         </div>
-        <div id="secondPage" class="pages" onclick="clickSecondPageRunners()">
-            <div class="pagesText">Run</div>
+        <div class="runnerContainer" id="runnerContainer2">
+            <img class="runner" id="runner2" src="Images/Dog1.jpg" alt="runner2"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer3">
+            <img class="runner" id="runner3" src="Images/cat.jpg" alt="runner3"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer4">
+            <img class="runner" id="runner4" src="Images/horse.jpg" alt="runner4"> </img>
+        </div>
+        <div class="runnerContainer" id="runnerContainer5">
+            <img class="runner" id="runner5" src="Images/dog2.jpg" alt="runner5"> </img>
         </div>
     </div>
+    <div class = button id="buttonStart" onclick='startButton()'>Start</div>
+    <div class = button id="buttonReset" onclick='resetButton()'>Reset</div>
+    <img id="FinishLineSvg" src="Images/Finish line.svg" alt="FinishLine">
+    <!-- <button id="buttonStart" type="button" onclick="StartButton()">Start</button> -->
 
-    <script>
-        function clickFirstPageDateCounter() {
-            window.open("https://gintarasradzevicius.github.io/3d_day_counter/index.html", "_self");
-        }
-
-        function clickSecondPageRunners() {
-            window.open("https://gintarasradzevicius.github.io/runners/index.html", "_self");
-        }
-    </script>
+    <script src="javascript.js"></script>
 
 </body>
 
 </html>
+
+<!-- 
+    MVP1
+    1. Hardcoded runners with pictures
+    2. 
+
+ -->
