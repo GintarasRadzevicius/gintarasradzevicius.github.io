@@ -129,5 +129,5 @@ function resetRunner(runnerNo) {
     runnersRightCorner = document.getElementById(runnerContainerId).offsetLeft + 80; //79 is runners width including borders 75+2+2
 
     document.getElementById(runnerContainerId).style.marginLeft = runnerPos + 'px';
-    document.getElementById(runnerId).style.transform = 'rotate(0 deg)';
+    document.getElementById(runnerId).style.transform = 'rotate(0)';
 }
