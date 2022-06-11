@@ -157,11 +157,9 @@ const stop = () => {
 // if you dont want to make it stop and make it infinite you can just remove the stop function 😊
 
 function closeWinner() {
+    resetButton();
     document.getElementById('winnerOverlay').style.display = 'none';
     document.getElementById('winner').src = "";
-
-
-    resetButton();
 
 
 }
