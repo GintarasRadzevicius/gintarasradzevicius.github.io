@@ -62,9 +62,7 @@ function showWinner() {
     }
     document.getElementById('winnerOverlay').style.display = 'block';
     document.getElementById('winner').src = pictureSrc;
-    console.log("inner text before: " + document.getElementById('winnerText').innerText)
     document.getElementById('winnerText').innerText = "Winner is " + winnerName;
-    console.log("inner text after: " + "Winner is " + winnerName);
 
     start();    //start confetti animation
     stop();     //stop confetti animation
