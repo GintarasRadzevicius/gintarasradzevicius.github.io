@@ -5,69 +5,66 @@ let bstartButtonWasPressed = false;
 let finishLineCoord = document.getElementById('FinishLineSvg').getBoundingClientRect();
 let finishLineLeftCorner = finishLineCoord.left - 30;
 console.log('finishLineLeftCorner: ' + finishLineLeftCorner);
-// let keepMoving = true;
 let winner = 0;
 let interval;
 let runnersRightCorner = 0;
 
 function startButton() {
-    // resetRunners();
     activateResetButton();
     interval = setInterval(moveAllRunners,5);
-
-    // showWinner();
-
 }
 
 function activateResetButton() {
     document.getElementById('buttonStart').style.display = 'none';
     document.getElementById('buttonReset').style.display = 'block';
+    document.getElementById('menuLine').style.backgroundColor = '#D62246';
 }
 
 function moveAllRunners() {
-    // while (keepMoving) {
         for (let index = 1; index < 6; index++) {
             moveRunner(index);
             checkFinishLine(runnersRightCorner, index);
             if (winner) {
                 clearInterval(interval);
                 console.log('winner: ' + winner);
+                showWinner();
             }
         }
-
-        // await sleep(2);
-    // }
-    // scale();
 }
 
 function showWinner() {
-    console.log('winner: ' + winner);
-
+    let pictureSrc;
     switch (winner) {
         case 1:
-            console.log('Winner is: rabbit')
+            pictureSrc= 'Images/rabbit.jpg';
             break;
         case 2:
-            console.log('Winner is: dog1')
-        
+            pictureSrc= 'Images/Dog1.jpg';
             break;
         case 3:
-            console.log('Winner is: cat')
-    
+            pictureSrc= 'Images/cat.jpg';
             break;
         case 4:
-            console.log('Winner is: horse')
-    
+            pictureSrc= 'Images/horse.jpg';
             break;
         case 5:
-            console.log('Winner is: dog2')
-    
+            pictureSrc= 'Images/dog2.jpg';
             break;
                                             
         default:
             break;
     }
-    
+  console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
+    document.getElementById('winnerOverlay').style.display = 'block';
+    document.getElementById('winner').src = pictureSrc;
+    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+
+    start();
+    stop();
+
+ 
+
+
 }
 
 function scale() {
@@ -81,11 +78,13 @@ function scale() {
 
 function moveRunner(runnerNo) {
     let randomInt = getRandomInt(2);
+
     if (!randomInt) {return;}
-    
+
     let runnerPos = runnersMarginLeft[runnerNo-1] = runnersMarginLeft[runnerNo - 1] + randomInt;
     let runnerId = 'runner' + runnerNo;
     let runnerContainerId = 'runnerContainer' + runnerNo;
+
     runnersRightCorner = document.getElementById(runnerContainerId).offsetLeft + 80; //79 is runners width including borders 75+2+2
 
     document.getElementById(runnerContainerId).style.marginLeft = runnerPos + 'px';
@@ -107,13 +106,16 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function sleep(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 function resetButton() {
+    winner = 0;
+    
     document.getElementById('buttonReset').style.display = 'none';
     document.getElementById('buttonStart').style.display = 'block';
+    document.getElementById('menuLine').style.backgroundColor = '#4CAF50';
 
     clearInterval(interval);
 
@@ -131,3 +133,31 @@ function resetRunner(runnerNo) {
     document.getElementById(runnerContainerId).style.marginLeft = runnerPos + 'px';
     document.getElementById(runnerId).style.transform = 'rotate(0)';
 }
+
+
+
+// *************************************************************************************************
+// *************************************************************************************************
+// *************************************************************************************************
+
+
+
+ // for starting the confetti 
+
+const start = () => {
+    setTimeout(function() {
+        confetti.start()
+    }, 1000); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+};
+
+//  for stopping the confetti 
+
+const stop = () => {
+    setTimeout(function() {
+        confetti.stop()
+    }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+};
+// after this here we are calling both the function so it works
+
+
+// if you dont want to make it stop and make it infinite you can just remove the stop function 😊
