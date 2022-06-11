@@ -34,46 +34,40 @@ function moveAllRunners() {
 
 function showWinner() {
     let pictureSrc;
+    let winnerName = '';
     switch (winner) {
         case 1:
             pictureSrc= 'Images/rabbit.jpg';
+            winnerName = 'Rabbit';
             break;
         case 2:
             pictureSrc= 'Images/Dog1.jpg';
+            winnerName = 'Dog1';
             break;
         case 3:
             pictureSrc= 'Images/cat.jpg';
+            winnerName = 'Cat';
             break;
         case 4:
             pictureSrc= 'Images/horse.jpg';
+            winnerName = 'Horse';
             break;
         case 5:
-            pictureSrc= 'Images/dog2.jpg';
+            pictureSrc= 'Images/cat2.jpg';
+            winnerName = 'Cat2';
             break;
                                             
         default:
             break;
     }
-  console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
     document.getElementById('winnerOverlay').style.display = 'block';
     document.getElementById('winner').src = pictureSrc;
-    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+    console.log("inner text before: " + document.getElementById('winnerText').innerText)
+    document.getElementById('winnerText').innerText = "Winner is " + winnerName;
+    console.log("inner text after: " + "Winner is " + winnerName);
 
-    start();
-    stop();
-
- 
-
-
-}
-
-function scale() {
-    document.getElementById("runner" + winner).style.margin = "0";
-    document.getElementById("runnerContainer" + winner).style.margin = "0";
-    document.getElementById("runner" + winner).style.position = 'absolute';
-    document.getElementById("runner" + winner).style.top = '50%';
-    document.getElementById("runner" + winner).style.left = '50%';
-    document.getElementById("runner" + winner).style.transform = 'translate(-50%, -50%)';
+    start();    //start confetti animation
+    stop();     //stop confetti animation
 }
 
 function moveRunner(runnerNo) {
@@ -161,3 +155,13 @@ const stop = () => {
 
 
 // if you dont want to make it stop and make it infinite you can just remove the stop function 😊
+
+function closeWinner() {
+    document.getElementById('winnerOverlay').style.display = 'none';
+    document.getElementById('winner').src = "";
+
+
+    resetButton();
+
+
+}
