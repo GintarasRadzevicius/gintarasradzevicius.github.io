@@ -18,7 +18,7 @@ body {
 .pages{
     width: 150px;
     height: 150px;
-    margin: 80px auto;
+    margin: 50px auto;
     border-radius: 50%; 
     background: rgb(38, 38, 38);
     /* text-align: center; */
@@ -80,30 +80,30 @@ body {
     } 
 }
 
-#3rdPage{
+#thirdPage{
     /* 2E86AB
     F24236
     5FBB97 */
-    color: #2E86AB;
-    text-shadow: #2E86AB 0px 3px 3px;
+    color: red;
+    text-shadow: red 0px 3px 3px;
 
     animation: shadowAnimationPage3 3s ease-in infinite;
 }
 
 @keyframes shadowAnimationPage3 {
     0% {
-        -webkit-box-shadow: 0 0 10px 10px #2E86AB;
-        box-shadow: 0 0 10px 10px #2E86AB;
+        -webkit-box-shadow: 0 0 10px 10px red;
+        box-shadow: 0 0 10px 10px red;
     } 
 
     50% {
-        -webkit-box-shadow: 0 0 10px 10px #ffff00;
-        box-shadow: 0 0 10px 10px #ffff00;
+        -webkit-box-shadow: 0 0 10px 10px #2E86AB;
+        box-shadow: 0 0 10px 10px #2E86AB;
     }
 
     100% {
-        -webkit-box-shadow: 0 0 10px 10px #2E86AB;
-        box-shadow: 0 0 10px 10px #2E86AB;
+        -webkit-box-shadow: 0 0 10px 10px red;
+        box-shadow: 0 0 10px 10px red;
     } 
 }
 
