@@ -69,7 +69,7 @@ function showWinner() {
 }
 
 function moveRunner(runnerNo) {
-    let randomInt = getRandomInt(2);
+    let randomInt = getRandomInt(10);
 
     if (!randomInt) {return;}
 
