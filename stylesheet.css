@@ -16,8 +16,8 @@ body {
 }
 
 .pages{
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: 80px auto;
     border-radius: 50%; 
     background: rgb(38, 38, 38);
@@ -64,6 +64,33 @@ body {
 }
 
 @keyframes shadowAnimationPage2 {
+    0% {
+        -webkit-box-shadow: 0 0 10px 10px #2E86AB;
+        box-shadow: 0 0 10px 10px #2E86AB;
+    } 
+
+    50% {
+        -webkit-box-shadow: 0 0 10px 10px #ffff00;
+        box-shadow: 0 0 10px 10px #ffff00;
+    }
+
+    100% {
+        -webkit-box-shadow: 0 0 10px 10px #2E86AB;
+        box-shadow: 0 0 10px 10px #2E86AB;
+    } 
+}
+
+#3rdPage{
+    /* 2E86AB
+    F24236
+    5FBB97 */
+    color: #2E86AB;
+    text-shadow: #2E86AB 0px 3px 3px;
+
+    animation: shadowAnimationPage3 3s ease-in infinite;
+}
+
+@keyframes shadowAnimationPage3 {
     0% {
         -webkit-box-shadow: 0 0 10px 10px #2E86AB;
         box-shadow: 0 0 10px 10px #2E86AB;
